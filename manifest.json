@@ -1,0 +1,15 @@
+{
+  "name": "Hamster Adventure",
+  "description": "A fun hamster adventure game",
+  "icons": [
+    {
+      "src": "https://github.com/Homaland/1/blob/8550938b1115737e8399886433f7285630b40f3f/homa1.png",
+      "type": "https://github.com/Homaland/1/blob/8550938b1115737e8399886433f7285630b40f3f/enemy.png",
+      "sizes": "200x200"
+    }
+  ],
+  "start_url": "https://homaland-hstart-a09a.twc1.net",
+  "display": "standalone",
+  "background_color": "#87CEEB",
+  "theme_color": "#87CEEB"
+}
