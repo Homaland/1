@@ -11,7 +11,7 @@ interface JettonListProps {
 export const JettonList = ({ jettons, connectedAddressString, onSendClick, className }: JettonListProps) => {
   return (
     <div className={className}>
-      <h2>Jetton List</h2>
+      <h2></h2>
       {connectedAddressString ? (
         <div>
           {jettons && jettons.length ? (
