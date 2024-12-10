@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "0.0.0",
   "type": "module",
-  "homepage": "/dist",
+  "homepage": "/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
