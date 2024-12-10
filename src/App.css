@@ -119,8 +119,15 @@
   border-radius: 5px;
 }
 
+
+.loading-screen h1 {
+  margin-top: 20px;
+  font-size: 2rem;
+  color: var(--text-color);
+}
 .loading-screen {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -128,8 +135,29 @@
   text-align: center;
 }
 
-.loading-screen h1 {
-  margin-top: 20px;
-  font-size: 2rem;
+.loading-image {
+  width: 30vh; /* Установите нужный размер изображения */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.loading-screen h3 {
+  font-size: 1.5rem;
   color: var(--text-color);
 }
+
+@keyframes dot-blink {
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+  100% {
+    content: ".";
+  }
+}
+
