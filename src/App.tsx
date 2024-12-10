@@ -112,7 +112,7 @@ function App() {
           )}
         {/* Список NFT с превью */}
         <div className="nft-list">
-          <h2>Your NFTs</h2>
+          <h3>Your NFTs</h3>
           {nftError && <p className="error">{nftError}</p>}
           {filteredNfts && filteredNfts.length > 0 ? (
             <ul className="nft-grid">
