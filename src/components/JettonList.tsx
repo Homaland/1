@@ -11,14 +11,13 @@ interface JettonListProps {
 export const JettonList = ({ jettons, connectedAddressString, onSendClick, className }: JettonListProps) => {
   return (
     <div className={className}>
+      
       {connectedAddressString ? (
         <div>
           {jettons && jettons.length ? (
-            jettons
-              .filter((jettonBalance) => jettonBalance.balance > 0) // Filter out jettons with balance 0
-              .map((jettonBalance) => (
-                <JettonItem key={jettonBalance.jetton.address.toString()} jettonBalance={jettonBalance} onSendClick={onSendClick} />
-              ))
+            jettons.map((jettonBalance) => (
+              <JettonItem key={jettonBalance.jetton.address.toString()} jettonBalance={jettonBalance} onSendClick={onSendClick} />
+            ))
           ) : (
             <p>No jettons found</p>
           )}
