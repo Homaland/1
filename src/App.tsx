@@ -97,7 +97,7 @@ function App() {
       ) : (
         <div>
           <header>
-           
+           <h2>Hold On for Dear Reward</h2>
           </header>
 
           <main>
