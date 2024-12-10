@@ -20,8 +20,9 @@ function App() {
   const [selectedJetton, setSelectedJetton] = useState<JettonBalance | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const [nfts, setNfts] = useState<any[] | null>(null); // Исправлено на 'any', если тип NftItemWithPreview неверен
+  const [nfts, setNfts] = useState<any[] | null>(null);
   const [nftError, setNftError] = useState<string | null>(null);
+  const [hasHODRCollection, setHasHODRCollection] = useState<boolean | null>(null); // Статус для коллекции HODR
 
   const connectedAddressString = useTonAddress();
   const connectedAddress = useMemo(() => {
@@ -34,6 +35,7 @@ function App() {
     if (!connectedAddress) {
       setJettons(null);
       setNfts(null);
+      setHasHODRCollection(null);
       return;
     }
 
@@ -49,14 +51,24 @@ function App() {
     ta.accounts
       .getAccountNftItems(connectedAddress)
       .then((res) => {
-        setNfts(res.nftItems); // Используем правильный тип для ответа
+        setNfts(res.nftItems);
+        checkHODRCollectionStatus(res.nftItems); // Проверка коллекции HODR
       })
       .catch((e: Error) => {
         console.error(e);
         setNftError(e.message || "Failed to fetch NFTs");
         setNfts(null);
+        setHasHODRCollection(null);
       });
   }, [connectedAddress]);
+
+  // Функция для проверки наличия коллекции HODR
+  const checkHODRCollectionStatus = (nftItems: any[]) => {
+    const collectionExists = nftItems.some(
+      (nft) => nft.collection && nft.collection.name && nft.collection.name.includes("HODR")
+    );
+    setHasHODRCollection(collectionExists);
+  };
 
   // Фильтрация NFT, чтобы показывать только те, у которых есть коллекция
   const filteredNfts = nfts?.filter((nft) => nft.collection);
@@ -134,6 +146,20 @@ function App() {
             </ul>
           ) : (
             <p>No NFTs with a collection found</p>
+          )}
+        </div>
+
+        {/* Статус наличия коллекции HODR */}
+        <div className="collection-status">
+          <h3>Collection Status</h3>
+          {hasHODRCollection !== null ? (
+            hasHODRCollection ? (
+              <p style={{ color: "green" }}>✔️ HODR collection found!</p>
+            ) : (
+              <p style={{ color: "red" }}>❌ No HODR collection found.</p>
+            )
+          ) : (
+            <p>Loading...</p>
           )}
         </div>
       </main>
