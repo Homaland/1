@@ -9,7 +9,6 @@ import { JettonList } from "./components/JettonList";
 import { SendJettonModal } from "./components/SendJettonModal";
 import ta from "./tonapi";
 
-// Интерфейс для атрибутов NFT
 interface NftAttribute {
   trait_type: string;
   value: string;
@@ -31,49 +30,51 @@ function App() {
       : null;
   }, [connectedAddressString]);
 
-  const [isLoading, setIsLoading] = useState(true); // Новый стейт для отслеживания загрузки
-  const [dots, setDots] = useState(1); // Для отслеживания количества точек
+  const [isLoading, setIsLoading] = useState(true);
+  const [dots, setDots] = useState(1);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDots((prevDots) => (prevDots % 3) + 1); // Меняем количество точек от 1 до 3
+      setDots((prevDots) => (prevDots % 3) + 1); // Обновление точек
     }, 500);
 
-    return () => clearInterval(interval); // Останавливаем интервал, когда компонент размонтируется
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    if (!connectedAddress) {
-      setJettons(null);
-      setNfts(null);
-      setHasHODRCollection(null);
-      setIsLoading(true); // Показать загрузочный экран
-      return;
-    }
+    // Устанавливаем минимальную длительность загрузочного экрана
+    const loadingStartTime = Date.now();
 
-    ta.accounts
-      .getAccountJettonsBalances(connectedAddress)
-      .then((res) => setJettons(res.balances))
-      .catch((e: Error) => {
-        console.error(e);
-        setError(e.message || "Failed to fetch jettons");
+    const fetchData = async () => {
+      if (!connectedAddress) {
         setJettons(null);
-      });
-
-    ta.accounts
-      .getAccountNftItems(connectedAddress)
-      .then((res) => {
-        setNfts(res.nftItems);
-        checkHODRCollectionStatus(res.nftItems);
-        setIsLoading(false); // Убрать загрузочный экран после получения данных
-      })
-      .catch((e: Error) => {
-        console.error(e);
-        setNftError(e.message || "Failed to fetch NFTs");
         setNfts(null);
         setHasHODRCollection(null);
-        setIsLoading(false); // Убрать загрузочный экран в случае ошибки
-      });
+        return;
+      }
+
+      try {
+        const [jettonRes, nftRes] = await Promise.all([
+          ta.accounts.getAccountJettonsBalances(connectedAddress),
+          ta.accounts.getAccountNftItems(connectedAddress),
+        ]);
+
+        setJettons(jettonRes.balances);
+        setNfts(nftRes.nftItems);
+        checkHODRCollectionStatus(nftRes.nftItems);
+      } catch (e: any) {
+        console.error(e);
+        setError(e.message || "Failed to fetch data");
+        setNftError(e.message || "Failed to fetch NFTs");
+      }
+
+      const elapsedTime = Date.now() - loadingStartTime;
+      const remainingTime = Math.max(0, 3000 - elapsedTime); // 3 секунды минимального времени
+
+      setTimeout(() => setIsLoading(false), remainingTime);
+    };
+
+    fetchData();
   }, [connectedAddress]);
 
   const checkHODRCollectionStatus = (nftItems: any[]) => {
@@ -87,13 +88,11 @@ function App() {
 
   return (
     <>
-      {/* Загрузочный экран с кнопкой TonConnect */}
       {isLoading ? (
         <div className="loading-screen">
-          {/* Картинка загрузочного экрана */}
           <img src="https://i.postimg.cc/BnsnSb2h/IMG-9937.png" alt="Loading..." className="loading-image" />
           <TonConnectButton style={{ position: "absolute", top: "20px", left: "50%", transform: "translateX(-50%)" }} />
-          <p>Connect your wallet{".".repeat(dots)}</p>
+          <h3>Connect your wallet{".".repeat(dots)}</h3>
         </div>
       ) : (
         <div>
@@ -102,7 +101,6 @@ function App() {
           </header>
 
           <main>
-            {/* Список жетонов */}
             <JettonList
               className="card"
               jettons={jettons}
@@ -111,7 +109,6 @@ function App() {
             />
             {error && <p className="error">{error}</p>}
 
-            {/* Модальное окно для отправки жетона */}
             {selectedJetton && connectedAddress && (
               <SendJettonModal
                 senderAddress={connectedAddress}
@@ -120,7 +117,6 @@ function App() {
               />
             )}
 
-            {/* Статус наличия коллекции HODR */}
             <div className="collection-status">
               <h3>Holder Status</h3>
               {hasHODRCollection !== null ? (
@@ -133,7 +129,6 @@ function App() {
                 <p>Loading...</p>
               )}
 
-              {/* Список NFT с превью */}
               <div className="nft-list">
                 <h3>Your NFTs</h3>
                 {nftError && <p className="error">{nftError}</p>}
@@ -154,19 +149,6 @@ function App() {
                           </div>
                         ) : (
                           <p>No third preview available</p>
-                        )}
-                        {nft.attributes && nft.attributes.length > 0 && (
-                          <div className="nft-attributes">
-                            <h4>Attributes:</h4>
-                            <ul>
-                              {nft.attributes.map((attr: NftAttribute, attrIndex: number) => (
-                                <li key={attrIndex}>
-                                  <strong>{attr.trait_type}: </strong>
-                                  {attr.value}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
                         )}
                       </li>
                     ))}
