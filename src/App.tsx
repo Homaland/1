@@ -7,20 +7,20 @@ import "./App.css";
 import { isValidAddress } from "./utils/address";
 import { JettonList } from "./components/JettonList";
 import { SendJettonModal } from "./components/SendJettonModal";
-import { NftItem, NftItemWithPreview } from "@ton-api/client"; // Импортируем NftItem с расширением
 import ta from "./tonapi";
 
-type NftPreview = {
-  resolution: string;
-  url: string;
-};
+// Интерфейс для атрибутов NFT
+interface NftAttribute {
+  trait_type: string;
+  value: string;
+}
 
 function App() {
   const [jettons, setJettons] = useState<JettonBalance[] | null>(null);
   const [selectedJetton, setSelectedJetton] = useState<JettonBalance | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const [nfts, setNfts] = useState<NftItemWithPreview[] | null>(null);
+  const [nfts, setNfts] = useState<any[] | null>(null); // Исправлено на 'any', если тип NftItemWithPreview неверен
   const [nftError, setNftError] = useState<string | null>(null);
 
   const connectedAddressString = useTonAddress();
@@ -47,7 +47,7 @@ function App() {
       });
 
     ta.accounts
-      .getAccountNftItems(connectedAddress) // Исправлено имя метода на getAccountNftItems
+      .getAccountNftItems(connectedAddress)
       .then((res) => {
         setNfts(res.nftItems); // Используем правильный тип для ответа
       })
@@ -120,7 +120,7 @@ function App() {
                     <div className="nft-attributes">
                       <h4>Attributes:</h4>
                       <ul>
-                        {nft.attributes.map((attr, attrIndex) => (
+                        {nft.attributes.map((attr: NftAttribute, attrIndex: number) => (
                           <li key={attrIndex}>
                             <strong>{attr.trait_type}: </strong>
                             {attr.value}
