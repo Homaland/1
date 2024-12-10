@@ -97,7 +97,7 @@ function App() {
       ) : (
         <div>
           <header>
-            <h1>HODRLAND</h1>
+           
           </header>
 
           <main>
