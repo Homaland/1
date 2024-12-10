@@ -119,3 +119,17 @@
   border-radius: 5px;
 }
 
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  text-align: center;
+}
+
+.loading-screen h1 {
+  margin-top: 20px;
+  font-size: 2rem;
+  color: var(--text-color);
+}
