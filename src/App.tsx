@@ -7,16 +7,12 @@ import "./App.css";
 import { isValidAddress } from "./utils/address";
 import { JettonList } from "./components/JettonList";
 import { SendJettonModal } from "./components/SendJettonModal";
-import { NftItem } from "@ton-api/client"; // Тип для NFT
+import { NftItem, NftItemWithPreview } from "@ton-api/client"; // Импортируем NftItem с расширением
 import ta from "./tonapi";
 
 type NftPreview = {
   resolution: string;
   url: string;
-};
-
-type NftItemWithPreview = NftItem & {
-  previews?: NftPreview[];
 };
 
 function App() {
@@ -44,16 +40,18 @@ function App() {
     ta.accounts
       .getAccountJettonsBalances(connectedAddress)
       .then((res) => setJettons(res.balances))
-      .catch((e) => {
+      .catch((e: Error) => {
         console.error(e);
         setError(e.message || "Failed to fetch jettons");
         setJettons(null);
       });
 
     ta.accounts
-      .getAccountNftItems(connectedAddress)
-      .then((res) => setNfts(res.nftItems))
-      .catch((e) => {
+      .getAccountNftItems(connectedAddress) // Исправлено имя метода на getAccountNftItems
+      .then((res) => {
+        setNfts(res.nftItems); // Используем правильный тип для ответа
+      })
+      .catch((e: Error) => {
         console.error(e);
         setNftError(e.message || "Failed to fetch NFTs");
         setNfts(null);
@@ -97,7 +95,8 @@ function App() {
             <ul className="nft-grid">
               {filteredNfts.map((nft, index) => (
                 <li key={index} className="nft-item">
-                  <p>{nft.name || `NFT ${index + 1}`}</p>
+                  {/* Название NFT */}
+                  <p>{nft.name ? nft.name : `NFT ${index + 1}`}</p>
 
                   {/* Название коллекции */}
                   {nft.collection && <p className="nft-collection">Collection: {nft.collection.name}</p>}
@@ -114,6 +113,21 @@ function App() {
                     </div>
                   ) : (
                     <p>No third preview available</p>
+                  )}
+
+                  {/* Атрибуты NFT */}
+                  {nft.attributes && nft.attributes.length > 0 && (
+                    <div className="nft-attributes">
+                      <h4>Attributes:</h4>
+                      <ul>
+                        {nft.attributes.map((attr, attrIndex) => (
+                          <li key={attrIndex}>
+                            <strong>{attr.trait_type}: </strong>
+                            {attr.value}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </li>
               ))}
