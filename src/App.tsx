@@ -10,11 +10,6 @@ import { JettonList } from "./components/JettonList";
 import { SendJettonModal } from "./components/SendJettonModal";
 import ta from "./tonapi";
 
-interface NftAttribute {
-  trait_type: string;
-  value: string;
-}
-
 function App() {
   const [jettons, setJettons] = useState<JettonBalance[] | null>(null);
   const [selectedJetton, setSelectedJetton] = useState<JettonBalance | null>(null);
