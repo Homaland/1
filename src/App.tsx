@@ -108,7 +108,7 @@ function App() {
                         src={nft.previews[2].url}
                         alt={nft.name || `NFT ${index + 1}`}
                         className="nft-image"
-                        style={{ width: "10vw", height: "auto" }} // 10% от ширины экрана
+                        style={{ width: "25vw", height: "auto" }} // 10% от ширины экрана
                       />
                     </div>
                   ) : (
