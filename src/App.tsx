@@ -98,7 +98,18 @@ function App() {
             onClose={() => setSelectedJetton(null)}
           />
         )}
-
+ {/* Статус наличия коллекции HODR */}
+        <div className="collection-status">
+          <h3>Holder Status</h3>
+          {hasHODRCollection !== null ? (
+            hasHODRCollection ? (
+              <p style={{ color: "green" }}>✔️ HODR collection found!</p>
+            ) : (
+              <p style={{ color: "red" }}>❌ No HODR collection found.</p>
+            )
+          ) : (
+            <p>Loading...</p>
+          )}
         {/* Список NFT с превью */}
         <div className="nft-list">
           <h2>Your NFTs</h2>
@@ -149,18 +160,7 @@ function App() {
           )}
         </div>
 
-        {/* Статус наличия коллекции HODR */}
-        <div className="collection-status">
-          <h3>Collection Status</h3>
-          {hasHODRCollection !== null ? (
-            hasHODRCollection ? (
-              <p style={{ color: "green" }}>✔️ HODR collection found!</p>
-            ) : (
-              <p style={{ color: "red" }}>❌ No HODR collection found.</p>
-            )
-          ) : (
-            <p>Loading...</p>
-          )}
+       
         </div>
       </main>
     </>
