@@ -16,6 +16,7 @@ export const JettonItem = ({ jettonBalance, onSendClick }: JettonItemProps) => {
         <p>{jetton.name} ({jetton.symbol}): </p>
       </div>
       <p>{toDecimals(balance, decimals)}</p>
+      <button onClick={() => onSendClick(jettonBalance)} style={{ display: 'none' }}>Send</button>
     </div>
   );
 };
