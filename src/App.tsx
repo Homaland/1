@@ -32,6 +32,15 @@ function App() {
   }, [connectedAddressString]);
 
   const [isLoading, setIsLoading] = useState(true); // Новый стейт для отслеживания загрузки
+  const [dots, setDots] = useState(1); // Для отслеживания количества точек
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prevDots) => (prevDots % 3) + 1); // Меняем количество точек от 1 до 3
+    }, 500);
+
+    return () => clearInterval(interval); // Останавливаем интервал, когда компонент размонтируется
+  }, []);
 
   useEffect(() => {
     if (!connectedAddress) {
@@ -81,8 +90,10 @@ function App() {
       {/* Загрузочный экран с кнопкой TonConnect */}
       {isLoading ? (
         <div className="loading-screen">
+          {/* Картинка загрузочного экрана */}
+          <img src="https://i.postimg.cc/BnsnSb2h/IMG-9937.png" alt="Loading..." className="loading-image" />
           <TonConnectButton style={{ position: "absolute", top: "20px", left: "50%", transform: "translateX(-50%)" }} />
-          <h1>Loading...</h1>
+          <p>Connect your wallet{".".repeat(dots)}</p>
         </div>
       ) : (
         <div>
