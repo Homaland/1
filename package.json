@@ -1,9 +1,9 @@
 {
-  "name": "tonapi-dapp-example",
+  "name": "HODRLAND",
   "license": "MIT",
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://tonkeeper.github.io/tonapi-dapp-example/",
+  "homepage": "/dist",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
