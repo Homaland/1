@@ -17,8 +17,8 @@ function App() {
   const [nfts, setNfts] = useState<any[] | null>(null);
   const [nftError, setNftError] = useState<string | null>(null);
   const [hasHODRCollection, setHasHODRCollection] = useState<boolean | null>(null);
-  const [user, setUser] = useState<any | null>(null);  // User data (name and avatar)
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [firstName, setFirstName] = useState<string | null>(null);
+  const [profilePhotoUrl, setProfilePhotoUrl] = useState<string | null>(null);
 
   const connectedAddressString = useTonAddress();
   const connectedAddress = useMemo(() => {
@@ -31,6 +31,31 @@ function App() {
   const [dots, setDots] = useState(1);
 
   useEffect(() => {
+    const themeChangeHandler = () => {
+      const newTheme = WebApp.themeParams;
+      document.body.style.backgroundColor = newTheme.bg_color || '#ffffff';
+      document.body.style.color = newTheme.text_color || '#000000';
+    };
+
+    WebApp.onEvent('themeChanged', themeChangeHandler);
+
+    return () => {
+      WebApp.offEvent('themeChanged', themeChangeHandler);
+      WebApp.MainButton.hide();
+    };
+  }, []);
+
+  useEffect(() => {
+  // Retrieve and store Telegram user's first name and profile photo URL
+  if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
+    setFirstName(WebApp.initDataUnsafe.user.first_name);
+    // Проверяем, что photo_url не undefined перед установкой значения
+    setProfilePhotoUrl(WebApp.initDataUnsafe.user.photo_url || null);
+  }
+}, []);
+
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setDots((prevDots) => (prevDots % 3) + 1);
     }, 500);
@@ -39,12 +64,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Fetch user data via WebApp SDK
-    if (WebApp.initDataUnsafe) {
-      const userData = WebApp.initDataUnsafe?.user;
-      setUser(userData);
-    }
-
     const loadingTimeout = setTimeout(() => {
       if (connectedAddress) {
         setIsLoading(false);
@@ -105,12 +124,21 @@ function App() {
       ) : (
         <div>
           <header>
-            <div className="user-info" onClick={() => setIsSettingsOpen(true)}>
-              <img src={user?.photo_url || "default-avatar.png"} alt="User Avatar" className="user-avatar" />
-              <span className="user-name">{user?.first_name || "User"}</span>
-            </div>
-            <h2>Hold On for Dear Reward</h2>
-          </header>
+  <div className="profile-header">
+    {profilePhotoUrl ? (
+      <img
+        src={profilePhotoUrl}
+        alt="Telegram Profile"
+        className="profile-photo"
+      />
+    ) : (
+      <p className="user-name">{firstName ? firstName : "User"}</p>
+    )}
+    {firstName && <span className="user-name">{firstName}</span>}
+  </div>
+  <h2>Hold On for Dear Reward</h2>
+</header>
+
 
           <main>
             <JettonList
@@ -171,13 +199,6 @@ function App() {
               </div>
             </div>
           </main>
-
-          {isSettingsOpen && (
-            <div className="settings-modal">
-              <h2>Settings</h2>
-              <button onClick={() => setIsSettingsOpen(false)}>Close</button>
-            </div>
-          )}
         </div>
       )}
     </>

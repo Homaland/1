@@ -1,21 +1,20 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import WebApp from '@twa-dev/sdk';
+import WebApp from '@twa-dev/sdk'; // Импорт Telegram Web Apps SDK
 
 import App from './App.tsx';
 import './index.css';
 
-// Уведомляем Telegram о готовности приложения
+// Telegram WebApp initialization
 WebApp.ready();
 
-// Рендерим React-приложение
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <TonConnectUIProvider
-      manifestUrl="https://homaland-memefight-f32c.twc1.net/static/tonconnect-manifest.json"
-    >
-      <App />
-    </TonConnectUIProvider>
-  </StrictMode>
+    <StrictMode>
+        <TonConnectUIProvider
+            manifestUrl="https://homaland-memefight-f32c.twc1.net/static/tonconnect-manifest.json"
+        >
+            <App />
+        </TonConnectUIProvider>
+    </StrictMode>,
 );
