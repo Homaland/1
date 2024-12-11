@@ -3,12 +3,16 @@ import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
 import { Address } from "@ton/core";
 import { JettonBalance } from "@ton-api/client";
 import WebApp from '@twa-dev/sdk';
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import "./App.css";
 import { isValidAddress } from "./utils/address";
 import { JettonList } from "./components/JettonList";
 import { SendJettonModal } from "./components/SendJettonModal";
 import ta from "./tonapi";
+import SettingsPage from "./pages/SettingsPage";  // Import settings page
+
+type Language = "RU" | "ENG";
 
 function App() {
   const [jettons, setJettons] = useState<JettonBalance[] | null>(null);
@@ -20,6 +24,8 @@ function App() {
   const [firstName, setFirstName] = useState<string | null>(null);
   const [profilePhotoUrl, setProfilePhotoUrl] = useState<string | null>(null);
 
+  const [language, setLanguage] = useState<Language>("ENG");  // Default language ENG
+
   const connectedAddressString = useTonAddress();
   const connectedAddress = useMemo(() => {
     return isValidAddress(connectedAddressString)
@@ -29,6 +35,19 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [dots, setDots] = useState(1);
+
+  // Load language from localStorage
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("language") as Language;
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  // Save language to localStorage
+  useEffect(() => {
+    localStorage.setItem("language", language);
+  }, [language]);
 
   useEffect(() => {
     const themeChangeHandler = () => {
@@ -46,14 +65,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-  // Retrieve and store Telegram user's first name and profile photo URL
-  if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
-    setFirstName(WebApp.initDataUnsafe.user.first_name);
-    // Проверяем, что photo_url не undefined перед установкой значения
-    setProfilePhotoUrl(WebApp.initDataUnsafe.user.photo_url || null);
-  }
-}, []);
-
+    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
+      setFirstName(WebApp.initDataUnsafe.user.first_name);
+      setProfilePhotoUrl(WebApp.initDataUnsafe.user.photo_url || null);
+    }
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -111,97 +127,124 @@ function App() {
 
   const filteredNfts = nfts?.filter((nft) => nft.collection);
 
+  const texts = {
+    RU: {
+      connectWallet: "Подключите кошелек",
+      holderStatus: "Статус владельца",
+      hodrCollectionFound: "✔️ Коллекция HODR найдена!",
+      hodrCollectionNotFound: "❌ Коллекция HODR не найдена.",
+      noCollectionFound: "Нет коллекции",
+      yourNfts: "Ваши NFTs"
+    },
+    ENG: {
+      connectWallet: "Connect your wallet",
+      holderStatus: "Holder Status",
+      hodrCollectionFound: "✔️ HODR collection found!",
+      hodrCollectionNotFound: "❌ No HODR collection found.",
+      noCollectionFound: "No collection found",
+      yourNfts: "Your NFTs"
+    }
+  };
+
   return (
-    <>
-      {isLoading ? (
-        <div className="loading-screen">
-          <img src="https://i.postimg.cc/BnsnSb2h/IMG-9937.png" alt="Loading..." className="loading-image" />
-          <TonConnectButton
-            style={{ position: "absolute", top: "20px", left: "50%", transform: "translateX(-50%)" }}
-          />
-          <p>Connect your wallet{".".repeat(dots)}</p>
-        </div>
-      ) : (
-        <div>
-          <header>
-  <div className="profile-header">
-    {profilePhotoUrl ? (
-      <img
-        src={profilePhotoUrl}
-        alt="Telegram Profile"
-        className="profile-photo"
-      />
-    ) : (
-      <p className="user-name">{firstName ? firstName : "User"}</p>
-    )}
-    {firstName && <span className="user-name">{firstName}</span>}
-  </div>
-  <h2>Hold On for Dear Reward</h2>
-</header>
-
-
-          <main>
-            <JettonList
-              className="card"
-              jettons={jettons}
-              connectedAddressString={connectedAddressString}
-              onSendClick={setSelectedJetton}
-            />
-            {error && <p className="error">{error}</p>}
-
-            {selectedJetton && connectedAddress && (
-              <SendJettonModal
-                senderAddress={connectedAddress}
-                jetton={selectedJetton}
-                onClose={() => setSelectedJetton(null)}
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          isLoading ? (
+            <div className="loading-screen">
+              <img src="https://i.postimg.cc/BnsnSb2h/IMG-9937.png" alt="Loading..." className="loading-image" />
+              <TonConnectButton
+                style={{ position: "absolute", top: "20px", left: "50%", transform: "translateX(-50%)" }}
               />
-            )}
-
-            <div className="collection-status">
-              <h3>Holder Status</h3>
-              {hasHODRCollection !== null ? (
-                hasHODRCollection ? (
-                  <p style={{ color: "green" }}>✔️ HODR collection found!</p>
-                ) : (
-                  <p style={{ color: "red" }}>❌ No HODR collection found.</p>
-                )
-              ) : (
-                <p>Loading...</p>
-              )}
-
-              <div className="nft-list">
-                <h3>Your NFTs</h3>
-                {nftError && <p className="error">{nftError}</p>}
-                {filteredNfts && filteredNfts.length > 0 ? (
-                  <ul className="nft-grid">
-                    {filteredNfts.map((nft, index) => (
-                      <li key={index} className="nft-item">
-                        <p>{nft.name ? nft.name : `NFT ${index + 1}`}</p>
-                        {nft.collection && <p className="nft-collection">Collection: {nft.collection.name}</p>}
-                        {nft.previews && nft.previews.length >= 3 ? (
-                          <div className="nft-image-wrapper">
-                            <img
-                              src={nft.previews[2].url}
-                              alt={nft.name || `NFT ${index + 1}`}
-                              className="nft-image"
-                              style={{ width: "25vw", height: "auto" }}
-                            />
-                          </div>
-                        ) : (
-                          <p>No third preview available</p>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>No NFTs with a collection found</p>
-                )}
-              </div>
+              <p>{texts[language].connectWallet}{".".repeat(dots)}</p>
             </div>
-          </main>
-        </div>
-      )}
-    </>
+          ) : (
+            <div>
+              <header>
+                <div className="profile-header">
+                  {profilePhotoUrl ? (
+                    <img
+                      src={profilePhotoUrl}
+                      alt="Telegram Profile"
+                      className="profile-photo"
+                    />
+                  ) : null}
+
+                  {firstName ? (
+                    <Link to="/settings" className="user-name">{firstName}</Link>
+                  ) : (
+                    <Link to="/settings" className="user-name">User</Link>
+                  )}
+                </div>
+                <h2>Hold On for Dear Reward</h2>
+              </header>
+
+              <main>
+                <JettonList
+                  className="card"
+                  jettons={jettons}
+                  connectedAddressString={connectedAddressString}
+                  onSendClick={setSelectedJetton}
+                />
+                {error && <p className="error">{error}</p>}
+
+                {selectedJetton && connectedAddress && (
+                  <SendJettonModal
+                    senderAddress={connectedAddress}
+                    jetton={selectedJetton}
+                    onClose={() => setSelectedJetton(null)}
+                  />
+                )}
+
+                <div className="collection-status">
+                  <h3>{texts[language].holderStatus}</h3>
+                  {hasHODRCollection !== null ? (
+                    hasHODRCollection ? (
+                      <p style={{ color: "green" }}>{texts[language].hodrCollectionFound}</p>
+                    ) : (
+                      <p style={{ color: "red" }}>{texts[language].hodrCollectionNotFound}</p>
+                    )
+                  ) : (
+                    <p>{texts[language].noCollectionFound}</p>
+                  )}
+
+                  <div className="nft-list">
+                    <h3>{texts[language].yourNfts}</h3>
+                    {nftError && <p className="error">{nftError}</p>}
+                    {filteredNfts && filteredNfts.length > 0 ? (
+                      <ul className="nft-grid">
+                        {filteredNfts.map((nft, index) => (
+                          <li key={index} className="nft-item">
+                            <p>{nft.name ? nft.name : `NFT ${index + 1}`}</p>
+                            {nft.collection && <p className="nft-collection">Collection: {nft.collection.name}</p>}
+                            {nft.previews && nft.previews.length >= 3 ? (
+                              <div className="nft-image-wrapper">
+                                <img
+                                  src={nft.previews[2].url}
+                                  alt={nft.name || `NFT ${index + 1}`}
+                                  className="nft-image"
+                                  style={{ width: "25vw", height: "auto" }}
+                                />
+                              </div>
+                            ) : (
+                              <p>No third preview available</p>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>{texts[language].noCollectionFound}</p>
+                    )}
+                  </div>
+                </div>
+              </main>
+            </div>
+          )
+        } />
+
+        <Route path="/settings" element={<SettingsPage language={language} setLanguage={setLanguage} />} />
+      </Routes>
+    </Router>
   );
 }
 

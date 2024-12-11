@@ -177,3 +177,22 @@
   font-size: 16px;
   font-weight: bold;
 }
+
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.wallet-connection {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Ensures that the button is centered within the container */
+  margin-top: 20px; /* Adds some spacing above the button */
+}
+
+select {
+  margin-top: 10px;
+}
