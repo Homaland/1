@@ -191,7 +191,7 @@ function App() {
             <div className="loading-screen">
               <img src="https://i.postimg.cc/BnsnSb2h/IMG-9937.png" alt="Loading..." className="loading-image" />
               <TonConnectButton
-                style={{ position: "absolute", top: "20px", left: "50%", transform: "translateX(-50%)" }}
+                style={{ position: "absolute", top: "10vh", left: "50%", transform: "translateX(-50%)" }}
               />
               <p>{texts[language].connectWallet}{".".repeat(dots)}</p>
             </div>
