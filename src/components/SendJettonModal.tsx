@@ -62,7 +62,7 @@ export const SendJettonModal = ({
           {error && <p className="error">{error}</p>}
 
           <label>
-            Select Jetton:
+            Select:
             <select
               value={selectedJetton.jetton.symbol}
               onChange={(e) => {
