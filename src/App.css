@@ -198,7 +198,7 @@
   display: flex;
   justify-content: center;
   width: 100%; /* Ensures that the button is centered within the container */
-  margin-top: 20px; /* Adds some spacing above the button */
+  margin-top: 7vh; /* Adds some spacing above the button */
 }
 
 select {
