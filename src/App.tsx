@@ -4,6 +4,13 @@ import { Address } from "@ton/core";
 import { JettonBalance } from "@ton-api/client";
 import WebApp from '@twa-dev/sdk';
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import BottomMenu from "./components/BottomMenu";
+
+// Прочие импорты для страниц
+import TaskPage from "./pages/TaskPage";
+import PlayPage from "./pages/PlayPage";
+import ShopPage from "./pages/ShopPage";
+import FrenPage from "./pages/FrenPage";
 
 import "./App.css";
 import { isValidAddress } from "./utils/address";
@@ -71,6 +78,36 @@ function App() {
     }
   }, []);
 
+    // Управление полноэкранным режимом
+  useEffect(() => {
+    // Запросить переход в полноэкранный режим
+    WebApp.requestFullscreen();
+
+  }, []);
+// Управление безопасными зонами
+  useEffect(() => {
+    // Убираем отступы для безопасных зон
+    
+
+        
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prevDots) => (prevDots % 3) + 1);
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Fetch user Telegram data
+  useEffect(() => {
+    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
+      setFirstName(WebApp.initDataUnsafe.user.first_name);
+      setProfilePhotoUrl(WebApp.initDataUnsafe.user.photo_url ?? null);  // Применили оператор ?? вместо ||
+    }
+  }, []);
+  
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setDots((prevDots) => (prevDots % 3) + 1);
@@ -177,9 +214,22 @@ function App() {
                   )}
                 </div>
                 <h2>Hold On for Dear Reward</h2>
+                <button onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}>Send</button>
+
               </header>
 
               <main>
+              {selectedJetton && connectedAddress && (
+  <SendJettonModal
+  senderAddress={connectedAddress}
+  jetton={selectedJetton}
+  onClose={() => setSelectedJetton(null)}
+  jettons={jettons || []}
+  isVisible={!!selectedJetton} // Передаем состояние видимости
+/>
+
+)}
+
                 <JettonList
                   className="card"
                   jettons={jettons}
@@ -188,15 +238,7 @@ function App() {
                 />
                 {error && <p className="error">{error}</p>}
 
-                {selectedJetton && connectedAddress && (
-                  <SendJettonModal
-                    senderAddress={connectedAddress}
-                    jetton={selectedJetton}
-                    onClose={() => setSelectedJetton(null)}
-                  />
-                )}
-
-                <div className="collection-status">
+                  <div className="collection-status">
                   <h3>{texts[language].holderStatus}</h3>
                   {hasHODRCollection !== null ? (
                     hasHODRCollection ? (
@@ -237,11 +279,21 @@ function App() {
                     )}
                   </div>
                 </div>
+                
               </main>
+              <BottomMenu /> 
             </div>
           )
         } />
+        
+          
+        
 
+  <Route path="/task" element={<TaskPage />} />
+            <Route path="/play" element={<PlayPage />} />
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/fren" element={<FrenPage />} />
+            
         <Route path="/settings" element={<SettingsPage language={language} setLanguage={setLanguage} />} />
       </Routes>
     </Router>

@@ -106,11 +106,17 @@
   list-style: none;
 }
 
+.nft-item:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Увеличиваем тень при наведении */
+}
+
 .nft-item {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Добавляем тени */
+  transition: box-shadow 0.3s ease-in-out; /* Плавное появление тени */
 }
 
 .nft-image {
@@ -195,4 +201,180 @@
 
 select {
   margin-top: 10px;
+}
+
+/* Затемнение фона */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный */
+  display: none;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.overlay.visible {
+  display: block;
+  opacity: 1;
+}
+
+/* Выезжающее окно */
+.slide-modal {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  max-height: 80%; /* Ограничение по высоте */
+  background: white;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto; /* Прокрутка при переполнении */
+  transition: bottom 0.5s ease-in-out; /* Увеличим продолжительность анимации */
+  width: 100%;
+  max-width: 100%; /* Ограничение ширины окна */
+  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+  
+}
+
+.slide-modal.visible {
+  bottom: 0;
+}
+
+
+/* Контент внутри модального окна */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+  justify-content: center; /* Центрирование по вертикали */
+  align-items: center; /* Центрирование по горизонтали */
+  text-align: center; /* Текст внутри будет центрирован */
+  width: 90%; /* Адаптивная ширина */
+  max-width: 400px; /* Ограничение максимальной ширины */
+  margin: auto; /* Для центрирования относительно родителя */
+}
+
+.modal-content label {
+  font-weight: bold;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content button {
+  width: 100%; /* Единая ширина для кнопок и полей ввода */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.modal-content button {
+  border: none;
+  cursor: pointer;
+}
+
+.modal-content button:first-child {
+  background: #4caf50;
+  color: white;
+}
+
+.modal-content button:last-child {
+  background: #f44336;
+  color: white;
+}
+
+/* В файл App.css или BottomMenu.css */
+.bottom-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.menu-item:hover {
+  color: #007bff;
+}
+
+.menu-item span {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.menu-item.active {
+  color: #007bff;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-content {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column; /* Располагаем элементы вертикально */
+  align-items: center;    /* Центрируем элементы по горизонтали */
+  text-align: center;     /* Центрируем текст внутри элементов */
+}
+
+.profile-photo {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px; /* Отступ между фото и именем */
+  margin-top: 2.5vh;
+}
+
+.user-name {
+  margin-top: 5px; /* Дополнительный отступ, если нужно */
+}
+
+
+
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.loading-image {
+  width: 150px;
+  height: auto;
+  
+  }
+
+.error {
+  color: red;
 }

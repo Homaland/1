@@ -1,4 +1,4 @@
-import { JettonBalance } from "@ton-api/client";
+import { JettonBalance } from "@ton-api/client"; 
 import { toDecimals } from "../utils/decimals";
 
 interface JettonItemProps {
@@ -6,7 +6,7 @@ interface JettonItemProps {
   onSendClick: (jetton: JettonBalance) => void;
 }
 
-export const JettonItem = ({ jettonBalance, onSendClick }: JettonItemProps) => {
+export const JettonItem = ({ jettonBalance}: JettonItemProps) => {
   const { jetton, balance, jetton: { decimals } } = jettonBalance;
 
   return (
@@ -16,7 +16,7 @@ export const JettonItem = ({ jettonBalance, onSendClick }: JettonItemProps) => {
         <p>{jetton.name} ({jetton.symbol}): </p>
       </div>
       <p>{toDecimals(balance, decimals)}</p>
-      <button onClick={() => onSendClick(jettonBalance)} style={{ display: 'none' }}>Send</button>
+      
     </div>
   );
 };
