@@ -1,9 +1,19 @@
+body, html {
+   
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none; 
+  
+}
 #root {
   width: 535px;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
 }
 
 .logo {
@@ -230,14 +240,14 @@ select {
   left: 0;
   width: 100%;
   max-height: 80%; /* Ограничение по высоте */
-  background: rgb(124, 122, 245);
+  background: #fff;
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
   z-index: 1001;
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto; /* Прокрутка при переполнении */
-  transition: bottom 0.5s ease-in-out; /* Увеличим продолжительность анимации */
+  transition: bottom 0.9s ease-in-out; /* Увеличим продолжительность анимации */
   width: 100%;
   max-width: 100%; /* Ограничение ширины окна */
   overflow-x: hidden; /* Убираем горизонтальную прокрутку */
@@ -259,7 +269,7 @@ select {
   align-items: center; /* Центрирование по горизонтали */
   text-align: center; /* Текст внутри будет центрирован */
   width: 90%; /* Адаптивная ширина */
-  max-width: 400px; /* Ограничение максимальной ширины */
+  max-width: 100%; /* Ограничение максимальной ширины */
   margin: auto; /* Для центрирования относительно родителя */
 }
 
@@ -273,7 +283,7 @@ select {
   width: 100%; /* Единая ширина для кнопок и полей ввода */
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #ссс;
   border-radius: 8px;
   box-sizing: border-box;
 }
@@ -327,4 +337,24 @@ select {
 
 .menu-item.active {
   color: #007bff;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Фиксированная высота на весь экран */
+  
+ scrollbar-width: none;
+ overflow-y: auto; /* Делаем прокручиваемый контент */
+}
+
+.content {
+  flex: 1;
+ 
+  height: 100vh; 
+  padding-bottom: 10vh; /* Отступ снизу для нижнего меню */
+
+}
+.main-content::-webkit-scrollbar {
+  display: none; /* Скрываем ползунок в Chrome, Safari */
 }

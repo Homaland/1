@@ -78,18 +78,22 @@ function App() {
     }
   }, []);
 
-    // Управление полноэкранным режимом
+  // Управление полноэкранным режимом и запрет свайпа вниз для закрытия приложения
   useEffect(() => {
     // Запросить переход в полноэкранный режим
     WebApp.requestFullscreen();
 
+    // Отключаем возможность свайпа вниз для закрытия приложения
+    WebApp.isVerticalSwipesEnabled = false;
+
+    // Включаем подтверждение закрытия
+    WebApp.enableClosingConfirmation();
+
   }, []);
-// Управление безопасными зонами
+
+  // Управление безопасными зонами
   useEffect(() => {
     // Убираем отступы для безопасных зон
-    
-
-        
   }, []);
 
   useEffect(() => {
@@ -106,7 +110,6 @@ function App() {
       setProfilePhotoUrl(WebApp.initDataUnsafe.user.photo_url ?? null);  // Применили оператор ?? вместо ||
     }
   }, []);
-  
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -196,7 +199,9 @@ function App() {
               <p>{texts[language].connectWallet}{".".repeat(dots)}</p>
             </div>
           ) : (
-            <div>
+           
+              <div className="main-content">
+              <div className="content">
               <header>
                 <div className="profile-header">
                   {profilePhotoUrl ? (
@@ -218,85 +223,79 @@ function App() {
 
               </header>
 
-              <main>
               {selectedJetton && connectedAddress && (
-  <SendJettonModal
-  senderAddress={connectedAddress}
-  jetton={selectedJetton}
-  onClose={() => setSelectedJetton(null)}
-  jettons={jettons || []}
-  isVisible={!!selectedJetton} // Передаем состояние видимости
-/>
-
-)}
-
-                <JettonList
-                  className="card"
-                  jettons={jettons}
-                  connectedAddressString={connectedAddressString}
-                  onSendClick={setSelectedJetton}
+                <SendJettonModal
+                  senderAddress={connectedAddress}
+                  jetton={selectedJetton}
+                  onClose={() => setSelectedJetton(null)}
+                  jettons={jettons || []}
+                  isVisible={!!selectedJetton} // Передаем состояние видимости
                 />
-                {error && <p className="error">{error}</p>}
+              )}
 
-                  <div className="collection-status">
-                  <h3>{texts[language].holderStatus}</h3>
-                  {hasHODRCollection !== null ? (
-                    hasHODRCollection ? (
-                      <p style={{ color: "green" }}>{texts[language].hodrCollectionFound}</p>
-                    ) : (
-                      <p style={{ color: "red" }}>{texts[language].hodrCollectionNotFound}</p>
-                    )
+              <JettonList
+                className="card"
+                jettons={jettons}
+                connectedAddressString={connectedAddressString}
+                onSendClick={setSelectedJetton}
+              />
+              {error && <p className="error">{error}</p>}
+
+              <div className="collection-status">
+                <h3>{texts[language].holderStatus}</h3>
+                {hasHODRCollection !== null ? (
+                  hasHODRCollection ? (
+                    <p style={{ color: "green" }}>{texts[language].hodrCollectionFound}</p>
+                  ) : (
+                    <p style={{ color: "red" }}>{texts[language].hodrCollectionNotFound}</p>
+                  )
+                ) : (
+                  <p>{texts[language].noCollectionFound}</p>
+                )}
+
+                <div className="nft-list">
+                  <h3>{texts[language].yourNfts}</h3>
+                  {nftError && <p className="error">{nftError}</p>}
+                  {filteredNfts && filteredNfts.length > 0 ? (
+                    <ul className="nft-grid">
+                      {filteredNfts.map((nft, index) => (
+                        <li key={index} className="nft-item">
+                          <p>{nft.name ? nft.name : `NFT ${index + 1}`}</p>
+                          {nft.collection && <p className="nft-collection">Collection: {nft.collection.name}</p>}
+                          {nft.previews && nft.previews.length >= 3 ? (
+                            <div className="nft-image-wrapper">
+                              <img
+                                src={nft.previews[2].url}
+                                alt={nft.name || `NFT ${index + 1}`}
+                                className="nft-image"
+                                style={{ width: "25vw", height: "auto" }}
+                              />
+                            </div>
+                          ) : (
+                            <p>No third preview available</p>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
                   ) : (
                     <p>{texts[language].noCollectionFound}</p>
                   )}
-
-                  <div className="nft-list">
-                    <h3>{texts[language].yourNfts}</h3>
-                    {nftError && <p className="error">{nftError}</p>}
-                    {filteredNfts && filteredNfts.length > 0 ? (
-                      <ul className="nft-grid">
-                        {filteredNfts.map((nft, index) => (
-                          <li key={index} className="nft-item">
-                            <p>{nft.name ? nft.name : `NFT ${index + 1}`}</p>
-                            {nft.collection && <p className="nft-collection">Collection: {nft.collection.name}</p>}
-                            {nft.previews && nft.previews.length >= 3 ? (
-                              <div className="nft-image-wrapper">
-                                <img
-                                  src={nft.previews[2].url}
-                                  alt={nft.name || `NFT ${index + 1}`}
-                                  className="nft-image"
-                                  style={{ width: "25vw", height: "auto" }}
-                                />
-                              </div>
-                            ) : (
-                              <p>No third preview available</p>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p>{texts[language].noCollectionFound}</p>
-                    )}
-                  </div>
                 </div>
-                
-              </main>
-              <BottomMenu /> 
-            </div>
-          )
-        } />
-        
-          
-        
+              </div>
+          </div>
+            <BottomMenu />
+          </div>
+        )
+      } />
 
-  <Route path="/task" element={<TaskPage />} />
-            <Route path="/play" element={<PlayPage />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/fren" element={<FrenPage />} />
-            
-        <Route path="/settings" element={<SettingsPage language={language} setLanguage={setLanguage} />} />
-      </Routes>
-    </Router>
+      <Route path="/task" element={<TaskPage />} />
+      <Route path="/play" element={<PlayPage />} />
+      <Route path="/shop" element={<ShopPage />} />
+      <Route path="/fren" element={<FrenPage />} />
+
+      <Route path="/settings" element={<SettingsPage language={language} setLanguage={setLanguage} />} />
+    </Routes>
+  </Router>
   );
 }
 
