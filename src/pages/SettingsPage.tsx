@@ -1,5 +1,4 @@
 import React from "react"; 
-import { TonConnectButton } from "@tonconnect/ui-react";
 import { BackButton } from "../components/BackButton";
 
 type SettingsPageProps = {
@@ -25,9 +24,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ language, setLanguage }) =>
         </select>
       </label>
 
-      <div className="wallet-connection">
-        <TonConnectButton />
-      </div>
+     
     </div>
   );
 };

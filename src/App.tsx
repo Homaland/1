@@ -6,6 +6,7 @@ import WebApp from '@twa-dev/sdk';
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import BottomMenu from "./components/BottomMenu";
 
+
 // Прочие импорты для страниц
 import TaskPage from "./pages/TaskPage";
 import PlayPage from "./pages/PlayPage";
@@ -56,20 +57,7 @@ function App() {
     localStorage.setItem("language", language);
   }, [language]);
 
-  useEffect(() => {
-    const themeChangeHandler = () => {
-      const newTheme = WebApp.themeParams;
-      document.body.style.backgroundColor = newTheme.bg_color || '#ffffff';
-      document.body.style.color = newTheme.text_color || '#000000';
-    };
-
-    WebApp.onEvent('themeChanged', themeChangeHandler);
-
-    return () => {
-      WebApp.offEvent('themeChanged', themeChangeHandler);
-      WebApp.MainButton.hide();
-    };
-  }, []);
+  
 
   useEffect(() => {
     if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
@@ -201,27 +189,55 @@ function App() {
           ) : (
            
               <div className="main-content">
-              <div className="content">
+           
               <header>
-                <div className="profile-header">
-                  {profilePhotoUrl ? (
-                    <img
-                      src={profilePhotoUrl}
-                      alt="Telegram Profile"
-                      className="profile-photo"
-                    />
-                  ) : null}
+              <div className="profile-header">
+  {profilePhotoUrl ? (
+    <img
+      src={profilePhotoUrl}
+      alt="Telegram Profile"
+      className="profile-photo"
+    />
+  ) : null}
 
-                  {firstName ? (
-                    <Link to="/settings" className="user-name">{firstName}</Link>
-                  ) : (
-                    <Link to="/settings" className="user-name">User</Link>
-                  )}
-                </div>
-                <h2>Hold On for Dear Reward</h2>
-                <button onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}>Send</button>
+  {firstName ? (
+    <Link to="/settings" className="user-name">{firstName}</Link>
+  ) : (
+    <Link to="/settings" className="user-name">User</Link>
+  )}
+
+  <TonConnectButton className="ton-connect-button" />
+</div>
+
+
+
+
+
+
+
 
               </header>
+
+          <div className="content">
+                <h2>Hold On for Dear Reward</h2>
+               
+ <div className="send-button-container">
+  <button
+    className="send-button"
+    onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}
+  >
+    <span className="material-symbols-outlined">send_money</span>
+  </button>
+  <p
+    className="send-button-text"
+    onClick={() => setSelectedJetton(jettons ? jettons[0] : null)} // Обработчик клика
+  >
+    Send
+  </p> {/* Текст под кнопкой */}
+</div>
+
+
+
 
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
@@ -232,7 +248,7 @@ function App() {
                   isVisible={!!selectedJetton} // Передаем состояние видимости
                 />
               )}
-
+ 
               <JettonList
                 className="card"
                 jettons={jettons}

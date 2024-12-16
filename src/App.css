@@ -1,18 +1,19 @@
 body, html {
-   
+    background-color: #000;
     overflow: hidden;
     user-select: none;
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none; 
+    -ms-user-select: none;
   
 }
 #root {
-  width: 535px;
-  max-width: 1280px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  overflow-y: auto;
 
 }
 
@@ -114,6 +115,7 @@ body, html {
   gap: 10px;
   padding: 0;
   list-style: none;
+
 }
 
 .nft-item:hover {
@@ -180,21 +182,30 @@ body, html {
 .profile-header {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Разделяет элементы по краям */
+  width: 100%; /* Занимает всю ширину родительского контейнера */
+  padding: 10px; /* Добавляет отступы вокруг */
+  box-sizing: border-box; /* Учитывает padding в ширине */
+  margin-top: 7vh;
 }
 
 .profile-photo {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right: 2%;
-  margin-top: 7vh;
+  margin-right: 10px; /* Отступ справа от фото */
 }
 
 .user-name {
   font-size: 16px;
   font-weight: bold;
-  margin-top: 7vh;
+  margin-right: auto; /* Отодвигает имя влево, освобождая место для кнопки */
 }
+
+.ton-connect-button {
+  margin-left: 10px; /* Отступ от имени (если нужно) */
+}
+
 
 .settings-page {
   display: flex;
@@ -261,6 +272,7 @@ select {
 
 /* Контент внутри модального окна */
 .modal-content {
+  background: #fff;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -271,6 +283,7 @@ select {
   width: 90%; /* Адаптивная ширина */
   max-width: 100%; /* Ограничение максимальной ширины */
   margin: auto; /* Для центрирования относительно родителя */
+  color: #000;
 }
 
 .modal-content label {
@@ -308,14 +321,15 @@ select {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #fff;
+  background-color: #000;
   padding: 10px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid rgb(10, 10, 10);
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 5px rgb(10, 10, 10);
+  height: 7vh;
 }
 
 .menu-item {
@@ -323,7 +337,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #333;
+  color: #fff;
 }
 
 .menu-item:hover {
@@ -345,16 +359,62 @@ select {
   height: 100vh; /* Фиксированная высота на весь экран */
   
  scrollbar-width: none;
- overflow-y: auto; /* Делаем прокручиваемый контент */
+  overflow-y: auto;
 }
 
 .content {
-  flex: 1;
+  
  
   height: 100vh; 
   padding-bottom: 10vh; /* Отступ снизу для нижнего меню */
-
+  overflow-y: auto;
 }
 .main-content::-webkit-scrollbar {
   display: none; /* Скрываем ползунок в Chrome, Safari */
 }
+
+.send-button-container {
+  display: flex;
+  flex-direction: column; /* Размещаем элементы вертикально */
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: center; /* Центрируем по вертикали */
+}
+
+.send-button {
+  background-color: #fff; /* Цвет фона кнопки */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.send-button:hover {
+  transform: scale(1.1); /* Эффект при наведении */
+}
+
+.material-symbols-outlined {
+  font-size: 30px; /* Размер иконки */
+  color: #0000F5; /* Цвет иконки */
+}
+
+.send-button-text {
+  margin-top: 8px; /* Отступ между кнопкой и текстом */
+  font-size: 14px;
+  color: #fff; /* Цвет текста */
+  text-align: center;
+  cursor: pointer; /* Делает текст кликабельным */
+}
+
+.send-button-text:hover {
+  text-decoration: underline; /* Добавляем подчеркивание при наведении */
+}
+
+
