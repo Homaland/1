@@ -191,7 +191,7 @@ function App() {
               <div className="main-content">
            
               <header>
-              <div className="profile-header">
+  <div className="profile-header">
   {profilePhotoUrl ? (
     <img
       src={profilePhotoUrl}
@@ -201,13 +201,27 @@ function App() {
   ) : null}
 
   {firstName ? (
-    <Link to="/settings" className="user-name">{firstName}</Link>
+    <Link to="/settings" className="user-name">
+      {firstName.length > 12 ? `${firstName.substring(0, 12)}...` : firstName}
+      {/* Иконка стрелки */}
+      <span className="arrow-icon">
+        <i className="material-icons">arrow_forward_ios</i>
+      </span>
+    </Link>
   ) : (
-    <Link to="/settings" className="user-name">User</Link>
+    <Link to="/settings" className="user-name">
+      User
+      {/* Иконка стрелки */}
+      <span className="arrow-icon">
+        <i className="material-icons">arrow_forward_ios</i>
+      </span>
+    </Link>
   )}
 
   <TonConnectButton className="ton-connect-button" />
 </div>
+
+
 
 
 
@@ -258,7 +272,7 @@ function App() {
               {error && <p className="error">{error}</p>}
 
               <div className="collection-status">
-                <h3>{texts[language].holderStatus}</h3>
+              <div className="cstatus">  <h3>{texts[language].holderStatus}</h3>
                 {hasHODRCollection !== null ? (
                   hasHODRCollection ? (
                     <p style={{ color: "green" }}>{texts[language].hodrCollectionFound}</p>
@@ -268,7 +282,7 @@ function App() {
                 ) : (
                   <p>{texts[language].noCollectionFound}</p>
                 )}
-
+ </div>
                 <div className="nft-list">
                   <h3>{texts[language].yourNfts}</h3>
                   {nftError && <p className="error">{nftError}</p>}

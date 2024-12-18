@@ -1,21 +1,21 @@
 body, html {
-    background-color: #000;
     overflow: hidden;
     user-select: none;
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none;    /* Firefox */
     -ms-user-select: none;
-  
+   
 }
+ 
+
+
 #root {
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  height: auto;
   text-align: center;
-  overflow-y: auto;
-
-}
+  }
 
 .logo {
   display: block;
@@ -47,8 +47,34 @@ body, html {
   }
 }
 
+
+
 .card {
   text-align: start;
+  background-color: #fff;
+  height: auto;
+  border: 1px solid #fff;
+  border-radius: 25px;
+  padding: 5px;
+ margin: 5%;
+ 
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
+              0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.cstatus {
+  padding-top: 2vh;
+  background-color: rgba(245, 215, 44, 0.7);
+  height: auto;
+  border: 1px solid rgba(245, 215, 44, 0.7);
+  border-radius: 25px;
+  padding: 5px;
+ margin: 5%;
+ 
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
+              0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .read-the-docs {
@@ -88,7 +114,7 @@ body, html {
   background-color: var(--bg-color);
   padding: 20px;
   border-radius: 8px;
-  width: 400px;
+  width: 100%;
 }
 
 .modal-content input {
@@ -106,7 +132,17 @@ body, html {
 }
 
 .nft-list {
-  margin-top: 20px;
+     padding-top: 2vh;
+  margin-top: 5px;
+    margin: 5%;
+     background-color: #fff;
+  height: auto;
+  border: 1px solid #fff;
+  border-radius: 25px;
+  padding: 5px;
+   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
+              0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .nft-grid {
@@ -154,7 +190,7 @@ body, html {
 }
 
 .loading-image {
-  width: 30vh; /* Установите нужный размер изображения */
+  width: 20vh; /* Установите нужный размер изображения */
   height: auto;
   margin-bottom: 20px;
 }
@@ -182,29 +218,45 @@ body, html {
 .profile-header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Разделяет элементы по краям */
-  width: 100%; /* Занимает всю ширину родительского контейнера */
+  justify-content: flex-start; /* Выравнивает элементы по левому краю */
+  width: 90%; /* Занимает всю ширину родительского контейнера */
   padding: 10px; /* Добавляет отступы вокруг */
   box-sizing: border-box; /* Учитывает padding в ширине */
-  margin-top: 7vh;
+  margin-top: 10vh;
+  margin-left: 5%;
 }
 
 .profile-photo {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right: 10px; /* Отступ справа от фото */
+  margin-right: 5px; /* Отступ справа от фото */
 }
 
 .user-name {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  margin-right: auto; /* Отодвигает имя влево, освобождая место для кнопки */
+  margin-right: 5px; /* Отступ от имени до иконки */
+  display: flex;
+  align-items: center;
+  max-width: 100%; /* Ограничение ширины */
+  white-space: nowrap; /* Запрещает перенос текста */
+  overflow: hidden; /* Скрывает лишний текст */
+  text-overflow: ellipsis; /* Добавляет многоточие, если текст не помещается */
+}
+
+.arrow-icon {
+  font-size: 14px;
+  color: #007bff; /* Синий цвет */
+  cursor: pointer; /* Указывает, что элемент кликабельный */
 }
 
 .ton-connect-button {
-  margin-left: 10px; /* Отступ от имени (если нужно) */
+  margin-left: auto; 
 }
+
+
+
 
 
 .settings-page {
@@ -321,14 +373,14 @@ select {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #000;
+  background-color: rgba(255, 255, 240, 1.0);
   padding: 10px;
-  border-top: 1px solid rgb(10, 10, 10);
+  border-top: 1px solid rgb(206, 205, 205);
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  box-shadow: 0 -2px 5px rgb(10, 10, 10);
+  box-shadow: 0 -2px 5px rgb(206, 205, 205);
   height: 7vh;
 }
 
@@ -337,7 +389,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #fff;
+  color: #000;
 }
 
 .menu-item:hover {
@@ -360,6 +412,7 @@ select {
   
  scrollbar-width: none;
   overflow-y: auto;
+  
 }
 
 .content {
@@ -367,11 +420,14 @@ select {
  
   height: 100vh; 
   padding-bottom: 10vh; /* Отступ снизу для нижнего меню */
-  overflow-y: auto;
+ 
 }
 .main-content::-webkit-scrollbar {
   display: none; /* Скрываем ползунок в Chrome, Safari */
+  
 }
+
+
 
 .send-button-container {
   display: flex;
@@ -408,7 +464,7 @@ select {
 .send-button-text {
   margin-top: 8px; /* Отступ между кнопкой и текстом */
   font-size: 14px;
-  color: #fff; /* Цвет текста */
+  color: #000; /* Цвет текста */
   text-align: center;
   cursor: pointer; /* Делает текст кликабельным */
 }
