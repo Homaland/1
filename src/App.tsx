@@ -13,6 +13,7 @@ import PlayPage from "./pages/PlayPage";
 import ShopPage from "./pages/ShopPage";
 import FrenPage from "./pages/FrenPage";
 import JettonDetailsPage from "./pages/JettonDetailsPage";
+import Tokeninfo from "./pages/TokenInfoPage";
 
 import "./App.css";
 import { isValidAddress } from "./utils/address";
@@ -241,7 +242,7 @@ function App() {
     <div className="stic-item">
       <img
         className="stic-image"
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/HODR.png"
+        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/IMG_0100.png"
         alt="Background"
       />
     </div>
@@ -315,7 +316,10 @@ function App() {
 
 
 
-
+<div className="tokenhodr">
+             
+              <Tokeninfo />
+            </div>
 
 
 
