@@ -2,13 +2,4 @@
   width: 100%; /* Ширина изображения 30% */
   height: 100%; /* Высота изображения 30% */
   object-fit: contain; /* Сохраняет пропорции изображения */
-  
-}
-.play-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-    margin-top: 4vh;
 }

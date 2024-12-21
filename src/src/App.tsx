@@ -222,15 +222,6 @@ function App() {
   <TonConnectButton className="ton-connect-button" />
 </div>
 
-
-
-
-
-
-
-
-
-
               </header>
 
           <div className="content">
@@ -276,50 +267,7 @@ function App() {
   </div>
 </div>
 
-      <div className="button-row">
-  {/* Кнопка "Arrow Circle Up" */}
-  <div className="button-container">
-    <button
-      className="action-button"
-      onClick={() => WebApp.showAlert("Soon")}
-    >
-      <span className="material-symbols-outlined">arrow_downward</span>
-      <p className="button-text">Receive</p>
-    </button>
-  </div>
-
-  {/* Кнопка "Arrow Circle Down" */}
-  <div className="button-container">
-    <button
-      className="action-button"
-      onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}
-    >
-      <span className="material-symbols-outlined">arrow_upward</span>
-      <p className="button-text">Send</p>
-    </button>
-  </div>
-
-  {/* Кнопка "Swap Vert" */}
-  <div className="button-container">
-    <button
-      className="action-button"
-      onClick={() => WebApp.showAlert("Soon")}
-    >
-      <span className="material-symbols-outlined">swap_vert</span>
-      <p className="button-text">Swap</p>
-    </button>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-              {selectedJetton && connectedAddress && (
+    {selectedJetton && connectedAddress && (
                 <SendJettonModal
                   senderAddress={connectedAddress}
                   jetton={selectedJetton}
@@ -396,11 +344,13 @@ function App() {
   element={
     <JettonDetailsPage
       jettons={jettons}
-      connectedAddressString={connectedAddressString}
+      connectedAddressString={connectedAddressString || ""}
       onSendClick={setSelectedJetton}
     />
   }
 />
+
+      
 
       <Route path="/settings" element={<SettingsPage language={language} setLanguage={setLanguage} />} />
     </Routes>

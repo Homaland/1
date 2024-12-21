@@ -4,7 +4,7 @@ import BottomMenu from "../components/BottomMenu";
 
 const TaskPage: React.FC = () => {
   return (
-    <div>
+    <div className="task-page">
       <h1>Task</h1>
       <p>Soon</p>
 
