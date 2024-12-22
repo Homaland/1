@@ -114,7 +114,7 @@ function App() {
       if (connectedAddress) {
         setIsLoading(false);
       }
-    }, 3000);
+    }, 100);
 
     if (!connectedAddress) {
       setJettons(null);
@@ -235,7 +235,7 @@ function App() {
               </header>
 
           <div className="content">
-                <h2>Hold On for Dear Reward</h2>
+              
        <div className="stic-list">
   <div className="stic-carousel">
     {/* Каждый stic-item теперь содержит одно изображение */}
@@ -280,40 +280,53 @@ function App() {
       <div className="button-row">
   {/* Кнопка "Arrow Circle Up" */}
   <div className="button-container">
-    <button
+    <div
       className="action-button"
       onClick={() => WebApp.showAlert("Soon")}
     >
-      <span className="material-symbols-outlined">arrow_downward</span>
+      <img
+        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_downward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+        alt="Receive"
+        className="icon"
+      />
       <p className="button-text">Receive</p>
-    </button>
+    </div>
   </div>
 
   {/* Кнопка "Arrow Circle Down" */}
   <div className="button-container">
-    <button
+    <div
       className="action-button"
       onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}
     >
-      <span className="material-symbols-outlined">arrow_upward</span>
+      <img
+        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_upward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+        alt="Send"
+        className="icon"
+      />
       <p className="button-text">Send</p>
-    </button>
+    </div>
   </div>
 
   {/* Кнопка "Swap Vert" */}
   <div className="button-container">
-    <button
+    <div
       className="action-button"
       onClick={() => WebApp.showAlert("Soon")}
     >
-      <span className="material-symbols-outlined">swap_vert</span>
+      <img
+        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/swap_vert_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+        alt="Swap"
+        className="icon"
+      />
       <p className="button-text">Swap</p>
-    </button>
+    </div>
   </div>
 </div>
 
 
 
+<div className="how-it-works">  <p>Hold On for Dear Reward</p> </div>
 
 
 <div className="tokenhodr">
@@ -333,14 +346,20 @@ function App() {
                 />
               )}
  
- <Link to="/jettons" className="jetton-list-link">
+<div
+  className="jetton-list-link"
+  onClick={() => window.location.href = '/jettons'}
+>
   <JettonList
-    className="card"
+   className="card"
     jettons={jettons}
     connectedAddressString={connectedAddressString}
     onSendClick={setSelectedJetton}
   />
-</Link>
+</div>
+
+  
+  
 
               {error && <p className="error">{error}</p>}
 

@@ -1,40 +1,44 @@
 import { FC, useEffect } from "react";
 import WebApp from "@twa-dev/sdk";
+import { useNavigate } from "react-router-dom";
 
 interface BackButtonProps {
-  onClick?: () => void;  // Updated to clarify the onClick type
+  onClick?: () => void;
 }
 
 let isButtonShown = false;
 
 export const BackButton: FC<BackButtonProps> = ({
-  onClick = () => {
-    window.history.back();
-  },
+  onClick = () => {},
 }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
-    // Show the back button when the component mounts
+    // Показать кнопку назад, когда компонент монтируется
     WebApp.BackButton.show();
     isButtonShown = true;
 
     return () => {
-      // Hide the back button when the component unmounts
+      // Скрыть кнопку назад, когда компонент размонтируется
       isButtonShown = false;
       if (!isButtonShown) {
         WebApp.BackButton.hide();
       }
     };
-  }, []); // Empty array ensures this runs only on mount/unmount
+  }, []); // Пустой массив зависимостей
 
   useEffect(() => {
-    // Attach event handler for when back button is clicked
-    WebApp.onEvent("backButtonClicked", onClick);
+    // Прикрепить обработчик события для кнопки назад
+    WebApp.onEvent("backButtonClicked", () => {
+      onClick();
+      navigate("/");  // Переход на главную страницу
+    });
 
     return () => {
-      // Clean up event listener when component unmounts
+      // Удалить обработчик при размонтировании компонента
       WebApp.offEvent("backButtonClicked", onClick);
     };
-  }, [onClick]); // Re-run when onClick changes
+  }, [onClick, navigate]); // Переходить только когда onClick или navigate изменяются
 
-  return null; // This component doesn't render anything
+  return null; // Этот компонент ничего не рендерит
 };

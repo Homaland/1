@@ -47,6 +47,24 @@ body, html {
   }
 }
 
+.how-it-works {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 5vh;
+    position: relative;
+}
+
+.how-it-works p {
+    font-family: 'Rubik Vinyl', cursive;
+    font-size: 3vh;
+    color: #000;
+    text-align: center;
+    transform: rotate(6.02deg);
+   
+}
+
 
 
 .stic-list {
@@ -100,18 +118,36 @@ background-color:rgba(255, 255, 255, 0.87);
 
 
 
-.card {
-  text-align: start; /* Выравниваем текст по левому краю */
-  background-color: #fff; /* Устанавливаем белый фон для карточки */
-  height: auto; /* Высота элемента автоматически подстраивается под содержимое */
-  border: 1px solid #fff; /* Белая рамка вокруг карточки (визуально незаметна) */
-  border-radius: 25px; /* Скругленные углы у карточки */
-  padding: 5px; /* Внутренние отступы внутри карточки */
-  margin: 5%; /* Внешние отступы со всех сторон в 5% от ширины родителя */
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
-              0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для создания объема */
-  transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
+.jetton-list-link {
+  text-decoration: none; /* Убирает подчеркивание */
+  outline: none; /* Убирает обводку */
+  background: none; /* Убирает фон */
+  border: none; /* Убирает границу */
+  cursor: pointer; /* Показывает, что элемент кликабельный */
 }
+
+.jetton-list-link:hover,
+.jetton-list-link:focus,
+.jetton-list-link:active {
+  background: none; /* Убирает выделение */
+  box-shadow: none; /* Убирает эффект теней */
+}
+
+.card {
+  text-align: start;
+  background-color: #fff;
+  height: auto;
+  border: 1px solid #fff;
+  border-radius: 25px;
+  padding: 5px;
+  margin: 5%;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
+              0 4px 6px rgba(0, 0, 0, 0.1);
+  user-select: none; /* Запрещает выделение текста */
+  -webkit-tap-highlight-color: transparent; /* Убирает эффект выделения на мобильных устройствах */
+}
+
+
 
 .cstatus {
   padding-top: 2vh; /* Отступ сверху в 2% от высоты экрана */
@@ -448,12 +484,15 @@ select {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-decoration: none;
-  color: #000;
+  cursor: pointer; /* Указывает, что элемент кликабельный */
+  text-decoration: none; /* Убирает подчеркивание */
+  color: #000; /* Базовый цвет текста */
+  user-select: none; /* Запрещает выделение текста */
+  -webkit-tap-highlight-color: transparent; /* Убирает выделение на мобильных устройствах */
 }
 
 .menu-item:hover {
-  color: #007bff;
+  color: #007bff; /* Цвет при наведении */
 }
 
 .menu-item span {
@@ -462,8 +501,9 @@ select {
 }
 
 .menu-item.active {
-  color: #007bff;
+  color: #007bff; /* Цвет активного элемента */
 }
+
 
 .main-content {
   display: flex;
@@ -503,19 +543,24 @@ select {
 }
 
 .action-button {
-  background: none; /* Убираем стандартное оформление кнопки */
+  background: none; /* Убираем фон */
   border: none; /* Убираем рамку */
-  cursor: pointer;
+  cursor: pointer; /* Указываем, что элемент кликабельный */
   text-align: center;
   display: flex;
   flex-direction: column; /* Иконка и текст идут друг за другом */
   align-items: center;
   gap: 4px; /* Пространство между иконкой и текстом */
+  user-select: none; /* Запрещаем выделение текста */
+  -webkit-tap-highlight-color: transparent; /* Убираем выделение на мобильных устройствах */
 }
 
-.action-button:hover .material-symbols-outlined,
-.action-button:hover .button-text {
-  color: #0000F5; /* Изменение цвета при наведении */
+.action-button:hover,
+.action-button:focus,
+.action-button:active {
+  outline: none; /* Убираем обводку */
+  background: none; /* Убираем фон */
+  box-shadow: none; /* Убираем любые тени */
 }
 
 .material-symbols-outlined {
@@ -527,6 +572,7 @@ select {
   font-size: 14px; /* Размер текста */
   color: #333; /* Цвет текста */
 }
+
 
 .jetton-details-page {
   display: flex;

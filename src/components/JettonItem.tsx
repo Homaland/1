@@ -6,7 +6,7 @@ interface JettonItemProps {
   onSendClick: (jetton: JettonBalance) => void;
 }
 
-export const JettonItem = ({ jettonBalance}: JettonItemProps) => {
+export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
   const { jetton, balance, jetton: { decimals } } = jettonBalance;
 
   return (
@@ -16,7 +16,6 @@ export const JettonItem = ({ jettonBalance}: JettonItemProps) => {
         <p>{jetton.name} ({jetton.symbol}): </p>
       </div>
       <p>{toDecimals(balance, decimals)}</p>
-      
     </div>
   );
 };
