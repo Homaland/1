@@ -24,7 +24,7 @@ function TokenInfo() {
         setTokenData({
           name: tokenInfo.baseToken.symbol,
           price: `$${tokenInfo.priceUsd}`,
-          change: `${tokenInfo.priceChange.h1}%`,
+          change: `${tokenInfo.priceChange.h6}%`,
         });
       } catch (err) {
         console.error(err);
