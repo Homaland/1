@@ -3,8 +3,10 @@ import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
 import { Address } from "@ton/core";
 import { JettonBalance } from "@ton-api/client";
 import WebApp from '@twa-dev/sdk';
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import BottomMenu from "./components/BottomMenu";
+import Header from "./components/Header";
+import { SticList } from "./components/SticList";
 
 
 // Прочие импорты для страниц
@@ -14,6 +16,7 @@ import ShopPage from "./pages/ShopPage";
 import FrenPage from "./pages/FrenPage";
 import JettonDetailsPage from "./pages/JettonDetailsPage";
 import Tokeninfo from "./pages/TokenInfoPage";
+import { NftList } from './components/NftList'; 
 
 import "./App.css";
 import { isValidAddress } from "./utils/address";
@@ -21,8 +24,7 @@ import { JettonList } from "./components/JettonList";
 import { SendJettonModal } from "./components/SendJettonModal";
 import ta from "./tonapi";
 import SettingsPage from "./pages/SettingsPage";  // Import settings page
-
-type Language = "RU" | "ENG";
+import { getText, loadLanguage, saveLanguage, Language } from "./components/languageUtils";
 
 function App() {
   const [jettons, setJettons] = useState<JettonBalance[] | null>(null);
@@ -34,7 +36,8 @@ function App() {
   const [firstName, setFirstName] = useState<string | null>(null);
   const [profilePhotoUrl, setProfilePhotoUrl] = useState<string | null>(null);
 
-  const [language, setLanguage] = useState<Language>("ENG");  // Default language ENG
+  const [language, setLanguage] = useState<Language>(loadLanguage().toUpperCase() as Language);
+
 
   const connectedAddressString = useTonAddress();
   const connectedAddress = useMemo(() => {
@@ -46,17 +49,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [dots, setDots] = useState(1);
 
-  // Load language from localStorage
+  // Save language to localStorage whenever it changes
   useEffect(() => {
-    const savedLanguage = localStorage.getItem("language") as Language;
-    if (savedLanguage) {
-      setLanguage(savedLanguage);
-    }
-  }, []);
-
-  // Save language to localStorage
-  useEffect(() => {
-    localStorage.setItem("language", language);
+    saveLanguage(language);
   }, [language]);
 
   
@@ -114,7 +109,7 @@ function App() {
       if (connectedAddress) {
         setIsLoading(false);
       }
-    }, 100);
+    }, 3000);
 
     if (!connectedAddress) {
       setJettons(null);
@@ -157,24 +152,7 @@ function App() {
 
   const filteredNfts = nfts?.filter((nft) => nft.collection);
 
-  const texts = {
-    RU: {
-      connectWallet: "Подключите кошелек",
-      holderStatus: "Статус владельца",
-      hodrCollectionFound: "✔️ Коллекция HODR найдена!",
-      hodrCollectionNotFound: "❌ Коллекция HODR не найдена.",
-      noCollectionFound: "Нет коллекции",
-      yourNfts: "Ваши NFTs"
-    },
-    ENG: {
-      connectWallet: "Connect your wallet",
-      holderStatus: "Holder Status",
-      hodrCollectionFound: "✔️ HODR collection found!",
-      hodrCollectionNotFound: "❌ No HODR collection found.",
-      noCollectionFound: "No collection found",
-      yourNfts: "Your NFTs"
-    }
-  };
+  const texts = getText(language);
 
   return (
     <Router>
@@ -186,96 +164,19 @@ function App() {
               <TonConnectButton
                 style={{ position: "absolute", top: "10vh", left: "50%", transform: "translateX(-50%)" }}
               />
-              <p>{texts[language].connectWallet}{".".repeat(dots)}</p>
+        
+              <p>{texts.connectWallet}{".".repeat(dots)}</p>
             </div>
           ) : (
            
               <div className="main-content">
            
-              <header>
-  <div className="profile-header">
-  {profilePhotoUrl ? (
-    <img
-      src={profilePhotoUrl}
-      alt="Telegram Profile"
-      className="profile-photo"
-    />
-  ) : null}
+              <Header profilePhotoUrl={profilePhotoUrl} firstName={firstName} /> {/* Use Header component */}
 
-  {firstName ? (
-    <Link to="/settings" className="user-name">
-      {firstName.length > 12 ? `${firstName.substring(0, 12)}...` : firstName}
-      {/* Иконка стрелки */}
-      <span className="arrow-icon">
-        <i className="material-icons">arrow_forward_ios</i>
-      </span>
-    </Link>
-  ) : (
-    <Link to="/settings" className="user-name">
-      User
-      {/* Иконка стрелки */}
-      <span className="arrow-icon">
-        <i className="material-icons">arrow_forward_ios</i>
-      </span>
-    </Link>
-  )}
-
-  <TonConnectButton className="ton-connect-button" />
-</div>
-
-
-
-
-
-
-
-
-
-
-              </header>
 
           <div className="content">
               
-       <div className="stic-list">
-  <div className="stic-carousel">
-    {/* Каждый stic-item теперь содержит одно изображение */}
-    <div className="stic-item">
-      <img
-        className="stic-image"
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/IMG_0100.png"
-        alt="Background"
-      />
-    </div>
-    <div className="stic-item">
-      <img
-        className="stic-image"
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/IMG_0090.png"
-        alt="Background"
-      />
-    </div>
-    <div className="stic-item">
-      <img
-        className="stic-image"
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/IMG_0084-ezgif.com-optimize.gif"
-        alt="Background"
-      />
-    </div>
-    <div className="stic-item">
-      <img
-        className="stic-image"
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/IMG_0091.png"
-        alt="Background"
-      />
-    </div>
-    <div className="stic-item">
-      <img
-        className="stic-image"
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/IMG_0092.png"
-        alt="Background"
-      />
-    </div>
-  </div>
-</div>
+          <SticList />
 
       <div className="button-row">
   {/* Кнопка "Arrow Circle Up" */}
@@ -364,44 +265,23 @@ function App() {
               {error && <p className="error">{error}</p>}
 
               <div className="collection-status">
-              <div className="cstatus">  <h3>{texts[language].holderStatus}</h3>
+              <div className="cstatus">  
+              <h3>{texts.holderStatus}</h3>
                 {hasHODRCollection !== null ? (
                   hasHODRCollection ? (
-                    <p style={{ color: "green" }}>{texts[language].hodrCollectionFound}</p>
+                    <p style={{ color: "green" }}>{texts.hodrCollectionFound}</p>
                   ) : (
-                    <p style={{ color: "red" }}>{texts[language].hodrCollectionNotFound}</p>
+                    <p style={{ color: "red" }}>{texts.hodrCollectionNotFound}</p>
                   )
                 ) : (
-                  <p>{texts[language].noCollectionFound}</p>
+                  <p>{texts.noCollectionFound}</p>
                 )}
  </div>
-               <div className="nft-list">
-  <h3>{texts[language].yourNfts}</h3>
-  {nftError && <p className="error">{nftError}</p>}
-  {filteredNfts && filteredNfts.length > 0 ? (
-    <ul className="nft-carousel">
-      {filteredNfts.map((nft, index) => (
-        <li key={index} className="nft-item">
-          <p>{nft.name ? nft.name : `NFT ${index + 1}`}</p>
-          {nft.collection && <p className="nft-collection">Collection: {nft.collection.name}</p>}
-          {nft.previews && nft.previews.length >= 3 ? (
-            <div className="nft-image-wrapper">
-              <img
-                src={nft.previews[2].url}
-                alt={nft.name || `NFT ${index + 1}`}
-                className="nft-image"
-              />
-            </div>
-          ) : (
-            <p>No third preview available</p>
-          )}
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p>{texts[language].noCollectionFound}</p>
-  )}
-</div>
+ <NftList
+                    nftError={nftError}
+                    filteredNfts={filteredNfts}
+                    texts={texts}
+                  />
 
               </div>
           </div>
