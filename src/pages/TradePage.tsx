@@ -11,7 +11,7 @@ const solanaWeb3JsAdapter = new SolanaAdapter({
 });
 
 // Project ID
-const projectId = '75c1ff8eab2548ed33251aaadcebee4e';
+const projectId = '8d87137e3ed849983726c0af4d32c697';
 
 // Metadata
 const metadata = {
