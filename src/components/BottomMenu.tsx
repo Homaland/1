@@ -38,11 +38,11 @@ const BottomMenu: React.FC = () => {
         <span>Shop</span>
       </div>
       <div
-        className={`menu-item ${location.pathname === "/fren" ? "active" : ""}`}
-        onClick={() => navigate("/fren")}  // Используем navigate для перехода
+        className={`menu-item ${location.pathname === "/trade" ? "active" : ""}`}
+        onClick={() => navigate("/trade")}  // Используем navigate для перехода
       >
-        <FaUsers className={location.pathname === "/fren" ? "active-icon" : ""} />
-        <span>Fren</span>
+        <FaUsers className={location.pathname === "/trade" ? "active-icon" : ""} />
+        <span>Trade</span>
       </div>
     </div>
   );

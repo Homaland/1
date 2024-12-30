@@ -342,7 +342,7 @@ background-color:rgba(255, 255, 255, 0.87);
 
 .arrow-icon {
   font-size: 14px;
-  color: #007bff; /* Синий цвет */
+  color: #007bff; 
   cursor: pointer; /* Указывает, что элемент кликабельный */
 }
 
@@ -366,13 +366,14 @@ background-color:rgba(255, 255, 255, 0.87);
 .wallet-connection {
   display: flex;
   justify-content: center;
-  width: 100%; /* Ensures that the button is centered within the container */
-  margin-top: 7vh; /* Adds some spacing above the button */
+  width: 100%; 
+  margin-top: 7vh; 
 }
 
 select {
   margin-top: 10px;
 }
+
 
 /* Затемнение фона */
 .overlay {
@@ -384,6 +385,7 @@ select {
   background: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный */
   display: none;
   z-index: 1000;
+  opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 
@@ -392,30 +394,47 @@ select {
   opacity: 1;
 }
 
+/* Анимация для модального окна */
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
 /* Выезжающее окно */
 .slide-modal {
   position: fixed;
-  bottom: -100%;
+  bottom: 0;
   left: 0;
   width: 100%;
-  max-height: 80%; /* Ограничение по высоте */
+  max-height: 80%;
   background: #fff;
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
   z-index: 1001;
   padding: 20px;
   box-sizing: border-box;
-  overflow-y: auto; /* Прокрутка при переполнении */
-  transition: bottom 0.9s ease-in-out; /* Увеличим продолжительность анимации */
-  width: 100%;
-  max-width: 100%; /* Ограничение ширины окна */
-  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
-  
+  overflow-y: auto;
+  transform: translateY(100%); /* По умолчанию скрыто за пределами экрана */
+  animation: slideOut 0.4s forwards; /* По умолчанию скрывается */
 }
 
 .slide-modal.visible {
-  bottom: 0;
+  animation: slideIn 0.4s forwards; /* Анимация появления */
 }
+
 
 
 /* Контент внутри модального окна */
@@ -614,3 +633,120 @@ select {
   justify-content: center;
 
 }
+
+
+
+
+.altcoins-list {
+  text-align: start;
+  background-color: #fff;
+  max-width: 800px; /* Максимальная ширина для адаптивности */
+  margin: 20px auto; /* Центровка списка */
+  height: auto;
+  border: 1px solid #fff;
+  border-radius: 25px;
+  padding: 20px; /* Увеличенный padding для читаемости */
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
+              0 4px 6px rgba(0, 0, 0, 0.1);
+  user-select: none; 
+  -webkit-tap-highlight-color: transparent;
+}
+
+.altcoin {
+  display: flex;
+  align-items: center;
+  padding: 10px 0; /* Пространство между монетами */
+  border-bottom: 1px solid #eee; /* Разделение */
+}
+
+.altcoin:last-child {
+  border-bottom: none; /* Убираем линию для последнего элемента */
+}
+
+.altcoin-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+  object-fit: cover; /* Убедимся, что изображение не искажено */
+}
+
+.altcoin-details {
+  flex-grow: 1;
+  font-size: 14px;
+  line-height: 1.5; /* Увеличиваем читаемость */
+  color: #333; /* Тёмный цвет для текста */
+}
+
+.altcoin-details span:first-child {
+  font-weight: bold; /* Имя и символ выделяются жирным */
+}
+
+.price-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-change {
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.alt-hub {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Фиксированная высота на весь экран */
+  scrollbar-width: none;
+  overflow-y: auto;
+  margin-top: 4vh;
+}
+
+.hub {
+  height: 100vh; 
+  padding-bottom: 10vh; /* Отступ снизу для нижнего меню */
+}
+
+.alt-hub::-webkit-scrollbar {
+  display: none; /* Скрываем ползунок в Chrome, Safari */
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.blinking {
+  animation: blink 1s infinite;
+}
+
+.ui-tapbar-button-container {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ui-tapbar-button-container:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+

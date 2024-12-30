@@ -1,11 +1,50 @@
-// src/components/SticList.tsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export const SticList: React.FC = () => {
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+
+  useEffect(() => {
+    // Эмулируем задержку загрузки
+    const timer = setTimeout(() => setLoading(false), 1000); // Убираем заглушки через 1 секунду
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    // Skeleton-заглушки
+    return (
+      <div className="stic-list skeleton-stic-list">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <div key={index} className="skeleton-stic-item" />
+        ))}
+        <style>
+          {`
+            .skeleton-stic-list {
+              display: flex;
+              gap: 10px;
+              overflow: auto;
+            }
+            .skeleton-stic-item {
+              flex: 0 0 auto;
+              width: 20%;
+              margin-left: 5%;
+              margin-bottom: 5%;
+              background-color: rgba(224, 224, 224, 0.87);
+             
+              border-radius: 25px;
+             
+              height: 100px; /* Высота заглушки */
+            }
+          `}
+        </style>
+      </div>
+    );
+  }
+
+  // Основной контент после загрузки
   return (
     <div className="stic-list">
       <div className="stic-carousel">
-        {/* Each stic-item contains one image */}
+        {/* Каждый stic-item содержит одно изображение */}
         <div className="stic-item">
           <img
             className="stic-image"
@@ -42,6 +81,7 @@ export const SticList: React.FC = () => {
           />
         </div>
       </div>
+     
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
+import { useTonAddress } from "@tonconnect/ui-react";
 import { Address } from "@ton/core";
 import { JettonBalance } from "@ton-api/client";
 import WebApp from '@twa-dev/sdk';
@@ -7,16 +7,18 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import BottomMenu from "./components/BottomMenu";
 import Header from "./components/Header";
 import { SticList } from "./components/SticList";
-
+import CollectionStatus from "./components/CollectionStatus";
+import ButtonRow from "./components/ButtonRow";
 
 // Прочие импорты для страниц
 import TaskPage from "./pages/TaskPage";
 import PlayPage from "./pages/PlayPage";
 import ShopPage from "./pages/ShopPage";
-import FrenPage from "./pages/FrenPage";
+import TradePage from "./pages/TradePage";
 import JettonDetailsPage from "./pages/JettonDetailsPage";
 import Tokeninfo from "./pages/TokenInfoPage";
 import { NftList } from './components/NftList'; 
+
 
 import "./App.css";
 import { isValidAddress } from "./utils/address";
@@ -46,8 +48,8 @@ function App() {
       : null;
   }, [connectedAddressString]);
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [dots, setDots] = useState(1);
+ 
+  
 
   // Save language to localStorage whenever it changes
   useEffect(() => {
@@ -55,14 +57,6 @@ function App() {
   }, [language]);
 
   
-
-  useEffect(() => {
-    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
-      setFirstName(WebApp.initDataUnsafe.user.first_name);
-      setProfilePhotoUrl(WebApp.initDataUnsafe.user.photo_url || null);
-    }
-  }, []);
-
   // Управление полноэкранным режимом и запрет свайпа вниз для закрытия приложения
   useEffect(() => {
     // Запросить переход в полноэкранный режим
@@ -81,13 +75,7 @@ function App() {
     // Убираем отступы для безопасных зон
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDots((prevDots) => (prevDots % 3) + 1);
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
-
+  
   // Fetch user Telegram data
   useEffect(() => {
     if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
@@ -95,27 +83,19 @@ function App() {
       setProfilePhotoUrl(WebApp.initDataUnsafe.user.photo_url ?? null);  // Применили оператор ?? вместо ||
     }
   }, []);
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDots((prevDots) => (prevDots % 3) + 1);
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, []);
-
+ 
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
       if (connectedAddress) {
-        setIsLoading(false);
+        
       }
-    }, 3000);
+    }, 0);
 
     if (!connectedAddress) {
       setJettons(null);
       setNfts(null);
       setHasHODRCollection(null);
-      setIsLoading(true);
+      
     } else {
       ta.accounts
         .getAccountJettonsBalances(connectedAddress)
@@ -151,92 +131,27 @@ function App() {
   };
 
   const filteredNfts = nfts?.filter((nft) => nft.collection);
-
   const texts = getText(language);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={
-          isLoading ? (
-            <div className="loading-screen">
-              <img src="https://i.postimg.cc/BnsnSb2h/IMG-9937.png" alt="Loading..." className="loading-image" />
-              <TonConnectButton
-                style={{ position: "absolute", top: "10vh", left: "50%", transform: "translateX(-50%)" }}
-              />
+       (          
         
-              <p>{texts.connectWallet}{".".repeat(dots)}</p>
-            </div>
-          ) : (
-           
               <div className="main-content">
-           
-              <Header profilePhotoUrl={profilePhotoUrl} firstName={firstName} /> {/* Use Header component */}
 
-
+                
+                         <Header profilePhotoUrl={profilePhotoUrl} firstName={firstName} /> {/* Use Header component */}
           <div className="content">
-              
-          <SticList />
-
-      <div className="button-row">
-  {/* Кнопка "Arrow Circle Up" */}
-  <div className="button-container">
-    <div
-      className="action-button"
-      onClick={() => WebApp.showAlert("Soon")}
-    >
-      <img
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_downward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
-        alt="Receive"
-        className="icon"
-      />
-      <p className="button-text">Receive</p>
-    </div>
-  </div>
-
-  {/* Кнопка "Arrow Circle Down" */}
-  <div className="button-container">
-    <div
-      className="action-button"
-      onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}
-    >
-      <img
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_upward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
-        alt="Send"
-        className="icon"
-      />
-      <p className="button-text">Send</p>
-    </div>
-  </div>
-
-  {/* Кнопка "Swap Vert" */}
-  <div className="button-container">
-    <div
-      className="action-button"
-      onClick={() => WebApp.showAlert("Soon")}
-    >
-      <img
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/swap_vert_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
-        alt="Swap"
-        className="icon"
-      />
-      <p className="button-text">Swap</p>
-    </div>
-  </div>
-</div>
-
-
-
+                        <SticList />
+                        <ButtonRow jettons={jettons} setSelectedJetton={setSelectedJetton} />
 <div className="how-it-works">  <p>Hold On for Dear Reward</p> </div>
-
-
 <div className="tokenhodr">
-             
+
+
               <Tokeninfo />
             </div>
-
-
-
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
                   senderAddress={connectedAddress}
@@ -247,6 +162,7 @@ function App() {
                 />
               )}
  
+            
 <div
   className="jetton-list-link"
   onClick={() => window.location.href = '/jettons'}
@@ -258,33 +174,14 @@ function App() {
     onSendClick={setSelectedJetton}
   />
 </div>
-
-  
-  
-
               {error && <p className="error">{error}</p>}
-
-              <div className="collection-status">
-              <div className="cstatus">  
-              <h3>{texts.holderStatus}</h3>
-                {hasHODRCollection !== null ? (
-                  hasHODRCollection ? (
-                    <p style={{ color: "green" }}>{texts.hodrCollectionFound}</p>
-                  ) : (
-                    <p style={{ color: "red" }}>{texts.hodrCollectionNotFound}</p>
-                  )
-                ) : (
-                  <p>{texts.noCollectionFound}</p>
-                )}
- </div>
+              <CollectionStatus hasHODRCollection={hasHODRCollection} texts={texts} />
  <NftList
                     nftError={nftError}
                     filteredNfts={filteredNfts}
                     texts={texts}
                   />
-
-              </div>
-          </div>
+                       </div>
             <BottomMenu />
           </div>
         )
@@ -293,7 +190,8 @@ function App() {
       <Route path="/task" element={<TaskPage />} />
       <Route path="/play" element={<PlayPage />} />
       <Route path="/shop" element={<ShopPage />} />
-      <Route path="/fren" element={<FrenPage />} />
+      <Route path="/trade" element={<TradePage />} />
+      
       <Route
   path="/jettons"
   element={
