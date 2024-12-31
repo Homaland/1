@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BackButton } from "../components/BackButton";
 import { createAppKit } from '@reown/appkit/react';
 import { SolanaAdapter } from '@reown/appkit-adapter-solana/react';
-import { arbitrum, polygon, scroll, optimism, mainnet } from '@reown/appkit/networks';
+import { Solana, arbitrum, polygon, scroll, optimism, mainnet } from '@reown/appkit/networks';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 
 // Настройка Solana Adapter
@@ -24,7 +24,7 @@ const metadata = {
 // Инициализация AppKit
 createAppKit({
   adapters: [solanaWeb3JsAdapter],
-  networks: [arbitrum, polygon, scroll, optimism, mainnet],
+  networks: [solana, arbitrum, polygon, scroll, optimism, mainnet],
   metadata: metadata,
   projectId,
   features: {
