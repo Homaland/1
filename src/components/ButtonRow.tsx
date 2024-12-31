@@ -28,17 +28,17 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
           {`
             .skeleton-button-row {
               display: flex;
-              gap: 20px;
+              gap: 4px;
             }
             .skeleton-button-container {
-              width: 100px;
-              height: 100px;
+              width: 50px;
+              height: 50px;
             }
             .skeleton-button {
               width: 100%;
               height: 100%;
               background-color: #e0e0e0;
-              border-radius: 8px;
+              border-radius: 25px;
             }
           `}
         </style>
