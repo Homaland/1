@@ -53,7 +53,7 @@ const TaskPage: React.FC = () => {
     stroke: {
       curve: "smooth",
       width: 3,
-      colors: ["#FFC107"],
+      colors: ["#0000F5"],
     },
     xaxis: {
       type: "datetime",
@@ -75,14 +75,14 @@ const TaskPage: React.FC = () => {
     tooltip: {
       enabled: false, // Отключаем тултипы
     },
-    colors: ["#FFC107"],
+    colors: ["#0000F5"],
   };
 
   return (
     <div
       className="play-page"
       style={{
-        color: "#FFFFFF",
+        color: "#0000F5",
         minHeight: "100vh",
         padding: "20px",
         display: "flex",
@@ -97,7 +97,7 @@ const TaskPage: React.FC = () => {
           style={{
             width: "50px",
             height: "50px",
-            border: "5px solid #FFC107",
+            border: "5px solid #0000F5",
             borderTop: "5px solid transparent",
             borderRadius: "50%",
             animation: "spin 1s linear infinite",
@@ -109,7 +109,7 @@ const TaskPage: React.FC = () => {
         </div>
       )}
       {currentPrice && !isLoading && (
-        <h2 style={{ textAlign: "center", color: "#FFC107" }}>
+        <h2 style={{ textAlign: "center", color: "#0000F5" }}>
           Текущая цена: ${currentPrice.toFixed(2)}
         </h2>
       )}
