@@ -29,7 +29,7 @@ const TaskPage: React.FC = () => {
       }
     };
 
-    const interval = setInterval(fetchData, 2000); // Запрос каждые 2 секунды
+    const interval = setInterval(fetchData, 3000); // Запрос каждые 3 секунды
     fetchData(); // Первый вызов без ожидания
 
     return () => clearInterval(interval); // Очистка интервала при размонтировании
@@ -57,7 +57,7 @@ const TaskPage: React.FC = () => {
         enabled: true,
         dynamicAnimation: {
           enabled: true,
-          speed: 3000, // Плавное обновление графика
+          speed: 2000, // Плавное обновление графика
         },
       },
       toolbar: { show: false }, // Убираем элементы управления
