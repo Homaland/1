@@ -1,9 +1,22 @@
-.image-container img {
-  width: 100%; /* Ширина изображения 30% */
-  height: 100%; /* Высота изображения 30% */
-  object-fit: contain; /* Сохраняет пропорции изображения */
-  
+/* Спиннер */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #0000F5;
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .play-page {
   display: flex;
   flex-direction: column;
