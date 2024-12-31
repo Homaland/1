@@ -1,5 +1,4 @@
-// src/components/CollectionStatus.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface CollectionStatusProps {
   hasHODRCollection: boolean | null;
@@ -7,6 +6,47 @@ interface CollectionStatusProps {
 }
 
 const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, texts }) => {
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+
+  useEffect(() => {
+    // Эмулируем задержку загрузки
+    const timer = setTimeout(() => setLoading(false), 1000); // Убираем заглушки через 1 секунду
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    // Заглушки
+    return (
+      <div className="collection-status skeleton-collection-status">
+        <div className="cstatus">
+          <h3 className="skeleton-text" />
+          <div className="skeleton-status" />
+        </div>
+        <style>
+          {`
+            .skeleton-collection-status {
+              padding: 20px;
+            }
+            .skeleton-text {
+              width: 150px;
+              height: 20px;
+              background-color: #e0e0e0;
+              margin-bottom: 10px;
+              border-radius: 8px;
+            }
+            .skeleton-status {
+              width: 200px;
+              height: 20px;
+              background-color: #e0e0e0;
+              border-radius: 8px;
+            }
+          `}
+        </style>
+      </div>
+    );
+  }
+
+  // Основной контент после загрузки
   return (
     <div className="collection-status">
       <div className="cstatus">
