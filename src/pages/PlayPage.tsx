@@ -7,7 +7,6 @@ const TaskPage: React.FC = () => {
   const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]);
   const [currentPrice, setCurrentPrice] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true); // Флаг загрузки данных
-  const [bufferedData, setBufferedData] = useState<{ x: number; y: number }[]>([]); // Буфер для данных
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,36 +18,23 @@ const TaskPage: React.FC = () => {
 
         setCurrentPrice(price);
 
-        setBufferedData((prev) => {
-          const updatedData = [...prev, { x: time, y: price }];
+        setSeries((prev) => {
+          const updatedData = [...prev[0].data, { x: time, y: price }];
           if (updatedData.length > 50) updatedData.shift(); // Ограничение длины графика
-          return updatedData;
+          return [{ data: updatedData }];
         });
+
+        setIsLoading(false); // Снимаем флаг загрузки после получения первых данных
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    const interval = setInterval(fetchData, 3000); // Запрос каждые 3 секунды
+    const interval = setInterval(fetchData, 5000); // Запрос каждые 5 секунд
     fetchData(); // Первый вызов без ожидания
 
     return () => clearInterval(interval); // Очистка интервала при размонтировании
   }, []);
-
-  useEffect(() => {
-    // Показываем график, когда данные загружены
-    if (bufferedData.length > 0 && isLoading) {
-      setSeries([{ data: bufferedData }]);
-      setIsLoading(false); // Отключаем спиннер
-    } else if (!isLoading) {
-      // Обновляем график в реальном времени
-      setSeries((prev) => {
-        const updatedData = [...prev[0].data, bufferedData[bufferedData.length - 1]];
-        if (updatedData.length > 50) updatedData.shift();
-        return [{ data: updatedData }];
-      });
-    }
-  }, [bufferedData, isLoading]);
 
   const options: ApexCharts.ApexOptions = {
     chart: {
@@ -80,7 +66,7 @@ const TaskPage: React.FC = () => {
     yaxis: {
       labels: {
         formatter: (value) => `$${value.toFixed(2)}`,
-        style: { colors: "#0000F5" },
+        style: { colors: "#FFFFFF" },
       },
     },
     grid: {
@@ -105,7 +91,7 @@ const TaskPage: React.FC = () => {
         justifyContent: "center",
       }}
     >
-      <h1 style={{ color: "#0000F5", textAlign: "center" }}>Earn</h1>
+      <h1 style={{ color: "#FFC107", textAlign: "center" }}>ГРАФИК</h1>
       <div style={{ width: "90%", margin: "auto" }}>
         {isLoading ? (
           <div className="spinner"></div>
