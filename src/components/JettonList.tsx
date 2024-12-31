@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 import { JettonBalance } from "@ton-api/client";
 import { JettonItem } from "./JettonItem";
 
@@ -109,7 +109,13 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
           )}
         </div>
       ) : (
-        <p>Connect to see jettons</p>
+        <div className="connect-message">
+          {loading ? (
+            <div className="skeleton-text" />
+          ) : (
+            <p>Connect to see jettons</p>
+          )}
+        </div>
       )}
       <style>
         {`
@@ -137,6 +143,22 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
           .skeleton-line {
             background-color: #e0e0e0;
             border-radius: 4px;
+          }
+          .connect-message {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+          }
+          .skeleton-text {
+            width: 200px;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin: 0 auto;
           }
         `}
       </style>
