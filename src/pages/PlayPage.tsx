@@ -84,7 +84,7 @@ const TaskPage: React.FC = () => {
         {isLoading ? (
           <div className="spinner"></div>
         ) : (
-          <ApexCharts options={options} series={series} type="line" height={350} />
+          <ApexCharts options={options} series={series} type="line" />
         )}
       </div>
     
