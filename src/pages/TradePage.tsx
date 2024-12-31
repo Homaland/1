@@ -10,7 +10,7 @@ const solanaWeb3JsAdapter = new SolanaAdapter({
   wallets: [new PhantomWalletAdapter(), new SolflareWalletAdapter()]
 })
 
-const networks = [arbitrum, polygon, scroll, optimism, mainnet];
+
 const projectId = '75c1ff8eab2548ed33251aaadcebee4e'
 
 // 2. Create a metadata object - optional
