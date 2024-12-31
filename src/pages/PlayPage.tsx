@@ -79,19 +79,9 @@ const TaskPage: React.FC = () => {
   };
 
   return (
-    <div
-      className="play-page"
-      style={{
-        color: "#0000F5",
-        minHeight: "100vh",
-        padding: "20px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <div className="play-page">
       <h1 style={{ color: "#FFC107", textAlign: "center" }}>ГРАФИК</h1>
+      <div className="earn-blok">
       <div style={{ width: "90%", margin: "auto" }}>
         {isLoading ? (
           <div className="spinner"></div>
@@ -104,6 +94,7 @@ const TaskPage: React.FC = () => {
           Текущая цена: ${currentPrice.toFixed(2)}
         </h2>
       )}
+        </div>
       <BottomMenu />
     </div>
   );
