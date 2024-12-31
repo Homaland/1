@@ -1,7 +1,8 @@
 .earn-blok {
   background: linear-gradient(to bottom, #1a1a1a, #121212); /* Убираем кавычки и исправляем запятую */
   color: #FFC107;
-  min-height: 100vh;
+  
+  height: 30vh;
   padding: 20px;
   display: flex;
   flex-direction: column;
