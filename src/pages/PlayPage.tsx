@@ -28,7 +28,7 @@ const TaskPage: React.FC = () => {
       }
     };
 
-    const interval = setInterval(fetchData, 5000); // Запрос каждые 5 секунд
+    const interval = setInterval(fetchData, 3500); // Запрос каждые 3.5 секунд
     fetchData(); // Первый вызов без ожидания
 
     return () => clearInterval(interval); // Очистка интервала при размонтировании
@@ -51,7 +51,7 @@ const TaskPage: React.FC = () => {
     stroke: {
       curve: "smooth",
       width: 3,
-      colors: ["#0000F5"],
+      colors: ["#FFC107"],
     },
     xaxis: {
       type: "datetime",
@@ -73,7 +73,7 @@ const TaskPage: React.FC = () => {
     tooltip: {
       enabled: false, // Отключаем тултипы
     },
-    colors: ["#0000F5"],
+    colors: ["#FFC107"],
   };
 
   return (
