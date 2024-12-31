@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 
 function TokenInfo() {
   const [tokenData, setTokenData] = useState<{
@@ -38,7 +38,32 @@ function TokenInfo() {
   return (
     <div className="token-info" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
       {error ? (
-        <p className="error">{error}</p>
+        <div className="skeleton" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div
+            style={{
+              width: "40px",
+              height: "40px",
+              backgroundColor: "#e0e0e0",
+              borderRadius: "50%",
+            }}
+          ></div>
+          <div
+            style={{
+              width: "100px",
+              height: "20px",
+              backgroundColor: "#e0e0e0",
+              borderRadius: "4px",
+            }}
+          ></div>
+          <div
+            style={{
+              width: "60px",
+              height: "20px",
+              backgroundColor: "#e0e0e0",
+              borderRadius: "4px",
+            }}
+          ></div>
+        </div>
       ) : tokenData ? (
         <>
           <img
