@@ -38,7 +38,6 @@ const TaskPage: React.FC = () => {
         },
       },
       toolbar: { show: false },
-      background: "transparent",
     },
     stroke: {
       curve: "smooth",
@@ -76,17 +75,14 @@ const TaskPage: React.FC = () => {
       x: { format: "HH:mm:ss" },
     },
     colors: ["#FFC107"],
-    background: {
-      gradientToColors: ["#1a1a1a", "#121212"], // Тёмный градиентный фон
-      shade: "dark",
-    },
   };
+  
 
   return (
     <div
       className="play-page"
       style={{
-        backgroundColor: "#121212",
+        background: "linear-gradient(to bottom, #1a1a1a, #121212)",
         color: "#FFFFFF",
         minHeight: "100vh",
         padding: "20px",
@@ -104,6 +100,7 @@ const TaskPage: React.FC = () => {
       <BottomMenu />
     </div>
   );
+  
 };
 
 export default TaskPage;
