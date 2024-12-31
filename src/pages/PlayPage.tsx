@@ -106,7 +106,7 @@ const TaskPage: React.FC = () => {
       }}
     >
       <h1 style={{ color: "#0000F5", textAlign: "center" }}>ГРАФИК</h1>
-      <div style={{ width: "90%", margin: "auto" }}>
+      <div className="chart-container">
         {isLoading ? (
           <div className="spinner"></div>
         ) : (
