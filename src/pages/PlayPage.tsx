@@ -6,9 +6,8 @@ import "./PlayPage.css";
 const TaskPage: React.FC = () => {
   const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]);
   const [currentPrice, setCurrentPrice] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(true); // Flag for data loading
-  const [bufferedData, setBufferedData] = useState<{ x: number; y: number }[]>([]); // Buffer for data
-  const [startTime, setStartTime] = useState<number | null>(null); // Track the start time for delay
+  const [isLoading, setIsLoading] = useState(true); // Флаг загрузки данных
+  const [bufferedData, setBufferedData] = useState<{ x: number; y: number }[]>([]); // Буфер для данных
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,13 +15,13 @@ const TaskPage: React.FC = () => {
         const response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT");
         const data = await response.json();
         const price = parseFloat(data.price);
-        const time = new Date().getTime(); // Current timestamp
+        const time = new Date().getTime(); // Текущая метка времени
 
         setCurrentPrice(price);
 
         setBufferedData((prev) => {
           const updatedData = [...prev, { x: time, y: price }];
-          if (updatedData.length > 50) updatedData.shift(); // Limit the length of the chart data
+          if (updatedData.length > 50) updatedData.shift(); // Ограничение длины графика
           return updatedData;
         });
       } catch (error) {
@@ -30,32 +29,26 @@ const TaskPage: React.FC = () => {
       }
     };
 
-    const interval = setInterval(fetchData, 2000); // Fetch data every 2 seconds
-    fetchData(); // First call immediately
+    const interval = setInterval(fetchData, 2000); // Запрос каждые 2 секунды
+    fetchData(); // Первый вызов без ожидания
 
-    return () => clearInterval(interval); // Clean up the interval on unmount
+    return () => clearInterval(interval); // Очистка интервала при размонтировании
   }, []);
 
   useEffect(() => {
-    if (startTime === null) {
-      setStartTime(new Date().getTime()); // Set start time when the component mounts
-    }
-    // Once buffered data is available and 7 seconds have passed, show the graph
+    // Показываем график, когда данные загружены
     if (bufferedData.length > 0 && isLoading) {
-      const elapsedTime = new Date().getTime() - startTime!;
-      if (elapsedTime >= 7000) {
-        setSeries([{ data: bufferedData }]);
-        setIsLoading(false); // Turn off loading spinner after 7 seconds
-      }
+      setSeries([{ data: bufferedData }]);
+      setIsLoading(false); // Отключаем спиннер
     } else if (!isLoading) {
-      // Update the chart with new data in real-time
+      // Обновляем график в реальном времени
       setSeries((prev) => {
         const updatedData = [...prev[0].data, bufferedData[bufferedData.length - 1]];
         if (updatedData.length > 50) updatedData.shift();
         return [{ data: updatedData }];
       });
     }
-  }, [bufferedData, isLoading, startTime]);
+  }, [bufferedData, isLoading]);
 
   const options: ApexCharts.ApexOptions = {
     chart: {
@@ -64,11 +57,11 @@ const TaskPage: React.FC = () => {
         enabled: true,
         dynamicAnimation: {
           enabled: true,
-          speed: 2000, // Smooth chart update
+          speed: 2000, // Плавное обновление графика
         },
       },
-      toolbar: { show: false },
-      zoom: { enabled: false },
+      toolbar: { show: false }, // Убираем элементы управления
+      zoom: { enabled: false }, // Отключаем зум
       background: "transparent",
     },
     stroke: {
@@ -79,7 +72,7 @@ const TaskPage: React.FC = () => {
     xaxis: {
       type: "datetime",
       labels: {
-        show: false,
+        show: false, // Скрыть метки времени
       },
       axisTicks: { show: false },
       axisBorder: { show: false },
@@ -91,10 +84,10 @@ const TaskPage: React.FC = () => {
       },
     },
     grid: {
-      show: false,
+      show: false, // Убираем сетку
     },
     tooltip: {
-      enabled: false,
+      enabled: false, // Отключаем тултипы
     },
     colors: ["#0000F5"],
   };
