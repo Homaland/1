@@ -30,7 +30,7 @@ export const SticList: React.FC = () => {
               margin-bottom: 5%;
               background-color: rgba(224, 224, 224, 0.87);
               border-radius: 25px;
-              height: 100vh; /* Высота заглушки */
+              height: 80px; /* Высота заглушки */
             }
           `}
         </style>
