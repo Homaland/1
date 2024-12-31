@@ -20,7 +20,7 @@ export const SticList: React.FC = () => {
           {`
             .skeleton-stic-list {
               display: flex;
-              gap: 10px;
+              gap: 5px;
               overflow: auto;
             }
             .skeleton-stic-item {
@@ -29,10 +29,8 @@ export const SticList: React.FC = () => {
               margin-left: 5%;
               margin-bottom: 5%;
               background-color: rgba(224, 224, 224, 0.87);
-             
               border-radius: 25px;
-             
-              height: 100px; /* Высота заглушки */
+              height: 100%; /* Высота заглушки */
             }
           `}
         </style>
