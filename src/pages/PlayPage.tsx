@@ -57,7 +57,7 @@ const TaskPage: React.FC = () => {
         enabled: true,
         dynamicAnimation: {
           enabled: true,
-          speed: 2000, // Плавное обновление графика
+          speed: 3000, // Плавное обновление графика
         },
       },
       toolbar: { show: false }, // Убираем элементы управления
@@ -105,8 +105,8 @@ const TaskPage: React.FC = () => {
         justifyContent: "center",
       }}
     >
-      <h1 style={{ color: "#0000F5", textAlign: "center" }}>ГРАФИК</h1>
-      <div style={{ width: "90%", margin: "auto", border: "2px solid black", position: "relative" }}>
+      <h1 style={{ color: "#0000F5", textAlign: "center" }}>Earn</h1>
+      <div style={{ width: "90%", margin: "auto" }}>
         {isLoading ? (
           <div className="spinner"></div>
         ) : (
