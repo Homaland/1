@@ -28,7 +28,7 @@ createAppKit({
   metadata: metadata,
   projectId,
   features: {
-    connectMethodsOrder: ['social', 'email', 'wallet'],
+    connectMethodsOrder: ['wallet'],
     analytics: true,
     onramp: false,
     swaps: true,
