@@ -9,7 +9,7 @@ const TaskPage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT");
+      const response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT");
       const data = await response.json();
       const price = parseFloat(data.price);
       const time = new Date().getTime(); // Текущая метка времени
@@ -75,7 +75,7 @@ const TaskPage: React.FC = () => {
     <div
       className="play-page"
       style={{
-        background: "linear-gradient(to bottom, #1a1a1a, #121212)",
+        
         color: "#FFFFFF",
         minHeight: "100vh",
         padding: "20px",
