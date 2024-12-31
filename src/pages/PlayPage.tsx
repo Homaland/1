@@ -66,7 +66,7 @@ const TaskPage: React.FC = () => {
     yaxis: {
       labels: {
         formatter: (value) => `$${value.toFixed(2)}`,
-        style: { colors: "#FFFFFF" },
+        style: { colors: "#0000F5" },
       },
     },
     grid: {
@@ -91,7 +91,7 @@ const TaskPage: React.FC = () => {
         justifyContent: "center",
       }}
     >
-      <h1 style={{ color: "#FFC107", textAlign: "center" }}>ГРАФИК</h1>
+      <h1 style={{ color: "#0000F5", textAlign: "center" }}>ГРАФИК</h1>
       <div style={{ width: "90%", margin: "auto" }}>
         {isLoading ? (
           <div className="spinner"></div>
