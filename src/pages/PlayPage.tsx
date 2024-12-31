@@ -5,7 +5,7 @@ import "./PlayPage.css";
 
 const TaskPage: React.FC = () => {
   const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]);
-  const [currentPrice, setCurrentPrice] = useState<number | null>(null);
+  
   const [isLoading, setIsLoading] = useState(true); // Флаг загрузки данных
 
   useEffect(() => {
@@ -15,8 +15,6 @@ const TaskPage: React.FC = () => {
         const data = await response.json();
         const price = parseFloat(data.price);
         const time = new Date().getTime(); // Текущая метка времени
-
-        setCurrentPrice(price);
 
         setSeries((prev) => {
           const updatedData = [...prev[0].data, { x: time, y: price }];
