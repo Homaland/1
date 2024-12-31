@@ -1,3 +1,13 @@
+.earn-blok {
+        background: "linear-gradient(to bottom, #1a1a1a, #121212)",
+        color: "#FFC107",
+        minHeight: "100vh",
+        padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+}
 .spinner {
   position: absolute; /* Устанавливаем позицию спиннера относительно его родителя */
   top: 50%;
@@ -5,7 +15,7 @@
   transform: translate(-50%, -50%); /* Центрируем спиннер */
   width: 50px;
   height: 50px;
-  border: 5px solid #0000F5;
+  border: 5px solid #FFC107;
   border-top: 5px solid transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
