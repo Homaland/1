@@ -1,7 +1,7 @@
 .earn-blok {
   background: #666666; /* Убираем кавычки и исправляем запятую */
   color: #FFC107;
-  height: 30vh;
+  height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
