@@ -6,21 +6,28 @@ import "./PlayPage.css";
 const TaskPage: React.FC = () => {
   const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]);
   const [currentPrice, setCurrentPrice] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true); // Флаг загрузки данных
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT");
-      const data = await response.json();
-      const price = parseFloat(data.price);
-      const time = new Date().getTime(); // Текущая метка времени
+      try {
+        const response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT");
+        const data = await response.json();
+        const price = parseFloat(data.price);
+        const time = new Date().getTime(); // Текущая метка времени
 
-      setCurrentPrice(price);
+        setCurrentPrice(price);
 
-      setSeries((prev) => {
-        const updatedData = [...prev[0].data, { x: time, y: price }];
-        if (updatedData.length > 50) updatedData.shift(); // Ограничение длины графика
-        return [{ data: updatedData }];
-      });
+        setSeries((prev) => {
+          const updatedData = [...prev[0].data, { x: time, y: price }];
+          if (updatedData.length > 50) updatedData.shift(); // Ограничение длины графика
+          return [{ data: updatedData }];
+        });
+
+        setIsLoading(false); // Снимаем флаг загрузки после получения первых данных
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     const interval = setInterval(fetchData, 5000); // Запрос каждые 5 секунд
@@ -75,22 +82,50 @@ const TaskPage: React.FC = () => {
     <div
       className="play-page"
       style={{
-        
         color: "#FFFFFF",
         minHeight: "100vh",
         padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <h1 style={{ color: "#FFC107", textAlign: "center" }}>ГРАФИК</h1>
-      <div style={{ width: "90%", margin: "auto" }}>
-        <ApexCharts options={options} series={series} type="line" height={350} />
-      </div>
-      {currentPrice && (
+      {isLoading ? (
+        <div
+          style={{
+            width: "50px",
+            height: "50px",
+            border: "5px solid #FFC107",
+            borderTop: "5px solid transparent",
+            borderRadius: "50%",
+            animation: "spin 1s linear infinite",
+          }}
+        ></div>
+      ) : (
+        <div style={{ width: "90%", margin: "auto" }}>
+          <ApexCharts options={options} series={series} type="line" height={350} />
+        </div>
+      )}
+      {currentPrice && !isLoading && (
         <h2 style={{ textAlign: "center", color: "#FFC107" }}>
           Текущая цена: ${currentPrice.toFixed(2)}
         </h2>
       )}
       <BottomMenu />
+      <style>
+        {`
+          @keyframes spin {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
