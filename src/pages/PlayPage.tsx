@@ -92,40 +92,19 @@ const TaskPage: React.FC = () => {
       }}
     >
       <h1 style={{ color: "#FFC107", textAlign: "center" }}>ГРАФИК</h1>
-      {isLoading ? (
-        <div
-          style={{
-            width: "50px",
-            height: "50px",
-            border: "5px solid #0000F5",
-            borderTop: "5px solid transparent",
-            borderRadius: "50%",
-            animation: "spin 1s linear infinite",
-          }}
-        ></div>
-      ) : (
-        <div style={{ width: "90%", margin: "auto" }}>
+      <div style={{ width: "90%", margin: "auto" }}>
+        {isLoading ? (
+          <div className="spinner"></div>
+        ) : (
           <ApexCharts options={options} series={series} type="line" height={350} />
-        </div>
-      )}
+        )}
+      </div>
       {currentPrice && !isLoading && (
         <h2 style={{ textAlign: "center", color: "#0000F5" }}>
           Текущая цена: ${currentPrice.toFixed(2)}
         </h2>
       )}
       <BottomMenu />
-      <style>
-        {`
-          @keyframes spin {
-            0% {
-              transform: rotate(0deg);
-            }
-            100% {
-              transform: rotate(360deg);
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };
