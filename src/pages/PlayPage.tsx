@@ -106,9 +106,22 @@ const TaskPage: React.FC = () => {
       }}
     >
       <h1 style={{ color: "#0000F5", textAlign: "center" }}>ГРАФИК</h1>
-      <div className="chart-container">
+      <div
+        style={{
+          width: "90%",
+          margin: "auto",
+          border: "2px solid black", // Черная линия вокруг блока
+          padding: "20px",
+          position: "relative", // Для центровки спиннера
+        }}
+      >
         {isLoading ? (
-          <div className="spinner"></div>
+          <div className="spinner" style={{
+            position: "absolute", // Абсолютное позиционирование для центровки
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)"
+          }}></div>
         ) : (
           <ApexCharts options={options} series={series} type="line" height={350} />
         )}
