@@ -13,22 +13,20 @@ const solanaWeb3JsAdapter = new SolanaAdapter({
 
 const projectId = '75c1ff8eab2548ed33251aaadcebee4e'
 
-// 2. Create a metadata object - optional
+// Metadata
 const metadata = {
-  name: '1',
-  description: 'AppKit Example',
-  url: 'https://reown.com/appkit', // origin must match your domain & subdomain
-  icons: ['https://assets.reown.com/reown-profile-pic.png']
-}
+  name: 'HODR',
+  description: 'HODR',
+  url: 'https://hodrland.fun/',
+  icons: ['https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/HODR.png'],
+};
 
-// 3. Create modal
 createAppKit({
   adapters: [solanaWeb3JsAdapter],
-  networks: [solana, arbitrum, polygon, scroll, optimism, mainnet],
+  networks: [solana, solanaTestnet, solanaDevnet],
   metadata: metadata,
   projectId,
   features: {
-    connectMethodsOrder: ['wallet'],
     analytics: true,
     onramp: false
   }
