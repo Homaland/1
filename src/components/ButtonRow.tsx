@@ -31,7 +31,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
               gap: 10px;
             }
             .skeleton-button-container {
-              width: 80px;
+              width: 70px;
               height: 80px;
             }
             .skeleton-button {
