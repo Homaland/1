@@ -11,7 +11,7 @@ const solanaWeb3JsAdapter = new SolanaAdapter({
 });
 
 // Project ID
-const projectId = '8d87137e3ed849983726c0af4d32c697';
+const projectId = '75c1ff8eab2548ed33251aaadcebee4e';
 
 // Metadata
 const metadata = {
@@ -28,7 +28,7 @@ createAppKit({
   metadata: metadata,
   projectId,
   features: {
-    connectMethodsOrder: ['wallet'],
+    connectMethodsOrder: ['social', 'email', 'wallet'],
     analytics: true,
     onramp: false,
     swaps: true,
