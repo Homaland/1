@@ -1,26 +1,30 @@
 .earn-blok {
-  background: #666666; /* Убираем кавычки и исправляем запятую */
+  background: #666666; /* Фон, который видно до загрузки */
   color: #FFC107;
   height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  border: 1px solid #666666; /* Полупрозрачная желтая рамка вокруг элемента */
-  border-radius: 25px; /* Скругленные углы для элемента */
-  padding: 5px; /* Внутренние отступы внутри элемента */
-  margin: 5%; /* Внешние отступы со всех сторон в 5% от ширины родителя */
+  border: 1px solid #666666;
+  border-radius: 25px;
+  padding: 5px;
+  margin: 5%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
-              0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для создания объема */
-  transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
+              0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  position: relative; /* Важно для корректного позиционирования спиннера */
+}
+
+.earn-blok.loading {
+  background: transparent; /* Прозрачный фон во время загрузки */
 }
 
 .spinner {
-  position: absolute; /* Устанавливаем позицию спиннера относительно его родителя */
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Центрируем спиннер */
+  transform: translate(-50%, -50%);
   width: 50px;
   height: 50px;
   border: 5px solid #FFC107;
@@ -38,13 +42,11 @@
   }
 }
 
-
-
 .play-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
-    margin-top: 4vh;
+  margin-top: 4vh;
 }
