@@ -78,9 +78,9 @@ const TaskPage: React.FC = () => {
 
   return (
     <div className="play-page">
-      <h1 style={{ color: "#FFC107", textAlign: "center" }}>Earn</h1>
+      <h1 style={{ textAlign: "center" }}>Earn</h1>
       <div className="earn-blok">
-      <div style={{ width: "90%", margin: "auto" }}>
+      <div style={{ width: "100%", margin: "auto" }}>
         {isLoading ? (
           <div className="spinner"></div>
         ) : (
