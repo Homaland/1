@@ -1,74 +1,77 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+import ApexCharts from "react-apexcharts";
 import BottomMenu from "../components/BottomMenu";
 import "./PlayPage.css";
 
-// Регистрация компонентов Chart.js
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
 const TaskPage: React.FC = () => {
-  const [chartData, setChartData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [series, setSeries] = useState([{ data: [] as { x: string; y: number }[] }]);
+  const [currentPrice, setCurrentPrice] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("https://api.binance.com/api/v3/klines", {
-          params: {
-            symbol: "BTCUSDT", // Пара торгов (например, BTC/USDT)
-            interval: "1h", // Интервал (например, 1 час)
-            limit: 50, // Количество данных
-          },
-        });
+    // Подключение к Binance WebSocket
+    const ws = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@trade");
 
-        const prices = response.data.map((item: any) => ({
-          time: new Date(item[0]).toLocaleTimeString(),
-          price: parseFloat(item[4]),
-        }));
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      const price = parseFloat(data.p); // Цена из WebSocket
+      const time = new Date(data.T).toLocaleTimeString(); // Время
 
-        setChartData({
-          labels: prices.map((p: any) => p.time),
-          datasets: [
-            {
-              label: "BTC/USDT Price",
-              data: prices.map((p: any) => p.price),
-              borderColor: "rgba(75,192,192,1)",
-              backgroundColor: "rgba(75,192,192,0.2)",
-              borderWidth: 2,
-            },
-          ],
-        });
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching Binance API data:", error);
-        setLoading(false);
-      }
+      setCurrentPrice(price);
+
+      // Обновление графика
+      setSeries((prev) => {
+        const updatedData = [...prev[0].data, { x: time, y: price }];
+        // Убираем старые точки, если их слишком много
+        if (updatedData.length > 50) updatedData.shift();
+        return [{ data: updatedData }];
+      });
     };
 
-    fetchData();
+    return () => ws.close(); // Закрываем WebSocket при размонтировании компонента
   }, []);
+
+  const options: ApexCharts.ApexOptions = {
+    chart: {
+      type: "line", // Исправлено: явно указываем строгое значение
+      animations: {
+        enabled: true,
+        speed: 800,
+        dynamicAnimation: {
+          enabled: true,
+          speed: 500, // Установите скорость для динамической анимации
+        },
+      },
+      toolbar: { show: false },
+      background: "#f4f4f4",
+    },
+    colors: ["#00E396"],
+    stroke: { curve: "smooth", width: 2 },
+    xaxis: { type: "category", title: { text: "Time" }, labels: { rotate: -45 } },
+    yaxis: {
+      title: { text: "Price (USDT)" },
+      labels: {
+        formatter: (value: number) => `$${value.toFixed(2)}`,
+      },
+    },
+    tooltip: { enabled: true },
+    grid: { borderColor: "#e7e7e7" },
+  };
 
   return (
     <div className="play-page">
-      <h1>Play</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div style={{ width: "80%", margin: "auto" }}>
-          <Line
-            data={chartData}
-            options={{
-              responsive: true,
-              plugins: {
-                legend: { display: true, position: "top" },
-                title: { display: true, text: "BTC/USDT Price Chart" },
-              },
-            }}
-          />
-        </div>
-      )}
+      <h1>BTC/USDT Live Price</h1>
+      <div style={{ textAlign: "center", marginBottom: "20px" }}>
+        {currentPrice ? (
+          <h2 style={{ color: "#00E396" }}>
+            Current Price: ${currentPrice.toFixed(2)}
+          </h2>
+        ) : (
+          <p>Loading current price...</p>
+        )}
+      </div>
+      <div style={{ width: "80%", margin: "auto" }}>
+        <ApexCharts options={options} series={series} type="line" height={350} />
+      </div>
       <BottomMenu />
     </div>
   );
