@@ -29,17 +29,21 @@ const TaskPage: React.FC = () => {
       }
     };
 
-    const interval = setInterval(fetchData, 5000); // Запрос каждые 5 секунд
+    const interval = setInterval(fetchData, 2000); // Запрос каждые 2 секунды
     fetchData(); // Первый вызов без ожидания
 
     return () => clearInterval(interval); // Очистка интервала при размонтировании
   }, []);
 
   useEffect(() => {
-    // Показываем график, когда данные загружены
-    if (bufferedData.length > 0 && isLoading) {
+    // Устанавливаем минимальное время отображения спиннера (7 секунд)
+    const minLoadingTime = 7000;
+    const loadingTimeout = setTimeout(() => {
+      setIsLoading(false); // Отключаем спиннер через 7 секунд
+    }, minLoadingTime);
+
+    if (bufferedData.length > 0 && !isLoading) {
       setSeries([{ data: bufferedData }]);
-      setIsLoading(false); // Отключаем спиннер
     } else if (!isLoading) {
       // Обновляем график в реальном времени
       setSeries((prev) => {
@@ -48,6 +52,8 @@ const TaskPage: React.FC = () => {
         return [{ data: updatedData }];
       });
     }
+
+    return () => clearTimeout(loadingTimeout); // Очистка таймера при размонтировании компонента
   }, [bufferedData, isLoading]);
 
   const options: ApexCharts.ApexOptions = {
