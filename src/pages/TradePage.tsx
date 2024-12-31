@@ -24,7 +24,7 @@ const metadata = {
 // 3. Create modal
 createAppKit({
   adapters: [solanaWeb3JsAdapter],
-  networks: [arbitrum, polygon, scroll, optimism, mainnet],
+  networks: [solana, arbitrum, polygon, scroll, optimism, mainnet],
   metadata: metadata,
   projectId,
   features: {
