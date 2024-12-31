@@ -66,7 +66,7 @@ const TaskPage: React.FC = () => {
     yaxis: {
       labels: {
         formatter: (value) => `$${value.toFixed(2)}`,
-        style: { colors: "#FFFFFF" },
+        style: { colors: "#FFC107" },
       },
     },
     grid: {
@@ -80,7 +80,7 @@ const TaskPage: React.FC = () => {
 
   return (
     <div className="play-page">
-      <h1 style={{ color: "#FFC107", textAlign: "center" }}>ГРАФИК</h1>
+      <h1 style={{ color: "#FFC107", textAlign: "center" }}>Earn</h1>
       <div className="earn-blok">
       <div style={{ width: "90%", margin: "auto" }}>
         {isLoading ? (
@@ -89,11 +89,7 @@ const TaskPage: React.FC = () => {
           <ApexCharts options={options} series={series} type="line" height={350} />
         )}
       </div>
-      {currentPrice && !isLoading && (
-        <h2 style={{ textAlign: "center", color: "#0000F5" }}>
-          Текущая цена: ${currentPrice.toFixed(2)}
-        </h2>
-      )}
+    
         </div>
       <BottomMenu />
     </div>
