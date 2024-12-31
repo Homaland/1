@@ -72,14 +72,16 @@ const TaskPage: React.FC = () => {
   return (
     <div className="play-page">
       <h1 style={{ textAlign: "center" }}>Earn</h1>
-      <div className={`earn-blok ${isLoading ? "loading" : ""}`}>
-        <div style={{ width: "100%", margin: "auto" }}>
-          {isLoading ? (
-            <div className="spinner"></div>
-          ) : (
-            <ApexCharts options={options} series={series} type="line" />
-          )}
-        </div>
+      <div className="earn-blok-wrapper">
+        {isLoading ? (
+          <div className="spinner"></div>
+        ) : (
+          <div className={`earn-blok loaded`}>
+            <div style={{ width: "100%", margin: "auto" }}>
+              <ApexCharts options={options} series={series} type="line" />
+            </div>
+          </div>
+        )}
       </div>
       <BottomMenu />
     </div>
