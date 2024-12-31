@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { JettonBalance } from "@ton-api/client";
 
 interface ButtonRowProps {
@@ -7,7 +7,46 @@ interface ButtonRowProps {
 }
 
 const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => {
-   return (
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+
+  useEffect(() => {
+    // Эмулируем задержку загрузки
+    const timer = setTimeout(() => setLoading(false), 1000); // Убираем заглушки через 1 секунду
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    // Заглушки
+    return (
+      <div className="button-row skeleton-button-row">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div key={index} className="skeleton-button-container">
+            <div className="skeleton-button" />
+          </div>
+        ))}
+        <style>
+          {`
+            .skeleton-button-row {
+              display: flex;
+              gap: 20px;
+            }
+            .skeleton-button-container {
+              width: 100px;
+              height: 100px;
+            }
+            .skeleton-button {
+              width: 100%;
+              height: 100%;
+              background-color: #e0e0e0;
+              border-radius: 8px;
+            }
+          `}
+        </style>
+      </div>
+    );
+  }
+
+  return (
     <div className="button-row">
       {/* Кнопка "Receive" */}
       <div className="button-container">
