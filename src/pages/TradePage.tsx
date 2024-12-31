@@ -17,7 +17,7 @@ const projectId = '75c1ff8eab2548ed33251aaadcebee4e';
 const metadata = {
   name: 'HODR',
   description: 'HODR',
-  url: 'https://hodrland.fun',
+  url: 'https://t.me/HODRBOT/HODR',
   icons: ['https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/HODR.png'],
 };
 
