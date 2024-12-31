@@ -1,13 +1,14 @@
 .earn-blok {
-        background: "linear-gradient(to bottom, #1a1a1a, #121212)",
-        color: "#FFC107",
-        minHeight: "100vh",
-        padding: "20px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+  background: linear-gradient(to bottom, #1a1a1a, #121212); /* Убираем кавычки и исправляем запятую */
+  color: #FFC107;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
 .spinner {
   position: absolute; /* Устанавливаем позицию спиннера относительно его родителя */
   top: 50%;
