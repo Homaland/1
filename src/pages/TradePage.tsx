@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BackButton } from "../components/BackButton";
 import { createAppKit } from '@reown/appkit/react'
 import { SolanaAdapter } from '@reown/appkit-adapter-solana/react'
-import { solana, ton, arbitrum, polygon, scroll, optimism, mainnet } from '@reown/appkit/networks'
+import { arbitrum, ethereum, polygon, scroll, optimism, mainnet, solana } from '@reown/appkit/networks'
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 
 const solanaWeb3JsAdapter = new SolanaAdapter({
@@ -22,7 +22,7 @@ const metadata = {
 
 createAppKit({
   adapters: [solanaWeb3JsAdapter],
-  networks: [solana, ton, arbitrum, polygon, scroll, optimism, mainnet],
+  networks: [arbitrum, ethereum, polygon, scroll, optimism, mainnet, solana],
   metadata: metadata,
   projectId,
   features: {
