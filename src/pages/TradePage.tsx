@@ -1,39 +1,36 @@
 import React, { useEffect, useState } from "react";  
 import { BackButton } from "../components/BackButton";
-import { createAppKit } from '@reown/appkit/react';
-import { SolanaAdapter } from '@reown/appkit-adapter-solana/react';
-import { Solana, arbitrum, polygon, scroll, optimism, mainnet } from '@reown/appkit/networks';
-import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { createAppKit } from '@reown/appkit/react'
+import { SolanaAdapter } from '@reown/appkit-adapter-solana/react'
+import { solana, solanaTestnet, solanaDevnet } from '@reown/appkit/networks'
+import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 
-// Настройка Solana Adapter
+
 const solanaWeb3JsAdapter = new SolanaAdapter({
-  wallets: [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
-});
+  wallets: [new PhantomWalletAdapter(), new SolflareWalletAdapter()]
+})
 
-// Project ID
-const projectId = '75c1ff8eab2548ed33251aaadcebee4e';
 
-// Metadata
+const projectId = '75c1ff8eab2548ed33251aaadcebee4e'
+
+// 2. Create a metadata object - optional
 const metadata = {
-  name: 'HODR',
-  description: 'HODR',
-  url: 'https://t.me/HODRBOT/HODR',
-  icons: ['https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/HODR.png'],
-};
+  name: '1',
+  description: 'AppKit Example',
+  url: 'https://reown.com/appkit', // origin must match your domain & subdomain
+  icons: ['https://assets.reown.com/reown-profile-pic.png']
+}
 
-// Инициализация AppKit
+// 3. Create modal
 createAppKit({
   adapters: [solanaWeb3JsAdapter],
-  networks: [solana, arbitrum, polygon, scroll, optimism, mainnet],
+  networks: [solana, solanaTestnet, solanaDevnet],
   metadata: metadata,
   projectId,
   features: {
-    connectMethodsOrder: ['wallet'],
-    analytics: true,
-    onramp: false,
-    swaps: true,
-  },
-});
+    analytics: true // Optional - defaults to your Cloud configuration
+  }
+})
 
 // Функция для получения данных о криптовалютах через Binance API
 const fetchBinanceAltcoins = async () => {
