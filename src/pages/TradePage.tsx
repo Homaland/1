@@ -22,7 +22,7 @@ const metadata = {
 
 createAppKit({
   adapters: [solanaWeb3JsAdapter],
-  networks: [solana, arbitrum, polygon, scroll, optimism, mainnet],
+  networks: [solana, ton, arbitrum, polygon, scroll, optimism, mainnet],
   metadata: metadata,
   projectId,
   features: {
