@@ -1,13 +1,19 @@
 .earn-blok {
-  background: linear-gradient(to bottom, #1a1a1a, #121212); /* Убираем кавычки и исправляем запятую */
+  background: #121212; /* Убираем кавычки и исправляем запятую */
   color: #FFC107;
-  
   height: 30vh;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  border: 1px solid rgba(245, 215, 44, 0.7); /* Полупрозрачная желтая рамка вокруг элемента */
+  border-radius: 25px; /* Скругленные углы для элемента */
+  padding: 5px; /* Внутренние отступы внутри элемента */
+  margin: 5%; /* Внешние отступы со всех сторон в 5% от ширины родителя */
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
+              0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для создания объема */
+  transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
 }
 
 .spinner {
