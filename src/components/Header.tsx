@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
             }
             .skeleton-name {
               width: 120px;
-              height: 16px;
+              height: 36px;
               background-color: #e0e0e0;
               border-radius: 4px;
             }
