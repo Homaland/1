@@ -15,8 +15,8 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@reown/appkit": "^1.6.2",
-    "@reown/appkit-adapter-solana": "^1.6.2",
+    "@reown/appkit": "^1.6.0",
+    "@reown/appkit-adapter-solana": "^1.6.0",
     "@solana/wallet-adapter-wallets": "^0.19.32",
     "@ton-api/client": "^0.2.0-beta.1",
     "@ton-api/ton-adapter": "^0.2.0-beta.1",
@@ -25,6 +25,7 @@
     "@tonconnect/ui-react": "^2.0.9",
     "@twa-dev/sdk": "^8.0.1",
     "apexcharts": "^4.2.0",
+    "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "react": "^18.3.1",
     "react-apexcharts": "^1.7.0",
