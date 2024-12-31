@@ -6,8 +6,9 @@ import "./PlayPage.css";
 const TaskPage: React.FC = () => {
   const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]);
   const [currentPrice, setCurrentPrice] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(true); // Флаг загрузки данных
-  const [bufferedData, setBufferedData] = useState<{ x: number; y: number }[]>([]); // Буфер для данных
+  const [isLoading, setIsLoading] = useState(true); // Flag for data loading
+  const [bufferedData, setBufferedData] = useState<{ x: number; y: number }[]>([]); // Buffer for data
+  const [startTime, setStartTime] = useState<number | null>(null); // Track the start time for delay
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,13 +16,13 @@ const TaskPage: React.FC = () => {
         const response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT");
         const data = await response.json();
         const price = parseFloat(data.price);
-        const time = new Date().getTime(); // Текущая метка времени
+        const time = new Date().getTime(); // Current timestamp
 
         setCurrentPrice(price);
 
         setBufferedData((prev) => {
           const updatedData = [...prev, { x: time, y: price }];
-          if (updatedData.length > 50) updatedData.shift(); // Ограничение длины графика
+          if (updatedData.length > 50) updatedData.shift(); // Limit the length of the chart data
           return updatedData;
         });
       } catch (error) {
@@ -29,32 +30,32 @@ const TaskPage: React.FC = () => {
       }
     };
 
-    const interval = setInterval(fetchData, 2000); // Запрос каждые 2 секунды
-    fetchData(); // Первый вызов без ожидания
+    const interval = setInterval(fetchData, 2000); // Fetch data every 2 seconds
+    fetchData(); // First call immediately
 
-    return () => clearInterval(interval); // Очистка интервала при размонтировании
+    return () => clearInterval(interval); // Clean up the interval on unmount
   }, []);
 
   useEffect(() => {
-    // Устанавливаем минимальное время отображения спиннера (7 секунд)
-    const minLoadingTime = 7000;
-    const loadingTimeout = setTimeout(() => {
-      setIsLoading(false); // Отключаем спиннер через 7 секунд
-    }, minLoadingTime);
-
-    if (bufferedData.length > 0 && !isLoading) {
-      setSeries([{ data: bufferedData }]);
+    if (startTime === null) {
+      setStartTime(new Date().getTime()); // Set start time when the component mounts
+    }
+    // Once buffered data is available and 7 seconds have passed, show the graph
+    if (bufferedData.length > 0 && isLoading) {
+      const elapsedTime = new Date().getTime() - startTime!;
+      if (elapsedTime >= 7000) {
+        setSeries([{ data: bufferedData }]);
+        setIsLoading(false); // Turn off loading spinner after 7 seconds
+      }
     } else if (!isLoading) {
-      // Обновляем график в реальном времени
+      // Update the chart with new data in real-time
       setSeries((prev) => {
         const updatedData = [...prev[0].data, bufferedData[bufferedData.length - 1]];
         if (updatedData.length > 50) updatedData.shift();
         return [{ data: updatedData }];
       });
     }
-
-    return () => clearTimeout(loadingTimeout); // Очистка таймера при размонтировании компонента
-  }, [bufferedData, isLoading]);
+  }, [bufferedData, isLoading, startTime]);
 
   const options: ApexCharts.ApexOptions = {
     chart: {
@@ -63,11 +64,11 @@ const TaskPage: React.FC = () => {
         enabled: true,
         dynamicAnimation: {
           enabled: true,
-          speed: 2000, // Плавное обновление графика
+          speed: 2000, // Smooth chart update
         },
       },
-      toolbar: { show: false }, // Убираем элементы управления
-      zoom: { enabled: false }, // Отключаем зум
+      toolbar: { show: false },
+      zoom: { enabled: false },
       background: "transparent",
     },
     stroke: {
@@ -78,7 +79,7 @@ const TaskPage: React.FC = () => {
     xaxis: {
       type: "datetime",
       labels: {
-        show: false, // Скрыть метки времени
+        show: false,
       },
       axisTicks: { show: false },
       axisBorder: { show: false },
@@ -90,10 +91,10 @@ const TaskPage: React.FC = () => {
       },
     },
     grid: {
-      show: false, // Убираем сетку
+      show: false,
     },
     tooltip: {
-      enabled: false, // Отключаем тултипы
+      enabled: false,
     },
     colors: ["#0000F5"],
   };
