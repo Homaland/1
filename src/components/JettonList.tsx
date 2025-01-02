@@ -6,19 +6,19 @@ import "./PlayPage.css";
 const PlayPage: React.FC = () => {
   const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]);
   const [isLoading, setIsLoading] = useState(true);
-  const [price, setPrice] = useState<number | null>(null);
+  const [tonPrice, setTonPrice] = useState<number | null>(null); // Состояние для цены TON
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT");
         const data = await response.json();
-        const currentPrice = parseFloat(data.price);
-        setPrice(currentPrice); // Store the current price
+        const price = parseFloat(data.price);
         const time = new Date().getTime();
 
+        setTonPrice(price); // Обновляем цену TON
         setSeries((prev) => {
-          const updatedData = [...prev[0].data, { x: time, y: currentPrice }];
+          const updatedData = [...prev[0].data, { x: time, y: price }];
           if (updatedData.length > 50) updatedData.shift();
           return [{ data: updatedData }];
         });
@@ -77,7 +77,7 @@ const PlayPage: React.FC = () => {
       <img
         src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/IMG_0189.png"
         alt="Earn"
-        style={{ width: "20px", height: "20px", borderRadius: "50%" }}
+        style={{ display: "block", margin: "0 auto", maxWidth: "100%", height: "auto" }}
       />
       <h1 style={{ textAlign: "center" }}>Earn</h1>
       <div className="earn-blok-wrapper">
@@ -85,15 +85,14 @@ const PlayPage: React.FC = () => {
           <div className="skeleton-loader"></div>
         ) : (
           <div className="chart-container">
-            <div className="chart-text top" style={{ display: "flex", alignItems: "center" }}>
-              {/* TON Logo and Current Price */}
+            <div className="chart-text top">
               <img
                 src="https://ton.org/download/ton_symbol.svg"
                 alt="TON"
                 className="jetton-image"
-                style={{ width: "20px", height: "20px", borderRadius: "50%" }}
+                style={{ width: "20px", height: "20px", borderRadius: "50%", marginRight: "8px" }}
               />
-              TON {price !== null ? `$${price.toFixed(2)}` : "Loading..."}
+              TON {tonPrice ? `$${tonPrice.toFixed(2)}` : "Loading..."}
             </div>
             <div className="earn-blok1 loaded">
               <div style={{ width: "100%", margin: "auto" }}>
