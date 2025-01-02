@@ -1,8 +1,8 @@
-// pages/EarnPage.tsx
+// pages/Earncard.tsx
 import { useEffect, useState } from "react"; 
 import WebApp from '@twa-dev/sdk';
 
-const [balance, setBalance] = useState<number | null>(null);
+function Earncard() { const [balance, setBalance] = useState<number | null>(null);
 
  useEffect(() => { 
   if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
@@ -34,5 +34,5 @@ return (
  </div>
   );
 
-
-export default EarnPage;
+}
+export default Earncard;
