@@ -74,9 +74,7 @@ const PlayPage: React.FC = () => {
       <h1 style={{ textAlign: "center" }}>Earn</h1> 
       <div className="earn-blok-wrapper"> 
         {isLoading ? (
-  <div className="skeleton-blok-wrapper">
-    <div className="skeleton"></div>
-  </div>
+   <div className="skeleton"></div> 
 ) : (
   <div className="chart-container">
     <p className="chart-text top">TON</p>
