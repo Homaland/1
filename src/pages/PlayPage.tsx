@@ -83,11 +83,13 @@ const TaskPage: React.FC = () => {
       <ApexCharts options={options} series={series} type="line" />
     </div>
   </div>
-  <p className="chart-text bottom">Bot Trading (soon)</p> {/* Нижний текст */}
+  <p className="chart-text bottom">Bot Trading</p> {/* Нижний текст */}
 </div>
 
         )}
       </div>
+      <div className="how-it-works">  <p>SOON SOON SOON SOON SOON SOON SOON SOON </p> </div>
+        <div className="how-it-works2">  <p>SOON SOON SOON SOON SOON SOON SOON SOON </p> </div>
       <BottomMenu />
     </div>
   );
