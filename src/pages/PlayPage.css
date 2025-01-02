@@ -21,6 +21,7 @@
   background: #666666;
   color: #FFC107;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +37,7 @@
 
 .chart-text {
   margin: 10px 0; /* Устанавливаем отступы сверху и снизу */
-  font-size: 16px; /* Размер текста */
+  font-size: 14px; /* Размер текста */
   color: #FFC107;
   text-align: center;
 }
@@ -51,7 +52,7 @@
 .earn-blo1 {
   background: #666666;
   color: #FFC107;
-  height: 85%;
+  height: 70%;
   width: 100%;
   display: flex;
   flex-direction: column;
