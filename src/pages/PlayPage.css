@@ -15,7 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;  /* Добавляем отступ сверху для отделения от предыдущих элементов */
+  margin-top: 5%;  /* Добавляем отступ сверху для отделения от предыдущих элементов */
 }
 
 .how-it-works1, .how-it-works2 {
@@ -77,8 +77,18 @@
   border-top: 5px solid transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  
 }
 
+.spiner-blok-wrapper {
+  position: relative;
+  width: 100%;
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;  /* Добавляем отступ сверху для отделения от предыдущих элементов */
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
