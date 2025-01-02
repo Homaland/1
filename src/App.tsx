@@ -18,7 +18,7 @@ import TradePage from "./pages/TradePage";
 import JettonDetailsPage from "./pages/JettonDetailsPage";
 import Tokeninfo from "./pages/TokenInfoPage";
 import { NftList } from './components/NftList'; 
-import Tokeninfo from "./pages/EarncardPage";
+import Earncard from "./pages/EarncardPage";
 
 import "./App.css";
 import { isValidAddress } from "./utils/address";
