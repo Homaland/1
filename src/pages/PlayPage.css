@@ -1,31 +1,59 @@
-.earn-blok-wrapper { 
+.play-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  /* Используем flex-start, чтобы начать с верхней части */
+  padding: 20px;
+  margin-top: 4vh;
+  min-height: 100vh;  /* Обеспечиваем минимальную высоту на весь экран */
+}
+
+.earn-blok-wrapper {
   position: relative;
   width: 100%;
   height: 25vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 15px; /* Отступ снизу для предотвращения наложения */
+  margin-top: 20px;  /* Добавляем отступ сверху для отделения от предыдущих элементов */
 }
 
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid #FFC107;
-  border-top: 5px solid transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.how-it-works1, .how-it-works2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5vh;
+  position: relative;
+  white-space: nowrap; 
+  overflow: hidden;
+}
+
+.how-it-works1 {
+  margin-bottom: 10px;  /* Добавляем отступ снизу, чтобы избежать наложения */
+}
+
+.how-it-works2 {
+  margin-bottom: 20px;  /* Увеличиваем отступ снизу */
+}
+
+.how-it-works1 p, .how-it-works2 p {
+  font-family: 'Rubik Vinyl', cursive;
+  font-size: 3vh;
+  color: #000;
+  text-align: center;
+  transform: rotate(12.02deg);
+  white-space: nowrap;
 }
 
 .chart-container {
   background: #666666;
   color: #FFC107;
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Убедимся, что текст и график разделены */
   border: 1px solid #666666;
   border-radius: 25px;
   padding: 20px;
@@ -42,22 +70,13 @@
   text-align: center;
 }
 
-.earn-blok.loaded {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.earn-blo1 {
-  background: #666666;
-  color: #FFC107;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  margin: 5%;
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #FFC107;
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -67,56 +86,4 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.play-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  margin-top: 4vh;
-  height: auto;
-}
-
-.how-it-works1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 5vh;
-  position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-bottom: 10px; /* Отступ снизу для предотвращения наложения */
-}
-
-.how-it-works1 p {
-  font-family: 'Rubik Vinyl', cursive;
-  font-size: 3vh;
-  color: #000;
-  text-align: center;
-  transform: rotate(12.02deg);
-  white-space: nowrap;
-}
-
-.how-it-works2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 5vh;
-  position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-bottom: 10vh; /* Отступ снизу для предотвращения наложения */
-}
-
-.how-it-works2 p {
-  font-family: 'Rubik Vinyl', cursive;
-  font-size: 3vh;
-  color: #000;
-  text-align: center;
-  transform: rotate(196.02deg);
-  white-space: nowrap;
 }
