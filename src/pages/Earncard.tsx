@@ -1,5 +1,6 @@
 // pages/EarnPage.tsx
 import { useEffect, useState } from "react"; 
+import WebApp from '@twa-dev/sdk';
 
 const [balance, setBalance] = useState<number | null>(null);
 
