@@ -31,7 +31,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
               display: flex;
               justify-content: center;
               align-items: center;
-  
+  width: 100%;
             }
            
             .skeleton-text {
