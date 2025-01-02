@@ -23,8 +23,7 @@ const [balance, setBalance] = useState<number | null>(null);
   }
 }, []);
 
-const EarnPage: React.FC = () => {
-  return (
+return (
   
       {balance !== null ? (
         <p>Your points: {balance}</p>
@@ -33,6 +32,6 @@ const EarnPage: React.FC = () => {
       )}
 
   );
-};
+
 
 export default EarnPage;
