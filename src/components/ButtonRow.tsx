@@ -11,7 +11,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
 
   useEffect(() => {
     // Эмулируем задержку загрузки
-    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 1 секунду
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
     return () => clearTimeout(timer);
   }, []);
 
@@ -26,6 +26,18 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
         ))}
         <style>
           {`
+            @keyframes skeleton-loading {
+              0% {
+                background-color: #e0e0e0;
+              }
+              50% {
+                background-color: #f7f7f7;
+              }
+              100% {
+                background-color: #e0e0e0;
+              }
+            }
+
             .skeleton-button-row {
               display: flex;
               gap: 10px;
@@ -39,6 +51,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
               height: 100%;
               background-color: #e0e0e0;
               border-radius: 10px;
+              animation: skeleton-loading 1.5s infinite ease-in-out;
             }
           `}
         </style>
