@@ -58,6 +58,7 @@ body, html {
 }
 
 .how-it-works p {
+    
     font-family: 'Rubik Vinyl', cursive;
     font-size: 3vh;
     color: #000;
@@ -67,6 +68,7 @@ body, html {
 }
 
 .how-it-works2 {
+     margin-top: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
