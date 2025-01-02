@@ -47,13 +47,7 @@
   font-size: 16px; /* измените размер шрифта по необходимости */
   color: #ffc107; /* цвет текста */
 }
-.chart-text.top {
-  top: 10px; /* отступ сверху */
-}
 
-.chart-text.bottom {
-  bottom: 10px; /* отступ снизу */
-}
 .earn-blo1 {
   background: #666666;
   color: #FFC107;
