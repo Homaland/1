@@ -49,7 +49,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
             
             }
             .skeleton-line {
-              width: 200px;
+              width: 90%;
               height: 20px;
               background-color: #e0e0e0;
               border-radius: 4px;
@@ -79,9 +79,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
         {`
          
           .no-collection-text {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #888;
+          
             text-align: center;
           }
         `}
