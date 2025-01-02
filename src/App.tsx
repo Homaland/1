@@ -19,6 +19,7 @@ import JettonDetailsPage from "./pages/JettonDetailsPage";
 import Tokeninfo from "./pages/TokenInfoPage";
 import { NftList } from './components/NftList'; 
 
+import { io } from "socket.io-client";
 
 import "./App.css";
 import { isValidAddress } from "./utils/address";
@@ -49,6 +50,33 @@ function App() {
   }, [connectedAddressString]);
 
  
+  const [balance, setBalance] = useState<number | null>(null);
+
+  
+
+const socket = io("http://homaland-hodrland-04a0.twc1.net");
+
+useEffect(() => {
+    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
+        const telegramId = WebApp.initDataUnsafe.user.id;
+
+        socket.emit("get_balance", { telegram_id: telegramId });
+
+        socket.on("balance", (data) => {
+            setBalance(data.balance);
+        });
+
+        socket.on("error", (error) => {
+            console.error("Socket error:", error.message);
+        });
+    }
+
+    return () => {
+        socket.disconnect();
+    };
+}, []);
+
+  
   
 
   // Save language to localStorage whenever it changes
@@ -133,6 +161,7 @@ function App() {
   const filteredNfts = nfts?.filter((nft) => nft.collection);
   const texts = getText(language);
 
+  
   return (
     <Router>
       <Routes>
@@ -152,6 +181,15 @@ function App() {
 
               <Tokeninfo />
             </div>
+            <div className="earncard">
+            {balance !== null ? (
+  <p>Your points: {balance}</p>
+) : error ? (
+  <p>Error fetching balance: {error}</p>
+) : (
+  <p>Loading your points...</p>
+)}
+    </div>
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
                   senderAddress={connectedAddress}
