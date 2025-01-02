@@ -76,14 +76,14 @@ const TaskPage: React.FC = () => {
         {isLoading ? (
           <div className="spinner"></div>
         ) : (
-      <div className="earn-blok">
-        <p>TON</p>
+      <div className="chart-container">
+       <p className="chart-text top">TON</p>
           <div className={`earn-blok1 loaded`}>
             <div style={{ width: "100%", margin: "auto" }}>
               <ApexCharts options={options} series={series} type="line" />
               </div>
           </div>
-        <p>Bot Trading(soon)</p>
+        <p className="chart-text bottom">Bot Trading (soon)</p>
         </div>
         )}
       </div>
