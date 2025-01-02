@@ -35,10 +35,14 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
               border-radius: 8px;
             }
             .skeleton-status {
-              width: 200px;
-              height: 20px;
+              padding: 5px;
+              margin: 5%;
+              height: auto;
               background-color: #e0e0e0;
               border-radius: 8px;
+              box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
+              0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: box-shadow 0.3s ease-in-out; 
             }
           `}
         </style>
