@@ -1,7 +1,7 @@
 import React from "react";  
 import { useNavigate } from "react-router-dom";  // Импорт useNavigate
 import { useLocation } from "react-router-dom";  // Импорт useLocation
-import { FaHome, FaTasks, FaPayments, FaStore, FaExchangeAlt } from "react-icons/fa"; // Импорт новой иконки
+import { FaHome, FaTasks, FaCreditCard, FaStore, FaExchangeAlt } from "react-icons/fa"; // Импорт новой иконки
 
 const BottomMenu: React.FC = () => {
   const location = useLocation();
@@ -28,7 +28,7 @@ const BottomMenu: React.FC = () => {
         onClick={() => navigate("/play")}  // Используем navigate для перехода
       >
         <FaGamepad className={location.pathname === "/play" ? "active-icon" : ""} />
-        <span>Play</span>
+        <span>Earn</span>
       </div>
       <div
         className={`menu-item ${location.pathname === "/shop" ? "active" : ""}`}
