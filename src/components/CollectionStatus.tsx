@@ -40,8 +40,8 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
             }
             .skeleton-status {
               width: 150px;
-              padding: 5px;
-              margin: 5%;
+              padding: 5%;
+              
               height: 6vh;
               background-color: #e0e0e0;
              border-radius: 8px;
