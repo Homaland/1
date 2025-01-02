@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import ApexCharts from "react-apexcharts";
-import BottomMenu from "../components/BottomMenu";
+import React, { useEffect, useState } from "react"; 
+import ApexCharts from "react-apexcharts"; 
+import BottomMenu from "../components/BottomMenu"; 
 import "./PlayPage.css";
 
 const PlayPage: React.FC = () => {
@@ -73,26 +73,29 @@ const PlayPage: React.FC = () => {
 
   return (
     <div className="play-page">
-      {/* Добавляем картинку перед заголовком */}
-      <img
-        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/IMG_0189.png"
-        alt="Earn"
-        style={{ width: "40px", height: "40px", }}
-      />
-      <h1 style={{ textAlign: "center" }}>Earn</h1>
+      {/* Контейнер с Flexbox для выравнивания картинки и текста "Earn" на одной строке */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <img
+          src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/IMG_0189.png"
+          alt="Earn"
+          style={{ width: "40px", height: "40px", marginRight: "10px" }}
+        />
+        <h1>Earn</h1>
+      </div>
       <div className="earn-blok-wrapper">
         {isLoading ? (
           <div className="skeleton-loader"></div>
         ) : (
           <div className="chart-container">
-            <div className="chart-text top">
+            {/* Контейнер для картинки и текста TON */}
+            <div className="chart-text top" style={{ display: "inline-flex", alignItems: "center" }}>
               <img
                 src="https://ton.org/download/ton_symbol.svg"
                 alt="TON"
                 className="jetton-image"
                 style={{ width: "20px", height: "20px", borderRadius: "50%", marginRight: "8px" }}
               />
-              TON {tonPrice ? `$${tonPrice.toFixed(2)}` : "Loading..."}
+              <span>TON {tonPrice ? `$${tonPrice.toFixed(2)}` : "Loading..."}</span>
             </div>
             <div className="earn-blok1 loaded">
               <div style={{ width: "100%", margin: "auto" }}>
