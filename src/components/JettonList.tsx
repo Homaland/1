@@ -77,7 +77,7 @@ const PlayPage: React.FC = () => {
       <img
         src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/IMG_0189.png"
         alt="Earn"
-        style={{ display: "block", margin: "0 auto", maxWidth: "100%", height: "auto" }}
+        style={{ width: "20px", height: "20px", borderRadius: "50%" }}
       />
       <h1 style={{ textAlign: "center" }}>Earn</h1>
       <div className="earn-blok-wrapper">
