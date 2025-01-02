@@ -2,7 +2,7 @@
 import React from "react";
 import BottomMenu from "../components/BottomMenu";
 
-const TaskPage: React.FC = () => {
+const FrenPage: React.FC = () => {
   return (
     <div className="fren-page">
       <h1>Fren</h1>
@@ -12,4 +12,4 @@ const TaskPage: React.FC = () => {
   );
 };
 
-export default TaskPage;
+export default FrenPage;
