@@ -61,7 +61,7 @@ function Earncard() {
             height: 20px;
             background-color: #e0e0e0;
             border-radius: 4px;
-            animation: skeleton-loading 1.5s infinite ease-in-out;
+            animation: skeleton-loading 2s infinite ease-in-out;
           }
         `}
       </style>
