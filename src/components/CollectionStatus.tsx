@@ -31,7 +31,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
               padding: 0px;
                 align-items: center; /* Центрирование по горизонтали */
   justify-content: center; /* Центрирование по вертикали */
-  height: 100%; /* Высота родительского контейнера */
+  height: 7vh; /* Высота родительского контейнера */
             }
             .skeleton-text {
               width: 150px;
