@@ -1,7 +1,7 @@
 import React from "react";  
 import { useNavigate } from "react-router-dom";  // Импорт useNavigate
 import { useLocation } from "react-router-dom";  // Импорт useLocation
-import { FaHome, FaTasks, FaGamepad, FaStore, FaExchangeAlt } from "react-icons/fa"; // Импорт новой иконки
+import { FaHome, FaTasks, FaPayments, FaStore, FaExchangeAlt } from "react-icons/fa"; // Импорт новой иконки
 
 const BottomMenu: React.FC = () => {
   const location = useLocation();
