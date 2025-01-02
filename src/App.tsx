@@ -161,16 +161,16 @@ function App() {
   
       // Отправляем данные пользователя на сервер
       fetch("https://homaland-hodrland-04a0.twc1.net/save_user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          telegram_id: id,
-          first_name: first_name,
-          username: username,
-        }),
-      })
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        telegram_id: id,
+        first_name: first_name,
+        username: username,
+    }),
+})
         .then((response) => response.json())
         .then((data) => {
           console.log("User saved:", data);
