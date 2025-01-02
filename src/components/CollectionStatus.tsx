@@ -57,9 +57,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
               height: 6vh;
               background-color: #e0e0e0;
               border-radius: 8px;
-              box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
-              0 4px 6px rgba(0, 0, 0, 0.1); 
-  transition: box-shadow 0.3s ease-in-out; 
+           
   text-align: center;
   justify-content: center;
   align-items: center;
