@@ -18,7 +18,7 @@ import TradePage from "./pages/TradePage";
 import JettonDetailsPage from "./pages/JettonDetailsPage";
 import Tokeninfo from "./pages/TokenInfoPage";
 import { NftList } from './components/NftList'; 
-
+import Tokeninfo from "./pages/EarncardPage";
 
 import "./App.css";
 import { isValidAddress } from "./utils/address";
@@ -201,13 +201,8 @@ function App() {
 
               <Tokeninfo />
             </div>
-            <div className="earncard">
-      {balance !== null ? (
-        <p>Your points: {balance}</p>
-      ) : (
-        <p>Loading your points...</p>
-      )}
-    </div>
+            <Earncard />
+           
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
                   senderAddress={connectedAddress}
