@@ -119,6 +119,18 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
       )}
       <style>
         {`
+          @keyframes skeleton-loading {
+            0% {
+              background-color: #e0e0e0;
+            }
+            50% {
+              background-color: #f7f7f7;
+            }
+            100% {
+              background-color: #e0e0e0;
+            }
+          }
+
           .skeleton-list {
             display: flex;
             flex-direction: column;
@@ -134,6 +146,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             height: 40px;
             background-color: #e0e0e0;
             border-radius: 50%;
+            animation: skeleton-loading 1.5s infinite ease-in-out;
           }
           .skeleton-details {
             display: flex;
@@ -143,6 +156,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
           .skeleton-line {
             background-color: #e0e0e0;
             border-radius: 4px;
+            animation: skeleton-loading 1.5s infinite ease-in-out;
           }
           .connect-message {
             display: flex;
@@ -159,6 +173,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             background-color: #e0e0e0;
             border-radius: 4px;
             margin: 0 auto;
+            animation: skeleton-loading 1.5s infinite ease-in-out;
           }
         `}
       </style>
