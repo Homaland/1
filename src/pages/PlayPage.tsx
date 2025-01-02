@@ -1,13 +1,26 @@
-import React, { useEffect, useState } from "react"; 
+import React, { useEffect, useState, useRef } from "react";  
 import ApexCharts from "react-apexcharts"; 
 import BottomMenu from "../components/BottomMenu"; 
+import lottie from "lottie-web";
 import "./PlayPage.css"; 
 
 const PlayPage: React.FC = () => {
   const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]); 
   const [isLoading, setIsLoading] = useState(true); 
+  const animationContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => { 
+    // Загрузка Lottie-анимации
+    if (animationContainer.current) {
+      lottie.loadAnimation({
+        container: animationContainer.current,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "https://github.com/HODRLAND/HODR/raw/refs/heads/main/img/PremiumGifts_AgADEAADSSyZTw.tgs", // Путь к файлу tgs
+      });
+    }
+
     const fetchData = async () => { 
       try { 
         const response = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=TONUSDT"); 
@@ -71,6 +84,7 @@ const PlayPage: React.FC = () => {
 
   return ( 
     <div className="play-page"> 
+      <div ref={animationContainer} style={{ width: "100%", height: "300px", marginBottom: "20px" }} /> {/* Здесь будет анимация */}
       <h1 style={{ textAlign: "center" }}>Earn</h1> 
       <div className="earn-blok-wrapper"> 
         {isLoading ? ( 
