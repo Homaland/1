@@ -18,33 +18,6 @@
   margin-top: 5%;  /* Добавляем отступ сверху для отделения от предыдущих элементов */
 }
 
-.how-it-works1, .how-it-works2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 5vh;
-  position: relative;
-  white-space: nowrap; 
-  overflow: hidden;
-}
-
-.how-it-works1 {
-  margin-bottom: 10px;  /* Добавляем отступ снизу, чтобы избежать наложения */
-}
-
-.how-it-works2 {
-  margin-bottom: 20px;  /* Увеличиваем отступ снизу */
-}
-
-.how-it-works1 p, .how-it-works2 p {
-  font-family: 'Rubik Vinyl', cursive;
-  font-size: 3vh;
-  color: #000;
-  text-align: center;
-  transform: rotate(12.02deg);
-  white-space: nowrap;
-}
 
 .chart-container {
   background: #666666;
