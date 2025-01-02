@@ -23,7 +23,7 @@ function TokenInfo() {
         const tokenInfo = data.pairs[0];
         setTokenData({
           name: tokenInfo.baseToken.symbol,
-          price: `$${tokenInfo.priceUsd}`,
+          price: `HODR $${tokenInfo.priceUsd}`,
           change: `${tokenInfo.priceChange.h6}%`,
         });
       } catch (err) {
