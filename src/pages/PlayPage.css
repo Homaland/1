@@ -16,21 +16,9 @@
   animation: spin 1s linear infinite;
 }
 
+
 .earn-blok {
   background: #666666;
-  color: #FFC107;
-
-  width: 100%;
-
-}
-
-.text-top,
-.text-bottom {
-  text-align: center;
-  font-size: 16px; /* Размер текста */
-  color: #ffc107; /* Цвет текста */
-  margin: 10px 0; /* Отступ сверху и снизу */
-   background: #666666;
   color: #FFC107;
   height: 100%;
   width: 100%;
@@ -42,26 +30,30 @@
   border-radius: 25px;
   padding: 5px;
   margin: 5%;
-box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2),
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2),
               0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease-in-out
+  transition: box-shadow 0.3s ease-in-out;
 }
-
-.text-top {
-  margin-bottom: 20px; /* Дополнительный отступ для верхнего текста */
-}
-
-.text-bottom {
-  margin-top: 20px; /* Дополнительный отступ для нижнего текста */
-}
-
-
 
 .earn-blok.loaded {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
 
+.earn-blo1 {
+  background: #666666;
+  color: #FFC107;
+  height: 85%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px;
+  margin: 5%;
+
+}
 
 @keyframes spin {
   0% {
