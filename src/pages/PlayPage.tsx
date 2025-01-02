@@ -77,8 +77,10 @@ const TaskPage: React.FC = () => {
           <div className="spinner"></div>
         ) : (
           <div className={`earn-blok loaded`}>
+            <p>TON</p>
             <div style={{ width: "100%", margin: "auto" }}>
               <ApexCharts options={options} series={series} type="line" />
+               <p>Bot Trading(soon)</p>
             </div>
           </div>
         )}
