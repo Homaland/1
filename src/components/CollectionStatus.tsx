@@ -21,16 +21,19 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
         <div className="cstatus">
           <h3 className="skeleton-text" />
           <div className="skeleton-status" />
+          <div className="skeleton-no-collection">
+            <div className="skeleton-text" />
+          </div>
         </div>
         <style>
           {`
             .skeleton-collection-status {
               padding: 0px;
+              display: flex;
+              flex-direction: column;
               align-items: center; /* Центрирование по горизонтали */
               justify-content: center; /* Центрирование по вертикали */
               height: 100%; /* Высота родительского контейнера */
-              display: flex; /* Для выравнивания содержимого по центру */
-              text-align: center; /* Центрирование текста */
             }
             .skeleton-text {
               width: 150px;
@@ -38,12 +41,17 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
               background-color: #e0e0e0;
               margin-bottom: 10px;
               border-radius: 8px;
+              text-align: center;
             }
             .skeleton-status {
               width: 150px;
               height: 2vh;
               background-color: #e0e0e0;
               border-radius: 8px;
+            }
+            .skeleton-no-collection {
+              width: 200px; /* Ширина заглушки для текста "No Collection Found" */
+              margin-top: 20px;
             }
           `}
         </style>
@@ -63,7 +71,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
             <p style={{ color: "red" }}>{texts.hodrCollectionNotFound}</p>
           )
         ) : (
-          <p style={{ textAlign: "center" }}>{texts.noCollectionFound}</p> {/* Центрируем текст */}
+          <p>{texts.noCollectionFound}</p>
         )}
       </div>
     </div>
