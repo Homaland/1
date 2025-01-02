@@ -176,7 +176,7 @@ function App() {
 
               <Tokeninfo />
             </div>
-           <div className="Earncard"> <Earncard /></div>
+           <div className="Earncards"> <Earncard /></div>
            
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
