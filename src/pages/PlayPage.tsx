@@ -3,7 +3,7 @@ import ApexCharts from "react-apexcharts";
 import BottomMenu from "../components/BottomMenu";
 import "./PlayPage.css";
 
-const TaskPage: React.FC = () => {
+const PlayPage: React.FC = () => {
   const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]);
   const [isLoading, setIsLoading] = useState(true);
 
