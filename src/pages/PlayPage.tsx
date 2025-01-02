@@ -73,19 +73,21 @@ const PlayPage: React.FC = () => {
     <div className="play-page"> 
       <h1 style={{ textAlign: "center" }}>Earn</h1> 
       <div className="earn-blok-wrapper"> 
-        {isLoading ? ( 
-          <div className="skeleton-loader"></div> 
-        ) : ( 
-          <div className="chart-container"> 
-            <p className="chart-text top">TON</p> {/* Верхний текст */}
-            <div className={`earn-blok1 loaded`}> 
-              <div style={{ width: "100%", margin: "auto" }}> 
-                <ApexCharts options={options} series={series} type="line" /> 
-              </div> 
-            </div> 
-            <p className="chart-text bottom">Bot Trading</p> {/* Нижний текст */}
-          </div> 
-        )}
+        {isLoading ? (
+  <div className="skeleton-blok-wrapper">
+    <div className="skeleton"></div>
+  </div>
+) : (
+  <div className="chart-container">
+    <p className="chart-text top">TON</p>
+    <div className={`earn-blok1 loaded`}>
+      <div style={{ width: "100%", margin: "auto" }}>
+        <ApexCharts options={options} series={series} type="line" />
+      </div>
+    </div>
+    <p className="chart-text bottom">Bot Trading</p>
+  </div>
+)}
       </div> 
       <div className="how-it-works2">  
         <p>SOON SOON SOON SOON SOON SOON SOON SOON </p> 
