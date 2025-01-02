@@ -73,20 +73,21 @@ const TaskPage: React.FC = () => {
     <div className="play-page">
       <h1 style={{ textAlign: "center" }}>Earn</h1>
       <div className="earn-blok-wrapper">
-        {isLoading ? (
-          <div className="spinner"></div>
-        ) : (
-       <div className={`earn-blok loaded`}>
-  <div className="chart-container">
-    <p className="chart-text top">TON</p>
-    <ApexCharts options={options} series={series} type="line" />
-    <p className="chart-text bottom">Bot Trading (soon)</p>
-  </div>
+  {isLoading ? (
+    <div className="spinner"></div>
+  ) : (
+    <>
+      <p className="text-top">TON</p>
+      <div className={`earn-blok loaded`}>
+        <div className="chart-container">
+          <ApexCharts options={options} series={series} type="line" />
+        </div>
+      </div>
+      <p className="text-bottom">Bot Trading (soon)</p>
+    </>
+  )}
 </div>
 
-
-        )}
-      </div>
       <BottomMenu />
     </div>
   );
