@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
 
   useEffect(() => {
     // Эмулируем задержку загрузки
-    const timer = setTimeout(() => setLoading(false), 1000); // Убираем skeleton через 1 секунду
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем skeleton через 1 секунду
     return () => clearTimeout(timer);
   }, []);
 
