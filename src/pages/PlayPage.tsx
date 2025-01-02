@@ -88,7 +88,7 @@ const TaskPage: React.FC = () => {
 
         )}
       </div>
-      <div className="how-it-works">  <p>SOON SOON SOON SOON SOON SOON SOON SOON </p> </div>
+      <div className="how-it-works1">  <p>SOON SOON SOON SOON SOON SOON SOON SOON </p> </div>
         <div className="how-it-works2">  <p>SOON SOON SOON SOON SOON SOON SOON SOON </p> </div>
       <BottomMenu />
     </div>
