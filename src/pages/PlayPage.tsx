@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"; 
 import ApexCharts from "react-apexcharts"; 
 import BottomMenu from "../components/BottomMenu"; 
-import "./PlayPage.css";
+import "./PlayPage.css"; 
 
-const PlayPage: React.FC = () => { 
+const PlayPage: React.FC = () => {
   const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]); 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => { 
     const fetchData = async () => { 
@@ -16,19 +16,19 @@ const PlayPage: React.FC = () => {
         const time = new Date().getTime();
 
         setSeries((prev) => { 
-          const updatedData = [...prev[0].data, { x: time, y: price }]; 
-          if (updatedData.length > 50) updatedData.shift(); 
-          return [{ data: updatedData }]; 
+          const updatedData = [...prev[0].data, { x: time, y: price }];
+          if (updatedData.length > 50) updatedData.shift();
+          return [{ data: updatedData }];
         });
 
-        setIsLoading(false); // Set loading flag to false
+        setIsLoading(false); // Снимаем флаг загрузки
       } catch (error) { 
         console.error("Error fetching data:", error); 
       } 
     };
 
     const interval = setInterval(fetchData, 3500); 
-    fetchData();
+    fetchData(); 
 
     return () => clearInterval(interval); 
   }, []);
@@ -74,27 +74,25 @@ const PlayPage: React.FC = () => {
       <h1 style={{ textAlign: "center" }}>Earn</h1> 
       <div className="earn-blok-wrapper"> 
         {isLoading ? ( 
-          <div className="skeleton-loader">
-       
-          </div>
+          <div className="skeleton-loader"></div> 
         ) : ( 
-          <div className="chart-container">
-            <p className="chart-text top">TON</p> 
-            <div className={`earn-blok1 loaded`}>
-              <div style={{ width: "100%", margin: "auto" }}>
-                <ApexCharts options={options} series={series} type="line" />
-              </div>
-            </div>
-            <p className="chart-text bottom">Bot Trading</p> 
-          </div>
-        )} 
+          <div className="chart-container"> 
+            <p className="chart-text top">TON</p> {/* Верхний текст */}
+            <div className={`earn-blok1 loaded`}> 
+              <div style={{ width: "100%", margin: "auto" }}> 
+                <ApexCharts options={options} series={series} type="line" /> 
+              </div> 
+            </div> 
+            <p className="chart-text bottom">Bot Trading</p> {/* Нижний текст */}
+          </div> 
+        )}
       </div> 
       <div className="how-it-works2">  
         <p>SOON SOON SOON SOON SOON SOON SOON SOON </p> 
       </div> 
       <BottomMenu /> 
     </div> 
-  ); 
+  );
 };
 
 export default PlayPage;
