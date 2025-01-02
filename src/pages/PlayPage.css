@@ -47,13 +47,6 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.chart-text {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  font-size: 16px; /* измените размер шрифта по необходимости */
-  color: #ffc107; /* цвет текста */
-}
 
 .earn-blo1 {
   background: #666666;
