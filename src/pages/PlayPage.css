@@ -1,5 +1,5 @@
-.earn-blok-wrapper { 
-  position: relative; /* Обеспечиваем контекст для абсолютного позиционирования спиннера */
+.earn-blok-wrapper {
+  position: relative;
   width: 100%;
   height: 25vh;
   display: flex;
@@ -16,7 +16,6 @@
   animation: spin 1s linear infinite;
 }
 
-
 .chart-container {
   background: #666666;
   color: #FFC107;
@@ -25,10 +24,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; /* Добавлено для разделения текста и графика */
+  justify-content: space-between;
   border: 1px solid #666666;
   border-radius: 25px;
-  padding: 20px; /* Увеличены отступы */
+  padding: 20px;
   margin: 5%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2),
               0 4px 6px rgba(0, 0, 0, 0.1);
@@ -36,18 +35,16 @@
 }
 
 .chart-text {
-  margin: 10px 0; /* Устанавливаем отступы сверху и снизу */
-  font-size: 14px; /* Размер текста */
+  margin: 10px 0;
+  font-size: 14px;
   color: #FFC107;
   text-align: center;
 }
-
 
 .earn-blok.loaded {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
-
 
 .earn-blo1 {
   background: #666666;
@@ -58,10 +55,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   padding: 5px;
   margin: 5%;
-
 }
 
 @keyframes spin {
@@ -80,4 +75,45 @@
   justify-content: center;
   padding: 20px;
   margin-top: 4vh;
+}
+
+.how-it-works1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5vh;
+  position: relative;
+  white-space: nowrap; /* Предотвращаем перенос текста */
+  overflow: hidden; /* Скрываем текст, который выходит за пределы */
+  margin-bottom: 10px; /* Добавляем отступ снизу, чтобы избежать наложения */
+}
+
+.how-it-works1 p {
+  font-family: 'Rubik Vinyl', cursive;
+  font-size: 3vh;
+  color: #000;
+  text-align: center;
+  transform: rotate(12.02deg);
+  white-space: nowrap; /* Предотвращаем перенос текста */
+}
+.how-it-works2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5vh;
+  position: relative;
+  white-space: nowrap; /* Предотвращаем перенос текста */
+  overflow: hidden; /* Скрываем текст, который выходит за пределы */
+  margin-bottom: 10px; /* Добавляем отступ снизу, чтобы избежать наложения */
+}
+
+.how-it-works2 p {
+  font-family: 'Rubik Vinyl', cursive;
+  font-size: 3vh;
+  color: #000;
+  text-align: center;
+  transform: rotate(196.02deg);
+  white-space: nowrap; /* Предотвращаем перенос текста */
 }
