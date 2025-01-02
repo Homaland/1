@@ -12,7 +12,7 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
 
   useEffect(() => {
     // Эмулируем загрузку
-    const timer = setTimeout(() => setLoading(false), 1000); // Убираем заглушку через 1 секунду
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушку через 1 секунду
     return () => clearTimeout(timer);
   }, []);
 
