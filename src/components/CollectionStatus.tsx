@@ -10,7 +10,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
 
   useEffect(() => {
     // Эмулируем задержку загрузки
-    const timer = setTimeout(() => setLoading(false), 1000); // Убираем заглушки через 1 секунду
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 1 секунду
     return () => clearTimeout(timer);
   }, []);
 
@@ -28,6 +28,9 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
          
             .skeleton-collection-status {
               padding: 0px;
+                align-items: center; /* Центрирование по горизонтали */
+  justify-content: center; /* Центрирование по вертикали */
+  height: 100%; /* Высота родительского контейнера */
             }
             .skeleton-text {
               width: 150px;
@@ -43,9 +46,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
               height: 6vh;
               background-color: #e0e0e0;
              border-radius: 8px;
-             text-align: center;
-
-            }
+                   }
           `}
         </style>
       </div>
