@@ -3,59 +3,80 @@ import ApexCharts from "react-apexcharts";
 import BottomMenu from "../components/BottomMenu";
 import "./PlayPage.css";
 
-// Fetch Binance data for the altcoin
-const fetchAltcoinData = async (symbol: string) => {
-  const binanceResponse = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`);
-  const binanceData = await binanceResponse.json();
-  const price = parseFloat(binanceData.price);
-
-  const coinGeckoResponse = await fetch(
-    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${symbol.toLowerCase()}`
-  );
-  const coinGeckoData = await coinGeckoResponse.json();
-  const marketData = coinGeckoData[0];
-  const priceChange = marketData.price_change_percentage_24h;
-  const symbolName = marketData.name;
-  const image = marketData.image;
-
-  return { price, priceChange, symbolName, image };
+// Функция для получения данных о криптовалютах через Binance API
+const fetchBinanceAltcoins = async () => {
+  const response = await fetch("https://api.binance.com/api/v3/ticker/24hr");
+  if (!response.ok) {
+    throw new Error("Failed to fetch altcoins data from Binance");
+  }
+  const data = await response.json();
+  return data.filter((coin: any) => coin.symbol.endsWith("USDT")); // Отфильтровываем только пары с USDT
 };
 
 const PlayPage: React.FC = () => {
-  const [series, setSeries] = useState([{ data: [] as { x: number; y: number }[] }]);
+  const [altcoins, setAltcoins] = useState<any[]>([]);
+  const [prices, setPrices] = useState<Record<string, number>>({});
+  const [initialPrices, setInitialPrices] = useState<Record<string, number>>({}); // Для хранения начальных цен
   const [isLoading, setIsLoading] = useState(true);
-  const [altcoinData, setAltcoinData] = useState<{
-    price: number;
-    priceChange: number;
-    symbolName: string;
-    image: string;
-  } | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    // Инициализация CoinGecko данных
+    const fetchTopAltcoins = async () => {
+      const response = await fetch(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1&sparkline=false"
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch CoinGecko data");
+      }
+      return response.json();
+    };
+
+    const getAltcoins = async () => {
       try {
-        const { price, priceChange, symbolName, image } = await fetchAltcoinData("TONUSDT");
-
-        setAltcoinData({ price, priceChange, symbolName, image });
-
-        const time = new Date().getTime();
-        setSeries((prev) => {
-          const updatedData = [...prev[0].data, { x: time, y: price }];
-          if (updatedData.length > 50) updatedData.shift();
-          return [{ data: updatedData }];
-        });
-
+        const data = await fetchTopAltcoins();
+        setAltcoins(data);
         setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      } catch (err: any) {
+        console.error(err);
+        setIsLoading(false);
       }
     };
 
-    const interval = setInterval(fetchData, 3500);
-    fetchData();
-
-    return () => clearInterval(interval);
+    getAltcoins();
   }, []);
+
+  // Обновление данных с Binance API
+  useEffect(() => {
+    const updatePrices = async () => {
+      try {
+        const binanceData = await fetchBinanceAltcoins();
+
+        const priceMap: Record<string, number> = {};
+        binanceData.forEach((coin: any) => {
+          priceMap[coin.symbol] = parseFloat(coin.lastPrice);
+
+          // Если цена еще не установлена (первая загрузка), сохраняем начальную цену
+          if (!initialPrices[coin.symbol]) {
+            setInitialPrices((prev) => ({
+              ...prev,
+              [coin.symbol]: priceMap[coin.symbol],
+            }));
+          }
+        });
+
+        setPrices(priceMap);
+      } catch (err: any) {
+        console.error("Error fetching Binance data:", err);
+      }
+    };
+
+    // Обновляем цены раз в секунду
+    const interval = setInterval(() => {
+      updatePrices();
+    }, 1000);
+
+    return () => clearInterval(interval); // Очищаем интервал при размонтировании
+  }, [prices, initialPrices]);
 
   const options: ApexCharts.ApexOptions = {
     chart: {
@@ -93,37 +114,59 @@ const PlayPage: React.FC = () => {
     colors: ["#FFC107"],
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  const priceChangeColor = altcoinData?.priceChange > 0 ? "green" : "red";
-  const priceChangeIcon = altcoinData?.priceChange > 0 ? "▲" : "▼";
-  const priceChanged = altcoinData?.priceChange !== 0;
-
   return (
     <div className="play-page">
       <img
-        src={altcoinData?.image || "https://default-image.com/altcoin.png"}
-        alt={altcoinData?.symbolName || "Altcoin"}
+        src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/IMG_0189.png"
+        alt="Earn"
         style={{ display: "block", margin: "0 auto", maxWidth: "100%", height: "auto" }}
       />
       <h1 style={{ textAlign: "center" }}>Earn</h1>
       <div className="earn-blok-wrapper">
-        <div className="chart-container">
-          <p className="chart-text top">
-            {altcoinData?.symbolName || "Altcoin"} {`(${altcoinData?.price.toFixed(2)})`}{" "}
-            <span style={{ color: priceChangeColor }}>
-              {priceChangeIcon} {altcoinData?.priceChange.toFixed(2)}%
-            </span>
-          </p>
-          <div className={`earn-blok1 loaded`}>
-            <div style={{ width: "100%", margin: "auto" }}>
-              <ApexCharts options={options} series={series} type="line" />
-            </div>
+        {isLoading ? (
+          <div className="skeleton-loader"></div>
+        ) : (
+          <div className="chart-container">
+            {altcoins.map((coin) => {
+              const binanceSymbol = `${coin.symbol.toUpperCase()}USDT`;
+              const currentPrice = prices[binanceSymbol] || coin.current_price;
+              const initialPrice = initialPrices[binanceSymbol];
+              const priceChange = initialPrice
+                ? ((currentPrice - initialPrice) / initialPrice) * 100
+                : 0;
+
+              const priceChangeColor = priceChange > 0 ? 'green' : 'red';
+              const priceChangeIcon = priceChange > 0 ? '▲' : '▼';
+              const priceChanged = initialPrice !== currentPrice;
+
+              return (
+                <div key={coin.id} className="altcoin">
+                  <img
+                    src={coin.image}
+                    alt={coin.name}
+                    className="altcoin-image"
+                    style={{ width: "30px", height: "30px" }}
+                  />
+                  <div className="altcoin-details">
+                    <span>{coin.name} ({coin.symbol.toUpperCase()})</span>
+                    <br />
+                    <div className="price-info">
+                      <span
+                        style={{ color: priceChangeColor }}
+                        className={priceChanged ? "blinking" : ""}
+                      >
+                        ${currentPrice.toLocaleString()}
+                      </span>
+                      <span style={{ color: priceChangeColor }}>
+                        {priceChangeIcon} {priceChange.toFixed(2)}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <p className="chart-text bottom">Bot Trading</p>
-        </div>
+        )}
       </div>
       <div className="how-it-works2">
         <p>SOON SOON SOON SOON SOON SOON SOON SOON </p>
