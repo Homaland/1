@@ -56,14 +56,14 @@ function TokenInfo() {
             height: 40px;
             background-color: #e0e0e0;
             border-radius: 50%;
-            animation: skeleton-loading 1.5s infinite;
+            animation: skeleton-loading 2s infinite;
           }
 
           .skeleton-line {
             height: 20px;
             background-color: #e0e0e0;
             border-radius: 4px;
-            animation: skeleton-loading 1.5s infinite;
+            animation: skeleton-loading 2s infinite;
           }
         `}
       </style>
