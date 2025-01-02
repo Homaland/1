@@ -24,6 +24,19 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
         </div>
         <style>
           {`
+
+          .collection-status {
+  padding-top: 2vh; /* Отступ сверху в 2% от высоты экрана */
+  background-color: rgba(245, 215, 44, 0.7); /* Полупрозрачный желтый фон */
+  height: auto; /* Высота элемента автоматически подстраивается под содержимое */
+  border: 1px solid rgba(245, 215, 44, 0.7); /* Полупрозрачная желтая рамка вокруг элемента */
+  border-radius: 25px; /* Скругленные углы для элемента */
+  padding: 5px; /* Внутренние отступы внутри элемента */
+  margin: 5%; /* Внешние отступы со всех сторон в 5% от ширины родителя */
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
+              0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для создания объема */
+  transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
+} 
             .skeleton-collection-status {
               padding: 0px;
             }
@@ -41,7 +54,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
               width: 150px;
               padding: 5px;
               margin: 5%;
-              height: 7vh;
+              height: 6vh;
               background-color: #e0e0e0;
               border-radius: 8px;
               box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
@@ -50,6 +63,8 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
   text-align: center;
   justify-content: center;
   align-items: center;
+    display: flex;
+  flex-direction: column;
             }
           `}
         </style>
