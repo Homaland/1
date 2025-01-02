@@ -77,13 +77,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
       </div>
       <style>
         {`
-          .collection-status {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-          }
+         
           .no-collection-text {
             margin-top: 20px;
             font-size: 18px;
