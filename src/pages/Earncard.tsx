@@ -24,13 +24,13 @@ const [balance, setBalance] = useState<number | null>(null);
 }, []);
 
 return (
-  
+  <div className="EarnPage">
       {balance !== null ? (
         <p>Your points: {balance}</p>
       ) : (
         <p>Loading your points...</p>
       )}
-
+ </div>
   );
 
 
