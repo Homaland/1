@@ -74,7 +74,7 @@ const TaskPage: React.FC = () => {
       <h1 style={{ textAlign: "center" }}>Earn</h1>
       <div className="earn-blok-wrapper">
         {isLoading ? (
-          <div className="spinner"></div>
+          <div className="spiner-blok-wrapper"><div className="spinner"></div></div>
         ) : (
      <div className="chart-container">
   <p className="chart-text top">TON</p> {/* Верхний текст */}
@@ -95,4 +95,4 @@ const TaskPage: React.FC = () => {
   );
 };
 
-export default TaskPage;
+export default PlayPage;
