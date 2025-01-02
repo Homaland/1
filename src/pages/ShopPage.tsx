@@ -2,7 +2,7 @@
 import React from "react";
 import BottomMenu from "../components/BottomMenu";
 
-const TaskPage: React.FC = () => {
+const ShopPage: React.FC = () => {
   return (
     <div className="shop-page">
       <h1>Shop</h1>
@@ -13,4 +13,4 @@ const TaskPage: React.FC = () => {
   );
 };
 
-export default TaskPage;
+export default ShopPage;
