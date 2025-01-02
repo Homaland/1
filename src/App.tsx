@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react"; 
 import { useTonAddress } from "@tonconnect/ui-react";
 import { Address } from "@ton/core";
 import { JettonBalance } from "@ton-api/client";
@@ -19,7 +19,6 @@ import JettonDetailsPage from "./pages/JettonDetailsPage";
 import Tokeninfo from "./pages/TokenInfoPage";
 import { NftList } from './components/NftList'; 
 
-import { io } from "socket.io-client";
 
 import "./App.css";
 import { isValidAddress } from "./utils/address";
@@ -52,31 +51,25 @@ function App() {
  
   const [balance, setBalance] = useState<number | null>(null);
 
-  
-
-const socket = io("http://homaland-hodrland-04a0.twc1.net");
-
-useEffect(() => {
+  useEffect(() => {
     if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
-        const telegramId = WebApp.initDataUnsafe.user.id;
-
-        socket.emit("get_balance", { telegram_id: telegramId });
-
-        socket.on("balance", (data) => {
+      const telegramId = WebApp.initDataUnsafe.user.id;
+      console.log("Telegram ID:", telegramId);  // Логируем ID пользователя
+  
+      fetch(https://homaland-hodrland-04a0.twc1.net/get_balance/${telegramId})
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === "success") {
             setBalance(data.balance);
-        });
-
-        socket.on("error", (error) => {
-            console.error("Socket error:", error.message);
+          } else {
+            console.error("Error fetching balance:", data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching balance:", error);
         });
     }
-
-    return () => {
-        socket.disconnect();
-    };
-}, []);
-
-  
+  }, []);
   
 
   // Save language to localStorage whenever it changes
@@ -161,6 +154,32 @@ useEffect(() => {
   const filteredNfts = nfts?.filter((nft) => nft.collection);
   const texts = getText(language);
 
+  useEffect(() => {
+    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
+      const { id, first_name, username } = WebApp.initDataUnsafe.user;
+  
+      // Отправляем данные пользователя на сервер
+      fetch("https://homaland-hodrland-04a0.twc1.net/save_user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          telegram_id: id,
+          first_name: first_name,
+          username: username,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("User saved:", data);
+        })
+        .catch((error) => {
+          console.error("Error saving user:", error);
+        });
+    }
+  }, []);
+
   
   return (
     <Router>
@@ -182,13 +201,11 @@ useEffect(() => {
               <Tokeninfo />
             </div>
             <div className="earncard">
-            {balance !== null ? (
-  <p>Your points: {balance}</p>
-) : error ? (
-  <p>Error fetching balance: {error}</p>
-) : (
-  <p>Loading your points...</p>
-)}
+      {balance !== null ? (
+        <p>Your points: {balance}</p>
+      ) : (
+        <p>Loading your points...</p>
+      )}
     </div>
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
