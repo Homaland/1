@@ -1,6 +1,5 @@
 // pages/EarnPage.tsx
-import React from "react";
-import BottomMenu from "../components/BottomMenu";
+import { useEffect, useState } from "react"; 
 
 const [balance, setBalance] = useState<number | null>(null);
 
