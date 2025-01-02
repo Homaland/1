@@ -11,7 +11,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
 
   useEffect(() => {
     // Эмулируем задержку загрузки
-    const timer = setTimeout(() => setLoading(false), 1000); // Убираем заглушки через 1 секунду
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 1 секунду
     return () => clearTimeout(timer);
   }, []);
 
