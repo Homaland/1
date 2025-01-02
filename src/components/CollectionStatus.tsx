@@ -27,33 +27,27 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
         </div>
         <style>
           {`
-            .skeleton-collection-status {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-  width: 100%;
+             .skeleton-collection-status {
+              padding: 0px;
+                align-items: center; /* Центрирование по горизонтали */
+  justify-content: center; /* Центрирование по вертикали */
+  height: 100%; /* Высота родительского контейнера */
             }
-           
             .skeleton-text {
               width: 150px;
               height: 20px;
               background-color: #e0e0e0;
               margin-bottom: 10px;
               border-radius: 8px;
+               text-align: center;
+
             }
-           
-            .skeleton-no-collection {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            
-            }
-            .skeleton-line {
-              width: 90%;
-              height: 20px;
+            .skeleton-status {
+              width: 150px;          
+              height: 2vh;
               background-color: #e0e0e0;
-              border-radius: 4px;
-            }
+             border-radius: 8px;
+                   }
           `}
         </style>
       </div>
