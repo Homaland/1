@@ -75,9 +75,7 @@ const PlayPage: React.FC = () => {
       <div className="earn-blok-wrapper"> 
         {isLoading ? ( 
           <div className="skeleton-loader">
-            <div className="skeleton-line" />
-            <div className="skeleton-line" />
-            <div className="skeleton-line" />
+       
           </div>
         ) : ( 
           <div className="chart-container">
