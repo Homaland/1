@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 
 function TokenInfo() {
   const [tokenData, setTokenData] = useState<{
@@ -37,32 +37,41 @@ function TokenInfo() {
 
   return (
     <div className="token-info" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <style>
+        {`
+          @keyframes skeleton-loading {
+            0% {
+              background-color: #e0e0e0;
+            }
+            50% {
+              background-color: #f7f7f7;
+            }
+            100% {
+              background-color: #e0e0e0;
+            }
+          }
+
+          .skeleton-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            animation: skeleton-loading 1.5s infinite;
+          }
+
+          .skeleton-line {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            animation: skeleton-loading 1.5s infinite;
+          }
+        `}
+      </style>
       {error ? (
         <div className="skeleton" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div
-            style={{
-              width: "40px",
-              height: "40px",
-              backgroundColor: "#e0e0e0",
-              borderRadius: "50%",
-            }}
-          ></div>
-          <div
-            style={{
-              width: "100px",
-              height: "20px",
-              backgroundColor: "#e0e0e0",
-              borderRadius: "4px",
-            }}
-          ></div>
-          <div
-            style={{
-              width: "60px",
-              height: "20px",
-              backgroundColor: "#e0e0e0",
-              borderRadius: "4px",
-            }}
-          ></div>
+          <div className="skeleton-circle"></div>
+          <div className="skeleton-line" style={{ width: "100px" }}></div>
+          <div className="skeleton-line" style={{ width: "60px" }}></div>
         </div>
       ) : tokenData ? (
         <>
@@ -86,30 +95,9 @@ function TokenInfo() {
         </>
       ) : (
         <div className="skeleton" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div
-            style={{
-              width: "40px",
-              height: "40px",
-              backgroundColor: "#e0e0e0",
-              borderRadius: "50%",
-            }}
-          ></div>
-          <div
-            style={{
-              width: "100px",
-              height: "20px",
-              backgroundColor: "#e0e0e0",
-              borderRadius: "4px",
-            }}
-          ></div>
-          <div
-            style={{
-              width: "60px",
-              height: "20px",
-              backgroundColor: "#e0e0e0",
-              borderRadius: "4px",
-            }}
-          ></div>
+          <div className="skeleton-circle"></div>
+          <div className="skeleton-line" style={{ width: "100px" }}></div>
+          <div className="skeleton-line" style={{ width: "60px" }}></div>
         </div>
       )}
     </div>
