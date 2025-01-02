@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
 
   useEffect(() => {
     // Эмулируем задержку загрузки
-    const timer = setTimeout(() => setLoading(false), 2000); // Убираем skeleton через 1 секунду
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем skeleton через 2 секунды
     return () => clearTimeout(timer);
   }, []);
 
@@ -31,11 +31,30 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
         </div>
         <style>
           {`
+            @keyframes skeleton-loading {
+              0% {
+                background-color: #e0e0e0;
+              }
+              50% {
+                background-color: #f7f7f7;
+              }
+              100% {
+                background-color: #e0e0e0;
+              }
+            }
+
             .skeleton-header {
               display: flex;
               align-items: center;
               gap: 10px;
             }
+
+            .skeleton-photo,
+            .skeleton-name,
+            .skeleton-button {
+              animation: skeleton-loading 1.5s infinite ease-in-out;
+            }
+
             .skeleton-photo {
               width: 40px;
               height: 40px;
