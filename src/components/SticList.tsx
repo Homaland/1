@@ -5,7 +5,7 @@ export const SticList: React.FC = () => {
 
   useEffect(() => {
     // Эмулируем задержку загрузки
-    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 1 секунду
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
     return () => clearTimeout(timer);
   }, []);
 
@@ -18,11 +18,24 @@ export const SticList: React.FC = () => {
         ))}
         <style>
           {`
+            @keyframes skeleton-loading {
+              0% {
+                background-color: #e0e0e0;
+              }
+              50% {
+                background-color: #f7f7f7;
+              }
+              100% {
+                background-color: #e0e0e0;
+              }
+            }
+
             .skeleton-stic-list {
               display: flex;
               gap: 5px;
               overflow: auto;
             }
+
             .skeleton-stic-item {
               flex: 0 0 auto;
               width: 20%;
@@ -31,6 +44,7 @@ export const SticList: React.FC = () => {
               background-color: rgba(224, 224, 224, 0.87);
               border-radius: 25px;
               height: 90px; /* Высота заглушки */
+              animation: skeleton-loading 1.5s infinite ease-in-out;
             }
           `}
         </style>
@@ -79,7 +93,6 @@ export const SticList: React.FC = () => {
           />
         </div>
       </div>
-     
     </div>
   );
 };
