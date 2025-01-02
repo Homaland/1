@@ -10,7 +10,7 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
 
   useEffect(() => {
     // Эмулируем задержку загрузки
-    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 1 секунду
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
     return () => clearTimeout(timer);
   }, []);
 
@@ -22,18 +22,19 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
           <h3 className="skeleton-text" />
           <div className="skeleton-status" />
           <div className="skeleton-no-collection">
-            <div className="skeleton-text" />
+            <div className="skeleton-line" />
           </div>
         </div>
         <style>
           {`
             .skeleton-collection-status {
-              padding: 0px;
               display: flex;
-              flex-direction: column;
-              align-items: center; /* Центрирование по горизонтали */
-              justify-content: center; /* Центрирование по вертикали */
+              justify-content: center;
+              align-items: center;
               height: 100%; /* Высота родительского контейнера */
+            }
+            .cstatus {
+              text-align: center; /* Центрирование содержимого */
             }
             .skeleton-text {
               width: 150px;
@@ -41,17 +42,24 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
               background-color: #e0e0e0;
               margin-bottom: 10px;
               border-radius: 8px;
-              text-align: center;
             }
             .skeleton-status {
-              width: 150px;
+              width: 150px;          
               height: 2vh;
               background-color: #e0e0e0;
               border-radius: 8px;
             }
             .skeleton-no-collection {
-              width: 200px; /* Ширина заглушки для текста "No Collection Found" */
-              margin-top: 20px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-top: 10px;
+            }
+            .skeleton-line {
+              width: 200px;
+              height: 20px;
+              background-color: #e0e0e0;
+              border-radius: 4px;
             }
           `}
         </style>
@@ -71,9 +79,26 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({ hasHODRCollection, 
             <p style={{ color: "red" }}>{texts.hodrCollectionNotFound}</p>
           )
         ) : (
-          <p>{texts.noCollectionFound}</p>
+          <p className="no-collection-text">{texts.noCollectionFound}</p>
         )}
       </div>
+      <style>
+        {`
+          .collection-status {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+          }
+          .no-collection-text {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #888;
+            text-align: center;
+          }
+        `}
+      </style>
     </div>
   );
 };
