@@ -27,7 +27,7 @@ const BottomMenu: React.FC = () => {
         className={`menu-item ${location.pathname === "/play" ? "active" : ""}`}
         onClick={() => navigate("/play")}  // Используем navigate для перехода
       >
-        <FaGamepad className={location.pathname === "/play" ? "active-icon" : ""} />
+        <FaCreditCard className={location.pathname === "/play" ? "active-icon" : ""} />
         <span>Earn</span>
       </div>
       <div
