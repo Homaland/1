@@ -15,6 +15,26 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
     return () => clearTimeout(timer);
   }, []);
 
+  const handleSwapClick = () => {
+    const swapWidgetUrl = "https://swap.coffee/widget";
+    const connectedAddress = jettons?.length ? jettons[0]?.walletAddress : null;
+
+    if (!connectedAddress) {
+      alert("Wallet address is not connected.");
+      return;
+    }
+
+    const widgetParams = new URLSearchParams({
+      address: connectedAddress.toString(),
+      network: "mainnet", // Замените на "testnet", если требуется
+    }).toString();
+
+    const widgetUrl = `${swapWidgetUrl}?${widgetParams}`;
+
+    // Открываем виджет в новой вкладке
+    window.open(widgetUrl, "_blank", "noopener,noreferrer");
+  };
+
   if (loading) {
     // Заглушки
     return (
@@ -95,7 +115,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
       <div className="button-container">
         <div
           className="action-button"
-          onClick={() => alert("Soon")}
+          onClick={handleSwapClick}
         >
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/swap_vert_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
