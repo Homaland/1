@@ -1,8 +1,8 @@
-// ButtonRow.tsx
 import React, { useState, useEffect } from "react";
 import { JettonBalance } from "@ton-api/client";
 import { createSwapWidget } from '@swap-coffee/ui-sdk';
-import { tonConnectConfig, swapWidgetConfig } from '../swapWidgetConfig'; // Путь к конфигурации виджета
+import { TonConnectUI } from '@tonconnect/ui'; // Импорт TonConnect UI
+import { swapWidgetConfig } from '../swapWidgetConfig'; // Ваши конфигурации для Swap Widget
 
 interface ButtonRowProps {
   jettons: JettonBalance[] | null;
@@ -10,22 +10,29 @@ interface ButtonRowProps {
 }
 
 const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+  const [swapWidgetVisible, setSwapWidgetVisible] = useState(false); // Состояние для отображения Swap Widget
+  const tonConnectUiInstance = new TonConnectUI(); // Инициализация TonConnect UI
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    // Эмулируем задержку загрузки
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
     return () => clearTimeout(timer);
   }, []);
 
   const handleSwapClick = () => {
-    // Инициализация виджета Swap при нажатии
-    createSwapWidget('#swap-widget-component', {
-      ...swapWidgetConfig, // Используем нашу конфигурацию
-      tonConnectUi: tonConnectConfig, // Подключаем TonConnect UI
+    // Инициализация виджета Swap при клике на кнопку Swap
+    setSwapWidgetVisible(true);
+
+    // Создаем виджет
+    createSwapWidget('#swap-widget-container', {
+      ...swapWidgetConfig,
+      tonConnectUi: tonConnectUiInstance, // Передаем TonConnect UI для интеграции
     });
   };
 
   if (loading) {
+    // Заглушки
     return (
       <div className="button-row skeleton-button-row">
         {Array.from({ length: 3 }).map((_, index) => (
@@ -33,6 +40,21 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
             <div className="skeleton-button" />
           </div>
         ))}
+        <style>
+          {`
+            @keyframes skeleton-loading {
+              0% { background-color: #e0e0e0; }
+              50% { background-color: #f7f7f7; }
+              100% { background-color: #e0e0e0; }
+            }
+            .skeleton-button-row { display: flex; gap: 10px; }
+            .skeleton-button-container { width: 70px; height: 80px; }
+            .skeleton-button {
+              width: 100%; height: 100%; background-color: #e0e0e0; 
+              border-radius: 10px; animation: skeleton-loading 1.5s infinite ease-in-out;
+            }
+          `}
+        </style>
       </div>
     );
   }
@@ -53,10 +75,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
 
       {/* Кнопка "Send" */}
       <div className="button-container">
-        <div
-          className="action-button"
-          onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}
-        >
+        <div className="action-button" onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}>
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_upward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
             alt="Send"
@@ -77,6 +96,9 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
           <p className="button-text">Swap</p>
         </div>
       </div>
+
+      {/* Контейнер для отображения виджета Swap, когда кнопка "Swap" нажата */}
+      {swapWidgetVisible && <div id="swap-widget-container" />}
     </div>
   );
 };
