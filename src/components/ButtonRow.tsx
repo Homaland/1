@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { JettonBalance } from "@ton-api/client";
 import { createSwapWidget } from '@swap-coffee/ui-sdk';
-import { TonConnectUI } from '@tonconnect/ui'; // Импорт TonConnect UI
-import { swapWidgetConfig } from '../swapWidgetConfig'; // Ваши конфигурации для Swap Widget
+import { TonConnectUI } from '@tonconnect/ui';
+import { swapWidgetConfig } from '../сonfig'; // Конфигурация виджета
 
 interface ButtonRowProps {
   jettons: JettonBalance[] | null;
@@ -11,8 +11,7 @@ interface ButtonRowProps {
 
 const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => {
   const [loading, setLoading] = useState(true); // Состояние загрузки
-  const [swapWidgetVisible, setSwapWidgetVisible] = useState(false); // Состояние для отображения Swap Widget
-  const tonConnectUiInstance = new TonConnectUI(); // Инициализация TonConnect UI
+  const [showSwapWidget, setShowSwapWidget] = useState(false); // Флаг для отображения виджета
 
   useEffect(() => {
     // Эмулируем задержку загрузки
@@ -21,15 +20,22 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
   }, []);
 
   const handleSwapClick = () => {
-    // Инициализация виджета Swap при клике на кнопку Swap
-    setSwapWidgetVisible(true);
-
-    // Создаем виджет
-    createSwapWidget('#swap-widget-container', {
-      ...swapWidgetConfig,
-      tonConnectUi: tonConnectUiInstance, // Передаем TonConnect UI для интеграции
-    });
+    setShowSwapWidget(true); // Показываем виджет при нажатии на "Swap"
   };
+
+  useEffect(() => {
+    if (showSwapWidget) {
+      // Создаем виджет только при необходимости
+      const tonConnectUiInstance = new TonConnectUI({
+        manifestUrl: "https://swap.coffee/tonconnect-manifest.json", // URL манифеста для TonConnect
+      });
+
+      createSwapWidget('#swap-widget-component', {
+        ...swapWidgetConfig, // Применяем конфигурацию виджета
+        tonConnectUi: tonConnectUiInstance,
+      });
+    }
+  }, [showSwapWidget]);
 
   if (loading) {
     // Заглушки
@@ -49,10 +55,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
             }
             .skeleton-button-row { display: flex; gap: 10px; }
             .skeleton-button-container { width: 70px; height: 80px; }
-            .skeleton-button {
-              width: 100%; height: 100%; background-color: #e0e0e0; 
-              border-radius: 10px; animation: skeleton-loading 1.5s infinite ease-in-out;
-            }
+            .skeleton-button { width: 100%; height: 100%; background-color: #e0e0e0; border-radius: 10px; animation: skeleton-loading 1.5s infinite ease-in-out; }
           `}
         </style>
       </div>
@@ -97,8 +100,8 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
         </div>
       </div>
 
-      {/* Контейнер для отображения виджета Swap, когда кнопка "Swap" нажата */}
-      {swapWidgetVisible && <div id="swap-widget-container" />}
+      {/* Виджет Swap */}
+      {showSwapWidget && <div id="swap-widget-component" className="swap-widget-container"></div>}
     </div>
   );
 };
