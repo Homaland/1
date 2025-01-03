@@ -27,7 +27,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
     if (showSwapWidget) {
       // Создаем виджет только при необходимости
       const tonConnectUiInstance = new TonConnectUI({
-        manifestUrl: "https://swap.coffee/tonconnect-manifest.json", // URL манифеста для TonConnect
+        manifestUrl: "https://homaland-memefight-f32c.twc1.net/static/tonconnect-manifest.json", // URL манифеста для TonConnect
       });
 
       createSwapWidget('#swap-widget-component', {
