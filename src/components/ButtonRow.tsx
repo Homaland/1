@@ -99,14 +99,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
           <p className="button-text">Swap</p>
         </div>
       </div>
-      <style scoped>
-#swap-widget-component { // External container id example
-  margin: 0 auto;
-  width: 100%;
-  height: 500px;
-}
-
-</style>
+   
 
       {/* Виджет Swap */}
       {showSwapWidget && <div id="swap-widget-component" className="swap-widget-container"></div>}
