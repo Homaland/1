@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { THEME, TonConnectUI } from "@tonconnect/ui";
-// @ts-ignore
 import { createSwapWidget } from '@swap-coffee/ui-sdk';
 
 
