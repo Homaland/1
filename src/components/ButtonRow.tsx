@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { JettonBalance } from "@ton-api/client";
-import { THEME, TonConnectUI } from "@tonconnect/ui";
-import { createSwapWidget } from "@swap-coffee/ui-sdk";
 
 interface ButtonRowProps {
   jettons: JettonBalance[] | null;
@@ -10,38 +8,12 @@ interface ButtonRowProps {
 
 const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => {
   const [loading, setLoading] = useState(true); // Состояние загрузки
-  const widgetInitialized = useRef(false);
 
   useEffect(() => {
     // Эмулируем задержку загрузки
     const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
     return () => clearTimeout(timer);
   }, []);
-
-  const initializeSwapWidget = () => {
-    if (!widgetInitialized.current) {
-      const manifestUrl = "https://swap.coffee/tonconnect-manifest.json";
-      const tonConnectSettings = {
-        manifestUrl: manifestUrl,
-        uiPreferences: {
-          theme: THEME.DARK,
-        },
-      };
-      const tonConnectUiInstance = new TonConnectUI(tonConnectSettings);
-
-      createSwapWidget("#swap-widget-component", {
-        theme: "light",
-        locale: "ru",
-        tonConnectManifest: {
-          url: manifestUrl,
-        },
-        injectionMode: "tonConnect",
-        tonConnectUi: tonConnectUiInstance,
-      });
-
-      widgetInitialized.current = true;
-    }
-  };
 
   if (loading) {
     // Заглушки
@@ -123,7 +95,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
       <div className="button-container">
         <div
           className="action-button"
-          onClick={initializeSwapWidget}
+          onClick={() => alert("Soon")}
         >
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/swap_vert_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
@@ -133,9 +105,6 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
           <p className="button-text">Swap</p>
         </div>
       </div>
-
-      {/* Компонент Swap Widget */}
-      <div id="swap-widget-component"></div>
     </div>
   );
 };
