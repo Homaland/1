@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { THEME, TonConnectUI } from "@tonconnect/ui";
+// @ts-ignore
 import { createSwapWidget } from '@swap-coffee/ui-sdk';
+
 
 function App() {
     const manifestUrl = "https://swap.coffee/tonconnect-manifest.json";
