@@ -12,7 +12,7 @@ WebApp.ready();
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <TonConnectUIProvider
-            manifestUrl="https://homaland-memefight-f32c.twc1.net/static/tonconnect-manifest.json"
+            manifestUrl="https://fefefefe.fun/static/tonconnect-manifest.json"
         >
             <App />
         </TonConnectUIProvider>
