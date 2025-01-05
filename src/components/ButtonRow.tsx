@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { JettonBalance } from "@ton-api/client";
+import { THEME, TonConnectUI } from "@tonconnect/ui";
 import { createSwapWidget } from "@swap-coffee/ui-sdk";
-import { TonConnectUI } from "@tonconnect/ui";
-import { swapWidgetConfig } from "../config"; // Конфигурация виджета
 
 interface ButtonRowProps {
   jettons: JettonBalance[] | null;
@@ -11,7 +10,6 @@ interface ButtonRowProps {
 
 const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => {
   const [loading, setLoading] = useState(true); // Состояние загрузки
-  const [showSwapWidget, setShowSwapWidget] = useState(false); // Флаг для отображения виджета
   const widgetInitialized = useRef(false);
 
   useEffect(() => {
@@ -20,29 +18,30 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSwapClick = () => {
-    setShowSwapWidget(true); // Показываем виджет при нажатии на "Swap"
-  };
-
-  useEffect(() => {
-    if (showSwapWidget && !widgetInitialized.current) {
-      // Создаем виджет только при необходимости
-      const tonConnectUiInstance = new TonConnectUI({
-        manifestUrl: "https://homaland-memefight-f32c.twc1.net/static/tonconnect-manifest.json", // URL манифеста для TonConnect
+  const initializeSwapWidget = () => {
+    if (!widgetInitialized.current) {
+      const manifestUrl = "https://swap.coffee/tonconnect-manifest.json";
+      const tonConnectSettings = {
+        manifestUrl: manifestUrl,
         uiPreferences: {
-          theme: "dark", // Темная тема
+          theme: THEME.DARK,
         },
-      });
+      };
+      const tonConnectUiInstance = new TonConnectUI(tonConnectSettings);
 
-      createSwapWidget('#swap-widget-component', {
-        ...swapWidgetConfig, // Применяем конфигурацию виджета
-        theme: 'light', // Осветленная тема
-        locale: 'ru', // Русский язык
+      createSwapWidget("#swap-widget-component", {
+        theme: "light",
+        locale: "ru",
+        tonConnectManifest: {
+          url: manifestUrl,
+        },
+        injectionMode: "tonConnect",
         tonConnectUi: tonConnectUiInstance,
       });
+
       widgetInitialized.current = true;
     }
-  }, [showSwapWidget]);
+  };
 
   if (loading) {
     // Заглушки
@@ -56,13 +55,32 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
         <style>
           {`
             @keyframes skeleton-loading {
-              0% { background-color: #e0e0e0; }
-              50% { background-color: #f7f7f7; }
-              100% { background-color: #e0e0e0; }
+              0% {
+                background-color: #e0e0e0;
+              }
+              50% {
+                background-color: #f7f7f7;
+              }
+              100% {
+                background-color: #e0e0e0;
+              }
             }
-            .skeleton-button-row { display: flex; gap: 10px; }
-            .skeleton-button-container { width: 70px; height: 80px; }
-            .skeleton-button { width: 100%; height: 100%; background-color: #e0e0e0; border-radius: 10px; animation: skeleton-loading 1.5s infinite ease-in-out; }
+
+            .skeleton-button-row {
+              display: flex;
+              gap: 10px;
+            }
+            .skeleton-button-container {
+              width: 70px;
+              height: 80px;
+            }
+            .skeleton-button {
+              width: 100%;
+              height: 100%;
+              background-color: #e0e0e0;
+              border-radius: 10px;
+              animation: skeleton-loading 1.5s infinite ease-in-out;
+            }
           `}
         </style>
       </div>
@@ -73,7 +91,10 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
     <div className="button-row">
       {/* Кнопка "Receive" */}
       <div className="button-container">
-        <div className="action-button" onClick={() => alert("Soon")}> {/* Placeholder */}
+        <div
+          className="action-button"
+          onClick={() => alert("Soon")}
+        >
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_downward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
             alt="Receive"
@@ -85,7 +106,10 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
 
       {/* Кнопка "Send" */}
       <div className="button-container">
-        <div className="action-button" onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}>
+        <div
+          className="action-button"
+          onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}
+        >
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_upward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
             alt="Send"
@@ -97,7 +121,10 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
 
       {/* Кнопка "Swap" */}
       <div className="button-container">
-        <div className="action-button" onClick={handleSwapClick}>
+        <div
+          className="action-button"
+          onClick={initializeSwapWidget}
+        >
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/swap_vert_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
             alt="Swap"
@@ -107,8 +134,8 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
         </div>
       </div>
 
-      {/* Виджет Swap */}
-      {showSwapWidget && <div id="swap-widget-component" className="swap-widget-container"></div>}
+      {/* Компонент Swap Widget */}
+      <div id="swap-widget-component"></div>
     </div>
   );
 };
