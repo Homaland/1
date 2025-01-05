@@ -35,6 +35,13 @@ function App() {
         <div>
             <h1>Swap Widget Example</h1>
             <div id="swap-widget-component"></div>
+             <style scoped>{`
+        #swap-widget-component {
+          margin: 0 auto;
+          width: 100%;
+          height: 500px;
+        }
+      `}</style>
         </div>
     );
 }
