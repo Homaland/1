@@ -39,6 +39,14 @@ const TaskPage: React.FC = () => {
 
       <div id="swap-widget-component"></div>
       <BottomMenu />
+
+      <style scoped>
+        #swap-widget-component {
+          margin: 0 auto;
+          width: 100%;
+          height: 500px;
+        }
+      </style>
     </div>
   );
 };
