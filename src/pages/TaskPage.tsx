@@ -40,6 +40,7 @@ function App() {
         #swap-widget-component {
           margin: 0 auto;
           width: 100%;
+          background-color: rgba(0, 0, 0, 0.5); 
           height: 500px;
         }
       `}</style>
