@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { JettonBalance } from "@ton-api/client";
-import { createSwapWidget } from '@swap-coffee/ui-sdk';
-import { TonConnectUI } from '@tonconnect/ui';
-import { swapWidgetConfig } from '../сonfig'; // Конфигурация виджета
+import { createSwapWidget } from "@swap-coffee/ui-sdk";
+import { TonConnectUI } from "@tonconnect/ui";
+import { swapWidgetConfig } from "../config"; // Конфигурация виджета
 
 interface ButtonRowProps {
   jettons: JettonBalance[] | null;
@@ -12,6 +12,7 @@ interface ButtonRowProps {
 const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => {
   const [loading, setLoading] = useState(true); // Состояние загрузки
   const [showSwapWidget, setShowSwapWidget] = useState(false); // Флаг для отображения виджета
+  const widgetInitialized = useRef(false);
 
   useEffect(() => {
     // Эмулируем задержку загрузки
@@ -24,16 +25,22 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
   };
 
   useEffect(() => {
-    if (showSwapWidget) {
+    if (showSwapWidget && !widgetInitialized.current) {
       // Создаем виджет только при необходимости
       const tonConnectUiInstance = new TonConnectUI({
         manifestUrl: "https://homaland-memefight-f32c.twc1.net/static/tonconnect-manifest.json", // URL манифеста для TonConnect
+        uiPreferences: {
+          theme: "dark", // Темная тема
+        },
       });
 
       createSwapWidget('#swap-widget-component', {
         ...swapWidgetConfig, // Применяем конфигурацию виджета
+        theme: 'light', // Осветленная тема
+        locale: 'ru', // Русский язык
         tonConnectUi: tonConnectUiInstance,
       });
+      widgetInitialized.current = true;
     }
   }, [showSwapWidget]);
 
@@ -66,7 +73,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
     <div className="button-row">
       {/* Кнопка "Receive" */}
       <div className="button-container">
-        <div className="action-button" onClick={() => alert("Soon")}>
+        <div className="action-button" onClick={() => alert("Soon")}> {/* Placeholder */}
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_downward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
             alt="Receive"
@@ -99,7 +106,6 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
           <p className="button-text">Swap</p>
         </div>
       </div>
-   
 
       {/* Виджет Swap */}
       {showSwapWidget && <div id="swap-widget-component" className="swap-widget-container"></div>}
