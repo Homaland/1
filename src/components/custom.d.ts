@@ -1,11 +1,11 @@
 declare module '@swap-coffee/ui-sdk' {
     export function createSwapWidget(
-        containerId: string, 
+        containerSelector: string,
         options: {
-            theme: string;
-            locale: string;
+            theme: 'light' | 'dark' | 'coffee';
+            locale: 'zh' | 'ua' | 'ru' | 'en' | 'es' | 'fr' | 'fa';
             tonConnectManifest: { url: string };
-            injectionMode: string;
+            injectionMode: 'tonConnect' | 'payload';
             tonConnectUi: any;
         }
     ): void;
