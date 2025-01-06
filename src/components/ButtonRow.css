@@ -18,9 +18,11 @@
   gap: 8px; /* Расстояние между иконкой и текстом */
 }
 
-.modal-header .close-btn:hover {
-  color: #f44336; /* Цвет при наведении */
+
+.modal-header .close-btn svg {
+  margin-right: 5px; /* Отступ между иконкой и текстом */
 }
+
 
 .modal-header .close-btn svg {
   margin-right: 5px; /* Отступ между иконкой и текстом */
@@ -91,7 +93,7 @@
 }
 
 .swap-content button:last-child {
-  background: #f44336;
+  background: #f3eded;
   color: white;
 }
 
