@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { useTonConnectUI } from "@tonconnect/ui-react";
 import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
@@ -10,6 +10,7 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [tonConnectUI] = useTonConnectUI();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
@@ -18,6 +19,10 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
 
   const handleSettingsClick = () => {
     navigate('/settings');
+  };
+
+  const handleConnectClick = () => {
+    tonConnectUI.openModal(); // Открытие модального окна подключения
   };
 
   if (loading) {
@@ -58,8 +63,10 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
           </div>
         )}
 
-        {/* Кастомный стиль для TonConnectButton */}
-        <TonConnectButton className="ton-connect-button" />
+        {/* Кастомная кнопка для подключения */}
+        <button onClick={handleConnectClick} className="my-custom-button">
+          Подключить кошелек
+        </button>
       </div>
       <style>
         {`
@@ -79,17 +86,17 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
             background-color: #e0e0e0;
             border-radius: 50%;
           }
-          .ton-connect-button {
-            background-color: #007BFF; /* Синий фон */
-            color: white; /* Белый текст */
-            border-radius: 18px; /* Радиус скругления */
-            padding: 10px 20px; /* Внутренние отступы */
+          .my-custom-button {
+            background-color: #007BFF;
+            color: white;
+            border-radius: 18px;
+            padding: 10px 20px;
             border: none;
             cursor: pointer;
             font-size: 16px;
           }
-          .ton-connect-button:hover {
-            background-color: #0056b3; /* Более тёмный синий при наведении */
+          .my-custom-button:hover {
+            background-color: #0056b3;
           }
         `}
       </style>
