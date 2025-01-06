@@ -1,16 +1,41 @@
-// pages/TaskPage.tsx
-import React from "react";
-import BottomMenu from "../components/BottomMenu";
+import React, { useEffect, useRef } from 'react';
+import { createSwapWidget } from '@swap-coffee/ui-sdk';
+import { useTonConnectUI } from '@tonconnect/ui-react'; // Импортируем хук
 
-const TaskPage: React.FC = () => {
+interface ModalProps {
+  onClose: () => void;
+}
+
+const Modal: React.FC<ModalProps> = ({ onClose }) => {
+  const manifestUrl = "https://swap.coffee/tonconnect-manifest.json";
+  const widgetInitialized = useRef(false);
+  const [tonConnectUi] = useTonConnectUI(); // Получаем экземпляр TonConnectUI
+
+  useEffect(() => {
+    if (!widgetInitialized.current) {
+      createSwapWidget('#swap-widget-component', {
+        theme: 'light',
+        locale: 'ru',
+        tonConnectManifest: {
+          url: manifestUrl,
+        },
+        injectionMode: 'tonConnect',
+        tonConnectUi: tonConnectUi, // Передаем существующий экземпляр
+      });
+
+      widgetInitialized.current = true;
+    }
+  }, [tonConnectUi]);
+
   return (
-    <div className="shop-page">
-      <h1>Shop</h1>
-      <p>Soon</p>
-
-      <BottomMenu />
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h1>Swap Widget</h1>
+        <div id="swap-widget-component"></div>
+        <button onClick={onClose}>Close</button>
+      </div>
     </div>
   );
 };
 
-export default TaskPage;
+export default Modal;
