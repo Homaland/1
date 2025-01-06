@@ -1,4 +1,4 @@
-import { useTonConnectUI } from '@tonconnect/ui-react';
+import { useTonConnectUI } from '@tonconnect/ui-react'; 
 import { useState, useEffect } from 'react';
 import { useTonAddress } from '@tonconnect/ui-react'; // Хук для получения адреса
 import './CustomConnectButton.css'; // Вынесите стили в отдельный файл
@@ -26,7 +26,7 @@ const CustomConnectButton = () => {
 
   const handleConnectDisconnect = () => {
     if (isConnected) {
-      tonConnectUI.disconnect(); // Отключаем кошелек
+      setShowModal(true); // Открываем модалку при подключенном состоянии
     } else {
       tonConnectUI.openModal(); // Открываем модалку для подключения
     }
@@ -46,17 +46,10 @@ const CustomConnectButton = () => {
 
   return (
     <div>
-      {/* Кнопка для подключения/отключения и отображения адреса */}
+      {/* Одна кнопка для подключения/отключения и отображения адреса */}
       <button onClick={handleConnectDisconnect}>
-        {isConnected ? `Disconnect Wallet` : `Connect Wallet`}
+        {isConnected ? userFriendlyAddress : 'Connect Wallet'}
       </button>
-
-      {/* Если подключено, отображаем адрес кошелька */}
-      {isConnected && userFriendlyAddress && (
-        <button onClick={() => setShowModal(!showModal)} className="wallet-address">
-          {userFriendlyAddress}
-        </button>
-      )}
 
       {/* Модальное окно для копирования адреса и отключения */}
       {showModal && (
