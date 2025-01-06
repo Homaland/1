@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import { SticList } from "./components/SticList";
 import CollectionStatus from "./components/CollectionStatus";
 import ButtonRow from "./components/ButtonRow";
+import CustomConnectButton from './components/CustomConnectButton';
 
 // Прочие импорты страниц
 import TaskPage from "./pages/TaskPage";
@@ -165,6 +166,7 @@ function App() {
 
                 
                          <Header profilePhotoUrl={profilePhotoUrl} firstName={firstName} /> {/* Use Header component */}
+                         <CustomConnectButton />
           <div className="content">
                         <SticList />
                         <ButtonRow jettons={jettons} setSelectedJetton={setSelectedJetton} />
