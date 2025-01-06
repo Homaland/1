@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { JettonBalance } from "@ton-api/client";
-import { createSwapWidget } from '@swap-coffee/ui-sdk';
-import { useTonConnectUI } from '@tonconnect/ui-react';
+import { createSwapWidget } from '@swap-coffee/ui-sdk';  // Импортируем виджет
+import { useTonConnectUI } from '@tonconnect/ui-react'; // Импортируем хук для TonConnect
 import './ButtonRow.css';
 
 interface ButtonRowProps {
@@ -10,31 +10,32 @@ interface ButtonRowProps {
 }
 
 const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => {
-  const [loading, setLoading] = useState(true);
-  const widgetInitialized = useRef(false); // Чтобы избежать повторной инициализации виджета
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+  const widgetInitialized = useRef(false); // Для того чтобы инициализировать виджет только один раз
   const [tonConnectUi] = useTonConnectUI(); // Получаем экземпляр TonConnectUI
 
+  // Эмулируем задержку загрузки
   useEffect(() => {
-    // Эмулируем задержку загрузки
     const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
     return () => clearTimeout(timer);
   }, []);
 
+  // Инициализация виджета Swap после первого рендера
   useEffect(() => {
-    if (tonConnectUi && !widgetInitialized.current) {
+    if (!widgetInitialized.current && tonConnectUi) {
+      const manifestUrl = "https://swap.coffee/tonconnect-manifest.json";
       createSwapWidget('#swap-widget-component', {
         theme: 'light',
         locale: 'ru',
         tonConnectManifest: {
-          url: "https://swap.coffee/tonconnect-manifest.json",
+          url: manifestUrl,
         },
         injectionMode: 'tonConnect',
-        tonConnectUi: tonConnectUi, // Передаем TonConnectUI экземпляр
+        tonConnectUi: tonConnectUi, // Передаем экземпляр TonConnectUI
       });
-
       widgetInitialized.current = true;
     }
-  }, [tonConnectUi]); // Ререндерим, если TonConnectUI изменился
+  }, [tonConnectUi]); // Срабатывает, когда загружен TonConnectUI
 
   if (loading) {
     // Заглушки
@@ -53,7 +54,10 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
     <div className="button-row">
       {/* Кнопка "Receive" */}
       <div className="button-container">
-        <div className="action-button" onClick={() => alert("Soon")}>
+        <div
+          className="action-button"
+          onClick={() => alert("Soon")}
+        >
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_downward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
             alt="Receive"
@@ -82,13 +86,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
       <div className="button-container">
         <div
           className="action-button"
-          onClick={() => {
-            // Показать или скрыть виджет при клике на "Swap"
-            const widgetElement = document.getElementById("swap-widget-component");
-            if (widgetElement) {
-              widgetElement.style.display = widgetElement.style.display === 'none' ? 'block' : 'none';
-            }
-          }}
+          onClick={() => alert("Soon")}
         >
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/swap_vert_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
@@ -96,11 +94,9 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
             className="icon"
           />
           <p className="button-text">Swap</p>
+          <div id="swap-widget-component"></div> {/* Место для виджета */}
         </div>
       </div>
-
-      {/* Контейнер для виджета Swap */}
-      <div id="swap-widget-component" style={{ display: 'none' }}></div>
     </div>
   );
 };
