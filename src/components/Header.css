@@ -1,0 +1,46 @@
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-photo, .placeholder-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.skeleton-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skeleton-photo, .skeleton-name, .skeleton-button {
+  animation: skeleton-loading 1.5s infinite ease-in-out;
+  background-color: #e0e0e0;
+}
+
+@keyframes skeleton-loading {
+  0% { background-color: #e0e0e0; }
+  50% { background-color: #f7f7f7; }
+  100% { background-color: #e0e0e0; }
+}
+
+.skeleton-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.skeleton-name {
+  width: 120px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+.skeleton-button {
+  width: 100px;
+  height: 36px;
+  border-radius: 18px;
+}
