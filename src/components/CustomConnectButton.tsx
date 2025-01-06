@@ -8,18 +8,20 @@ const CustomConnectButton = () => {
 
   // Эффект для отслеживания состояния подключения
   useEffect(() => {
-    // Функция для обновления состояния
-    const updateConnectionStatus = () => {
+    const checkConnectionStatus = () => {
       setIsConnected(tonConnectUI.connected); // Обновляем состояние подключения
     };
 
-    // Изначально проверяем подключение
-    updateConnectionStatus();
+    // Инициализация состояния подключения
+    checkConnectionStatus();
 
-       // Возвращаем очистку эффекта, если нужно, например, для отписки от событий
-    return () => {
-      // Очистка, если потребуется
-    };
+    // Используем setInterval для периодической проверки состояния подключения
+    const intervalId = setInterval(() => {
+      checkConnectionStatus();
+    }, 500); // Проверяем подключение каждую полсекунды (или можно увеличить задержку)
+
+    // Очищаем интервал после размонтирования компонента
+    return () => clearInterval(intervalId);
   }, [tonConnectUI]); // Следим за изменениями состояния TonConnectUI
 
   // Функция для подключения и отключения
