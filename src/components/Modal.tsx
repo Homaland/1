@@ -4,10 +4,11 @@ import { useTonConnectUI } from '@tonconnect/ui-react'; // Импортируе�
 
 interface ModalProps {
   onClose: () => void;
+  isVisible: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ onClose }) => {
-  const manifestUrl = "https://swap.coffee/tonconnect-manifest.json";
+const Modal: React.FC<ModalProps> = ({ onClose, isVisible }) => {
+  const manifestUrl = "https://fefefefe.fun/static/tonconnect-manifest.json";
   const widgetInitialized = useRef(false);
   const [tonConnectUi] = useTonConnectUI(); // Получаем экземпляр TonConnectUI
 
@@ -28,11 +29,13 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
   }, [tonConnectUi]);
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h1>Swap Widget</h1>
-        <div id="swap-widget-component"></div>
-        <button onClick={onClose}>Close</button>
+    <div className={`overlay ${isVisible ? "visible" : ""}`}>
+      <div className={`slide-swap ${isVisible ? "visible" : ""}`}>
+        <div className="swap-content">
+          <h1>Swap Widget</h1>
+          <div id="swap-widget-component"></div>
+          <button onClick={onClose}>Close</button>
+        </div>
       </div>
     </div>
   );
