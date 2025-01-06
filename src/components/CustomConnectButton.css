@@ -1,47 +1,4 @@
-/* CustomConnectButton.css */
-
-/* Основной стиль для кнопки */
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 180px; /* Установите максимальную ширину для кнопки */
-  text-align: center;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* Стиль для отображения адреса */
-.wallet-address {
-  cursor: pointer;
-  color: #007bff;
-  font-weight: bold;
-  display: inline-block;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: auto;
-  max-width: 180px; /* Установите максимальную ширину для отображения адреса */
-}
-
-.wallet-address:hover {
-  text-decoration: underline;
-}
-
-/* Выезжающее модальное окно */
+/* Стиль для выезжающего окна */
 .slide-modal {
   position: fixed;
   bottom: 0;
@@ -59,26 +16,26 @@ button:hover {
   animation: slideOut 0.4s forwards; /* По умолчанию скрывается */
 }
 
-/* Когда модальное окно активно (показывается) */
 .slide-modal.visible {
   animation: slideIn 0.4s forwards; /* Анимация появления */
 }
 
-/* Анимации для модального окна */
+/* Анимация появления модального окна */
 @keyframes slideIn {
-  0% {
+  from {
     transform: translateY(100%);
   }
-  100% {
+  to {
     transform: translateY(0);
   }
 }
 
+/* Анимация скрытия модального окна */
 @keyframes slideOut {
-  0% {
+  from {
     transform: translateY(0);
   }
-  100% {
+  to {
     transform: translateY(100%);
   }
 }
@@ -89,31 +46,27 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
   justify-content: center; /* Центрирование по вертикали */
   align-items: center; /* Центрирование по горизонтали */
   text-align: center; /* Текст внутри будет центрирован */
-  width: 90%; /* Адаптивная ширина */
-  max-width: 100%; /* Ограничение максимальной ширины */
-  margin: auto; /* Для центрирования относительно родителя */
   color: #000;
 }
 
 .modal-content button {
-  padding: 10px 20px;
+  width: 100%; /* Единая ширина для кнопок */
+  padding: 10px;
   font-size: 16px;
   border: none;
-  cursor: pointer;
   border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  width: 100%; /* Ширина кнопок */
+  cursor: pointer;
 }
 
 .modal-content button:first-child {
-  background-color: #4caf50;
+  background: #4caf50;
+  color: white;
 }
 
 .modal-content button:last-child {
-  background-color: #f44336;
+  background: #f44336;
+  color: white;
 }
