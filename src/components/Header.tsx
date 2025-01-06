@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import CustomConnectButton from './CustomConnectButton';
-import './Header.css'; // Вынесите стили в отдельный файл
+import './Header.css';
 
-const Header = ({ profilePhotoUrl, firstName }) => {
+// Определяем типы пропсов
+interface HeaderProps {
+  profilePhotoUrl: string | null;
+  firstName: string | null;
+}
+
+const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
