@@ -46,30 +46,30 @@ const CustomConnectButton = () => {
 
   return (
     <div>
+      {/* Кнопка подключения / отключения */}
       <button onClick={handleConnectDisconnect}>
-        {isConnected ? `Disconnect Wallet` : 'Connect Wallet'}
-        {isConnected && userFriendlyAddress && (
-          <span className="wallet-address">
-            {' '}
-            - {userFriendlyAddress}
-          </span>
-        )}
+        {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
       </button>
 
+      {/* Модальное окно с адресом кошелька, если подключено */}
       {isConnected && userFriendlyAddress && (
-        <div className="wallet-address" onClick={() => setShowModal(true)}>
-          {/* Адрес кошелька не будет отображаться на основной кнопке, а будет только в модальном окне */}
-        </div>
-      )}
-
-      {showModal && (
-        <div className="modal-overlay">
-          <div className={`slide-modal ${showModal ? 'visible' : ''}`}>
-            <div className="modal-content">
-              <button onClick={handleCopyAddress}>Copy address</button>
-              <button onClick={handleDisconnect}>Disconnect</button>
-            </div>
+        <div>
+          <div className="wallet-address" onClick={() => setShowModal(true)}>
+            <span>{userFriendlyAddress}</span>
           </div>
+
+          {showModal && (
+            <div className="modal-overlay">
+              <div className={`slide-modal ${showModal ? 'visible' : ''}`}>
+                <div className="modal-content">
+                  <p>Wallet Address:</p>
+                  <p>{userFriendlyAddress}</p>
+                  <button onClick={handleCopyAddress}>Copy Address</button>
+                  <button onClick={handleDisconnect}>Disconnect</button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
