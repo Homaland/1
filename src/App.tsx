@@ -10,7 +10,7 @@ import { SticList } from "./components/SticList";
 import CollectionStatus from "./components/CollectionStatus";
 import ButtonRow from "./components/ButtonRow";
 
-// Прочие импорты для страниц
+// Прочие импорты страниц
 import TaskPage from "./pages/TaskPage";
 import PlayPage from "./pages/PlayPage";
 import ShopPage from "./pages/ShopPage";
@@ -56,9 +56,7 @@ function App() {
   
   // Управление полноэкранным режимом и запрет свайпа вниз для закрытия приложения
   useEffect(() => {
-    // Запросить переход в полноэкранный режим
-    WebApp.requestFullscreen();
-
+   
     // Отключаем возможность свайпа вниз для закрытия приложения
     WebApp.isVerticalSwipesEnabled = false;
 
@@ -135,7 +133,7 @@ function App() {
       const { id, first_name, username } = WebApp.initDataUnsafe.user;
   
       // Отправляем данные пользователя на сервер
-      fetch("https://homaland-hodrland-04a0.twc1.net/save_user", {
+      fetch("https://fefefefe.fun/save_user", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
