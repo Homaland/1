@@ -41,40 +41,79 @@ button:hover {
   text-decoration: underline;
 }
 
-/* Модальное окно */
-.modal-overlay {
+/* Выезжающее модальное окно */
+.slide-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+  left: 0;
+  width: 100%;
+  max-height: 80%;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  transform: translateY(100%); /* По умолчанию скрыто за пределами экрана */
+  animation: slideOut 0.4s forwards; /* По умолчанию скрывается */
 }
 
+/* Когда модальное окно активно (показывается) */
+.slide-modal.visible {
+  animation: slideIn 0.4s forwards; /* Анимация появления */
+}
+
+/* Анимации для модального окна */
+@keyframes slideIn {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Контент внутри модального окна */
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
+  background: #fff;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 20px;
+  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+  justify-content: center; /* Центрирование по вертикали */
+  align-items: center; /* Центрирование по горизонтали */
+  text-align: center; /* Текст внутри будет центрирован */
+  width: 90%; /* Адаптивная ширина */
+  max-width: 100%; /* Ограничение максимальной ширины */
+  margin: auto; /* Для центрирования относительно родителя */
+  color: #000;
 }
 
-button {
-  margin: 10px;
+.modal-content button {
   padding: 10px 20px;
   font-size: 16px;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: #007bff;
   color: white;
+  width: 100%; /* Ширина кнопок */
 }
 
-button:hover {
-  background-color: #0056b3;
+.modal-content button:first-child {
+  background-color: #4caf50;
+}
+
+.modal-content button:last-child {
+  background-color: #f44336;
 }
