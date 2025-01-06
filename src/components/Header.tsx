@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useTonConnectUI } from "@tonconnect/ui-react";
-import { useNavigate } from "react-router-dom";
+import { TonConnectUIProvider } from '@tonconnect/ui-react';
+import CustomConnectButton from './CustomConnectButton';
+import { useNavigate } from "react-router-dom"; // Импортируем useNavigate
 
 type HeaderProps = {
   profilePhotoUrl: string | null;
@@ -8,21 +9,17 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const [tonConnectUI] = useTonConnectUI();
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+  const navigate = useNavigate(); // Инициализация useNavigate для программной навигации
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    // Эмулируем задержку загрузки
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем skeleton через 2 секунды
     return () => clearTimeout(timer);
   }, []);
 
   const handleSettingsClick = () => {
-    navigate('/settings');
-  };
-
-  const handleConnectClick = () => {
-    tonConnectUI.openModal(); // Открытие модального окна подключения
+    navigate('/settings'); // Программно переходим на страницу настроек
   };
 
   if (loading) {
@@ -33,7 +30,52 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
           <div className="skeleton-name" />
           <div className="skeleton-button" />
         </div>
-        <style>{/* Стили скелетона */}</style>
+        <style>
+          {`
+            @keyframes skeleton-loading {
+              0% {
+                background-color: #e0e0e0;
+              }
+              50% {
+                background-color: #f7f7f7;
+              }
+              100% {
+                background-color: #e0e0e0;
+              }
+            }
+
+            .skeleton-header {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            }
+
+            .skeleton-photo,
+            .skeleton-name,
+            .skeleton-button {
+              animation: skeleton-loading 1.5s infinite ease-in-out;
+            }
+
+            .skeleton-photo {
+              width: 40px;
+              height: 40px;
+              background-color: #e0e0e0;
+              border-radius: 50%;
+            }
+            .skeleton-name {
+              width: 120px;
+              height: 36px;
+              background-color: #e0e0e0;
+              border-radius: 4px;
+            }
+            .skeleton-button {
+              width: 100px;
+              height: 36px;
+              background-color: #e0e0e0;
+              border-radius: 18px;
+            }
+          `}
+        </style>
       </header>
     );
   }
@@ -63,10 +105,9 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
           </div>
         )}
 
-        {/* Кастомная кнопка для подключения */}
-        <button onClick={handleConnectClick} className="my-custom-button">
-          Подключить кошелек
-        </button>
+<TonConnectUIProvider manifestUrl="https://<YOUR_APP_URL>/tonconnect-manifest.json">
+           <CustomConnectButton />
+    </TonConnectUIProvider>
       </div>
       <style>
         {`
@@ -85,18 +126,6 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
             height: 40px;
             background-color: #e0e0e0;
             border-radius: 50%;
-          }
-          .my-custom-button {
-            background-color: #007BFF;
-            color: white;
-            border-radius: 18px;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-          }
-          .my-custom-button:hover {
-            background-color: #0056b3;
           }
         `}
       </style>
