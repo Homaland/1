@@ -22,11 +22,11 @@
   margin-right: 5px; /* Отступ между иконкой и текстом */
 }
 
-/* Убираем эффект hover для кнопки Close */
-.modal-header .close-btn:hover {
-  color: inherit; /* Убираем красный цвет при наведении */
-  background: transparent; /* Убираем фон */
+
+.modal-header .close-btn svg {
+  margin-right: 5px; /* Отступ между иконкой и текстом */
 }
+
 
 /* Выезжающее окно */
 .slide-swap {
@@ -81,20 +81,7 @@
   box-sizing: border-box;
 }
 
-.swap-content button {
-  border: none;
-  cursor: pointer;
-}
 
-.swap-content button:first-child {
-  background: #4caf50;
-  color: white;
-}
-
-.swap-content button:last-child {
-  background: #f3eded;
-  color: white;
-}
 
 /* Анимации для модального окна */
 @keyframes slideIn {
@@ -115,33 +102,32 @@
   }
 }
 
-/* Стили для загрузки */
+
+
 @keyframes skeleton-loading {
-  0% {
+    0% {
+      background-color: #e0e0e0;
+    }
+    50% {
+      background-color: #f7f7f7;
+    }
+    100% {
+      background-color: #e0e0e0;
+    }
+  }
+
+  .skeleton-button-row {
+    display: flex;
+    gap: 10px;
+  }
+  .skeleton-button-container {
+    width: 70px;
+    height: 80px;
+  }
+  .skeleton-button {
+    width: 100%;
+    height: 100%;
     background-color: #e0e0e0;
+    border-radius: 10px;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
   }
-  50% {
-    background-color: #f7f7f7;
-  }
-  100% {
-    background-color: #e0e0e0;
-  }
-}
-
-.skeleton-button-row {
-  display: flex;
-  gap: 10px;
-}
-
-.skeleton-button-container {
-  width: 70px;
-  height: 80px;
-}
-
-.skeleton-button {
-  width: 100%;
-  height: 100%;
-  background-color: #e0e0e0;
-  border-radius: 10px;
-  animation: skeleton-loading 1.5s infinite ease-in-out;
-}
