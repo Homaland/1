@@ -56,11 +56,13 @@ const CustomConnectButton = () => {
         </div>
       )}
 
-      {showModal && (
+     {showModal && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <button onClick={handleCopyAddress}>Copy address</button>
-            <button onClick={handleDisconnect}>Disconnect</button>
+          <div className={`slide-modal ${showModal ? 'visible' : ''}`}>
+            <div className="modal-content">
+              <button onClick={handleCopyAddress}>Copy address</button>
+              <button onClick={handleDisconnect}>Disconnect</button>
+            </div>
           </div>
         </div>
       )}
