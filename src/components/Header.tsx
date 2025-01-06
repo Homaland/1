@@ -104,7 +104,11 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
           </div>
         )}
 
-        <TonConnectButton className="ton-connect-button" />
+        <TonConnectButton 
+          className="ton-connect-button" 
+          style={{ backgroundColor: '#4CAF50', color: '#fff', borderRadius: '20px' }}
+          onClick={() => alert('Custom TonConnect Button clicked!')}
+        />
       </div>
       <style>
         {`
