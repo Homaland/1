@@ -20,16 +20,6 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
     navigate('/settings');
   };
 
-  const customButtonStyles = {
-    backgroundColor: '#007BFF',
-    color: '#FFFFFF',
-    borderRadius: '20px',
-    padding: '10px 20px',
-    fontSize: '16px',
-    border: 'none',
-    cursor: 'pointer'
-  };
-
   if (loading) {
     return (
       <header>
@@ -38,52 +28,7 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
           <div className="skeleton-name" />
           <div className="skeleton-button" />
         </div>
-        <style>
-          {`
-            @keyframes skeleton-loading {
-              0% {
-                background-color: #e0e0e0;
-              }
-              50% {
-                background-color: #f7f7f7;
-              }
-              100% {
-                background-color: #e0e0e0;
-              }
-            }
-
-            .skeleton-header {
-              display: flex;
-              align-items: center;
-              gap: 10px;
-            }
-
-            .skeleton-photo,
-            .skeleton-name,
-            .skeleton-button {
-              animation: skeleton-loading 1.5s infinite ease-in-out;
-            }
-
-            .skeleton-photo {
-              width: 40px;
-              height: 40px;
-              background-color: #e0e0e0;
-              border-radius: 50%;
-            }
-            .skeleton-name {
-              width: 120px;
-              height: 36px;
-              background-color: #e0e0e0;
-              border-radius: 4px;
-            }
-            .skeleton-button {
-              width: 100px;
-              height: 36px;
-              background-color: #e0e0e0;
-              border-radius: 18px;
-            }
-          `}
-        </style>
+        <style>{/* Стили скелетона */}</style>
       </header>
     );
   }
@@ -113,10 +58,8 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
           </div>
         )}
 
-        <TonConnectButton 
-          className="ton-connect-button" 
-          style={customButtonStyles}
-        />
+        {/* Кастомный стиль для TonConnectButton */}
+        <TonConnectButton className="ton-connect-button" />
       </div>
       <style>
         {`
@@ -135,6 +78,18 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
             height: 40px;
             background-color: #e0e0e0;
             border-radius: 50%;
+          }
+          .ton-connect-button {
+            background-color: #007BFF; /* Синий фон */
+            color: white; /* Белый текст */
+            border-radius: 18px; /* Радиус скругления */
+            padding: 10px 20px; /* Внутренние отступы */
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+          }
+          .ton-connect-button:hover {
+            background-color: #0056b3; /* Более тёмный синий при наведении */
           }
         `}
       </style>
