@@ -2,7 +2,7 @@
 .modal-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   padding-bottom: 20px; /* Отступ снизу, чтобы не прижимать содержимое */
 }
@@ -12,19 +12,15 @@
   border: none;
   color: #000;
   cursor: pointer;
-  font-size: 24px;
-  padding: 5px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px; /* Расстояние между иконкой и текстом */
 }
 
 .modal-header .close-btn:hover {
   color: #f44336; /* Цвет при наведении */
-}
-
-.modal-header .react-icon {
-  color: #61DAFB; /* Цвет иконки React */
 }
 
 /* Выезжающее окно */
