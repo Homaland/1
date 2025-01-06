@@ -39,8 +39,8 @@ const Modal: React.FC<ModalProps> = ({ onClose, isVisible }) => {
               <IoMdClose size={24} />
               Close
             </button>
+            <h2>Swap</h2>
           </div>
-          <h2>Swap</h2>
           <div id="swap-widget-component"></div>
         </div>
       </div>
