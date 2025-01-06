@@ -1,7 +1,7 @@
+
 import { useEffect, useRef } from 'react';
 import { THEME, TonConnectUI } from "@tonconnect/ui";
 import { createSwapWidget } from '@swap-coffee/ui-sdk';
-
 
 function App() {
     const manifestUrl = "https://swap.coffee/tonconnect-manifest.json";
@@ -36,14 +36,6 @@ function App() {
         <div>
             <h1>Swap Widget Example</h1>
             <div id="swap-widget-component"></div>
-             <style scoped>{`
-        #swap-widget-component {
-          margin: 0 auto;
-          width: 100%;
-          background-color: rgba(0, 0, 0, 0.5); 
-          height: 500px;
-        }
-      `}</style>
         </div>
     );
 }
