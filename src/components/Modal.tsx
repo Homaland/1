@@ -40,8 +40,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, isVisible }) => {
               Close
             </button>
           </div>
-
-          <h1>Swap Widget</h1>
+          <h2>Swap</h2>
           <div id="swap-widget-component"></div>
         </div>
       </div>
