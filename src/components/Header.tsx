@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TonConnectButton } from "@tonconnect/ui-react";
-import { useNavigate } from "react-router-dom"; // Импортируем useNavigate
+import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
   profilePhotoUrl: string | null;
@@ -8,17 +8,26 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
-  const [loading, setLoading] = useState(true); // Состояние загрузки
-  const navigate = useNavigate(); // Инициализация useNavigate для программной навигации
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Эмулируем задержку загрузки
-    const timer = setTimeout(() => setLoading(false), 2000); // Убираем skeleton через 2 секунды
+    const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
   const handleSettingsClick = () => {
-    navigate('/settings'); // Программно переходим на страницу настроек
+    navigate('/settings');
+  };
+
+  const customButtonStyles = {
+    backgroundColor: '#007BFF',
+    color: '#FFFFFF',
+    borderRadius: '20px',
+    padding: '10px 20px',
+    fontSize: '16px',
+    border: 'none',
+    cursor: 'pointer'
   };
 
   if (loading) {
@@ -104,7 +113,10 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
           </div>
         )}
 
-        <TonConnectButton className="ton-connect-button" />
+        <TonConnectButton 
+          className="ton-connect-button" 
+          style={customButtonStyles}
+        />
       </div>
       <style>
         {`
@@ -123,21 +135,6 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
             height: 40px;
             background-color: #e0e0e0;
             border-radius: 50%;
-          }
-
-          .ton-connect-button {
-            background-color: #4caf50; /* Зеленый фон */
-            color: white; /* Белый текст */
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-          }
-
-          .ton-connect-button:hover {
-            background-color: #45a049; /* Темно-зеленый при наведении */
           }
         `}
       </style>
