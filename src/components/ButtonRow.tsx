@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { JettonBalance } from "@ton-api/client";
-import { createSwapWidget } from '@swap-coffee/ui-sdk';  // Импортируем виджет
-import { useTonConnectUI } from '@tonconnect/ui-react'; // Импортируем хук для TonConnect
 import './ButtonRow.css';
+import Modal from '../pages/TaskPage'; // Импортируем компонент модального окна
 
 interface ButtonRowProps {
   jettons: JettonBalance[] | null;
@@ -11,31 +10,21 @@ interface ButtonRowProps {
 
 const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => {
   const [loading, setLoading] = useState(true); // Состояние загрузки
-  const widgetInitialized = useRef(false); // Для того чтобы инициализировать виджет только один раз
-  const [tonConnectUi] = useTonConnectUI(); // Получаем экземпляр TonConnectUI
+  const [showModal, setShowModal] = useState(false); // Состояние для отображения модального окна
 
-  // Эмулируем задержку загрузки
   useEffect(() => {
+    // Эмулируем задержку загрузки
     const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
     return () => clearTimeout(timer);
   }, []);
 
-  // Инициализация виджета Swap после первого рендера
-  useEffect(() => {
-    if (!widgetInitialized.current && tonConnectUi) {
-      const manifestUrl = "https://swap.coffee/tonconnect-manifest.json";
-      createSwapWidget('#swap-widget-component', {
-        theme: 'light',
-        locale: 'ru',
-        tonConnectManifest: {
-          url: manifestUrl,
-        },
-        injectionMode: 'tonConnect',
-        tonConnectUi: tonConnectUi, // Передаем экземпляр TonConnectUI
-      });
-      widgetInitialized.current = true;
-    }
-  }, [tonConnectUi]); // Срабатывает, когда загружен TonConnectUI
+  const handleSwapClick = () => {
+    setShowModal(true); // Открываем модальное окно при нажатии на кнопку "Swap"
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false); // Закрываем модальное окно
+  };
 
   if (loading) {
     // Заглушки
@@ -86,7 +75,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
       <div className="button-container">
         <div
           className="action-button"
-          onClick={() => alert("Soon")}
+          onClick={handleSwapClick} // Открыть модальное окно
         >
           <img
             src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/swap_vert_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
@@ -94,9 +83,11 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
             className="icon"
           />
           <p className="button-text">Swap</p>
-          <div id="swap-widget-component"></div> {/* Место для виджета */}
         </div>
       </div>
+
+      {/* Модальное окно с виджетом */}
+      {showModal && <Modal onClose={handleCloseModal} />}
     </div>
   );
 };
