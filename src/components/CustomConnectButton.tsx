@@ -47,7 +47,7 @@ const CustomConnectButton = () => {
   return (
     <div>
       {/* Одна кнопка для подключения/отключения и отображения адреса */}
-      <button onClick={handleConnectDisconnect}>
+      <button className="wallet-address" onClick={handleConnectDisconnect}>
         {isConnected ? userFriendlyAddress : 'Connect Wallet'}
       </button>
 
