@@ -13,6 +13,10 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <TonConnectUIProvider
             manifestUrl="https://fefefefe.fun/static/tonconnect-manifest.json"
+        // ... other parameters
+        actionsConfiguration={{
+            twaReturnUrl: 'https://t.me/HODRBOT/HODR'
+        }}
         >
             <App />
         </TonConnectUIProvider>
