@@ -1,19 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { SendJettonModal } from './SendJettonModal'; // Импортируем модальное окно
 import './Header.css';
 
 interface HeaderProps {
   profilePhotoUrl: string | null;
   firstName: string | null;
-  jetton: JettonBalance;
-  senderAddress: Address;
-  jettons: JettonBalance[];
 }
 
-const Header = ({ profilePhotoUrl, firstName, jetton, senderAddress, jettons }: HeaderProps) => {
+const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
   const [loading, setLoading] = useState(true);
-  const [isModalVisible, setIsModalVisible] = useState(false); // Состояние для модального окна
+  const [isModalVisible, setIsModalVisible] = useState(false); // Для модального окна
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +22,11 @@ const Header = ({ profilePhotoUrl, firstName, jetton, senderAddress, jettons }: 
   };
 
   const handleGiftClick = () => {
-    setIsModalVisible(true); // Открыть модальное окно
+    setIsModalVisible(true); // Показываем модальное окно
+  };
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false); // Скрываем модальное окно
   };
 
   if (loading) {
@@ -54,16 +54,31 @@ const Header = ({ profilePhotoUrl, firstName, jetton, senderAddress, jettons }: 
           <i className="material-icons">arrow_forward_ios</i>
         </span>
       </div>
-      <i className="material-icons gift-icon" onClick={handleGiftClick}>card_giftcard</i>
+      {/* Иконка подарка */}
+      <div onClick={handleGiftClick} className="gift-icon">
+        🎁
+      </div>
 
-      {/* Модальное окно для отправки жетонов */}
-      <SendJettonModal
-        jetton={jetton}
-        senderAddress={senderAddress}
-        onClose={() => setIsModalVisible(false)}
-        jettons={jettons}
-        isVisible={isModalVisible}
-      />
+      {/* Модальное окно */}
+      {isModalVisible && (
+        <div className="overlay visible">
+          <div className="slide-modal visible">
+            <div className="modal-content">
+              <h2>Send Gift</h2>
+              <label>
+                Recipient Address:
+                <input type="text" placeholder="Enter recipient address" />
+              </label>
+              <label>
+                Amount:
+                <input type="number" placeholder="Enter amount" />
+              </label>
+              <button onClick={handleCloseModal}>Send</button>
+              <button onClick={handleCloseModal}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
