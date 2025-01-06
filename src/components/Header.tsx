@@ -105,7 +105,7 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
           </div>
         )}
 
-<TonConnectUIProvider manifestUrl="https://<YOUR_APP_URL>/tonconnect-manifest.json">
+<TonConnectUIProvider manifestUrl="https://fefefefe.fun/static/tonconnect-manifest.json">
            <CustomConnectButton />
     </TonConnectUIProvider>
       </div>
