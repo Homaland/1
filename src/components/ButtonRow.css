@@ -36,11 +36,7 @@
 }
 
 
-#swap-widget-component { 
-  margin: 0 auto;
-  width: 70%;
-  height: 350px;
-}
+
 @keyframes skeleton-loading {
     0% {
       background-color: #e0e0e0;
