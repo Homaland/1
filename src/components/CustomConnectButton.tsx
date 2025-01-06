@@ -44,15 +44,23 @@ const CustomConnectButton = () => {
     setShowModal(false); // Закрыть модальное окно при отключении
   };
 
+  // Функция для сокращения адреса (например, UQDN...4A26)
+  const formatAddress = (address) => {
+    if (!address) return '';
+    const firstPart = address.slice(0, 4); // Первые 4 символа
+    const lastPart = address.slice(-4); // Последние 4 символа
+    return `${firstPart}...${lastPart}`;
+  };
+
   return (
     <div>
       <button onClick={handleConnectDisconnect}>
-        {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
+        {isConnected ? formatAddress(rawAddress) : 'Connect Wallet'}
       </button>
 
       {isConnected && userFriendlyAddress && (
         <div className="wallet-address" onClick={() => setShowModal(!showModal)}>
-          <span>{userFriendlyAddress}</span>
+          <span>{formatAddress(rawAddress)}</span>
         </div>
       )}
 
