@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import CustomConnectButton from './CustomConnectButton';
+
 import './Header.css';
 
 // Определяем типы пропсов
@@ -47,7 +47,7 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
           <i className="material-icons">arrow_forward_ios</i>
         </span>
       </div>
-      <CustomConnectButton />
+    
     </header>
   );
 };
