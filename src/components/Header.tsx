@@ -104,11 +104,7 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
           </div>
         )}
 
-        <TonConnectButton 
-          className="ton-connect-button" 
-          style={{ backgroundColor: '#4CAF50', color: '#fff', borderRadius: '20px' }}
-          onClick={() => alert('Custom TonConnect Button clicked!')}
-        />
+        <TonConnectButton className="ton-connect-button" />
       </div>
       <style>
         {`
@@ -127,6 +123,21 @@ const Header: React.FC<HeaderProps> = ({ profilePhotoUrl, firstName }) => {
             height: 40px;
             background-color: #e0e0e0;
             border-radius: 50%;
+          }
+
+          .ton-connect-button {
+            background-color: #4caf50; /* Зеленый фон */
+            color: white; /* Белый текст */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+          }
+
+          .ton-connect-button:hover {
+            background-color: #45a049; /* Темно-зеленый при наведении */
           }
         `}
       </style>
