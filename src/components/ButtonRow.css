@@ -1,26 +1,22 @@
-/* Стиль для заголовка модального окна */
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  padding-bottom: 20px; /* Отступ снизу, чтобы не прижимать содержимое */
-}
 
 .modal-header .close-btn {
   background: transparent;
   border: none;
   color: #000;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 24px;
+  padding: 5px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; /* Расстояние между иконкой и текстом */
+  align-items: right;
+  justify-content: right;
 }
 
 .modal-header .close-btn:hover {
   color: #f44336; /* Цвет при наведении */
+}
+
+.modal-header .react-icon {
+  color: #111111; /* Цвет иконки React */
 }
 
 /* Выезжающее окно */
