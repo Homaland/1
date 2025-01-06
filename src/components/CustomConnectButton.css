@@ -1,19 +1,47 @@
-.custom-connect-button {
-  width: 100px;
-  height: 36px;
-  background-color: rgb(185, 82, 82);
-  border-radius: 18px;
+/* CustomConnectButton.css */
+
+/* Основной стиль для кнопки */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 180px; /* Установите максимальную ширину для кнопки */
+  text-align: center;
 }
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Стиль для отображения адреса */
 .wallet-address {
   cursor: pointer;
   color: #007bff;
   font-weight: bold;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: auto;
+  max-width: 180px; /* Установите максимальную ширину для отображения адреса */
 }
 
 .wallet-address:hover {
   text-decoration: underline;
 }
 
+/* Модальное окно */
 .modal-overlay {
   position: fixed;
   top: 0;
