@@ -47,16 +47,22 @@ const CustomConnectButton = () => {
   return (
     <div>
       <button onClick={handleConnectDisconnect}>
-        {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
+        {isConnected ? `Disconnect Wallet` : 'Connect Wallet'}
+        {isConnected && userFriendlyAddress && (
+          <span className="wallet-address">
+            {' '}
+            - {userFriendlyAddress}
+          </span>
+        )}
       </button>
 
       {isConnected && userFriendlyAddress && (
-        <div className="wallet-address" onClick={() => setShowModal(!showModal)}>
-          <span>{userFriendlyAddress}</span>
+        <div className="wallet-address" onClick={() => setShowModal(true)}>
+          {/* Адрес кошелька не будет отображаться на основной кнопке, а будет только в модальном окне */}
         </div>
       )}
 
-     {showModal && (
+      {showModal && (
         <div className="modal-overlay">
           <div className={`slide-modal ${showModal ? 'visible' : ''}`}>
             <div className="modal-content">
