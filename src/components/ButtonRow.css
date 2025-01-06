@@ -1,10 +1,9 @@
-/* Стиль для заголовка модального окна */
 .modal-header {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Сдвигаем контент влево */
+  justify-content: space-between; /* Равномерное распределение между элементами */
   width: 100%;
-  padding-bottom: 10px; /* Отступ снизу, чтобы не прижимать содержимое */
+  padding-bottom: 10px; /* Отступ снизу */
 }
 
 .modal-header .close-btn {
@@ -17,6 +16,14 @@
   align-items: center;
   gap: 8px; /* Расстояние между иконкой и текстом */
 }
+
+.modal-header h2 {
+  flex-grow: 1;
+  text-align: center; /* Центруем текст "Swap" */
+  margin: 0; /* Убираем внешние отступы */
+  font-size: 20px; /* Размер текста заголовка */
+}
+
 
 .modal-header .close-btn svg {
   margin-right: 5px; /* Отступ между иконкой и текстом */
