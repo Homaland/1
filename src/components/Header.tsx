@@ -56,7 +56,7 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
       </div>
       {/* Иконка подарка */}
       <div onClick={handleGiftClick} className="gift-icon">
-        🎁
+        <i className="material-icons">card_giftcard</i>
       </div>
 
       {/* Модальное окно */}
