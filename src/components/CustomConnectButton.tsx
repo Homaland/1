@@ -1,30 +1,29 @@
 import { useTonConnectUI } from '@tonconnect/ui-react';
 import { useState, useEffect } from 'react';
+import { useTonAddress } from '@tonconnect/ui-react'; // Хук для получения адреса
 import './CustomConnectButton.css'; // Вынесите стили в отдельный файл
 
 const CustomConnectButton = () => {
-  const [tonConnectUI] = useTonConnectUI(); // Получаем UI от TonConnect
-  const [isConnected, setIsConnected] = useState(tonConnectUI.connected); // Состояние подключения, начинаем с текущего состояния
+  const [tonConnectUI] = useTonConnectUI();
+  const [isConnected, setIsConnected] = useState(tonConnectUI.connected);
+  const userFriendlyAddress = useTonAddress(); // Получаем пользовательский адрес
+  const rawAddress = useTonAddress(false); // Сырый адрес кошелька
+  const [showModal, setShowModal] = useState(false); // Состояние для отображения модального окна
 
-  // Эффект для отслеживания состояния подключения
   useEffect(() => {
     const checkConnectionStatus = () => {
       setIsConnected(tonConnectUI.connected); // Обновляем состояние подключения
     };
 
-    // Инициализация состояния подключения
     checkConnectionStatus();
 
-    // Используем setInterval для периодической проверки состояния подключения
     const intervalId = setInterval(() => {
       checkConnectionStatus();
-    }, 500); // Проверяем подключение каждую полсекунды (или можно увеличить задержку)
+    }, 500);
 
-    // Очищаем интервал после размонтирования компонента
     return () => clearInterval(intervalId);
-  }, [tonConnectUI]); // Следим за изменениями состояния TonConnectUI
+  }, [tonConnectUI]);
 
-  // Функция для подключения и отключения
   const handleConnectDisconnect = () => {
     if (isConnected) {
       tonConnectUI.disconnect(); // Отключаем кошелек
@@ -33,10 +32,39 @@ const CustomConnectButton = () => {
     }
   };
 
+  const handleCopyAddress = () => {
+    if (rawAddress) {
+      navigator.clipboard.writeText(rawAddress);
+      alert('Address copied to clipboard');
+    }
+  };
+
+  const handleDisconnect = () => {
+    tonConnectUI.disconnect();
+    setShowModal(false); // Закрыть модальное окно при отключении
+  };
+
   return (
-    <button onClick={handleConnectDisconnect}>
-      {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
-    </button>
+    <div>
+      <button onClick={handleConnectDisconnect}>
+        {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
+      </button>
+
+      {isConnected && userFriendlyAddress && (
+        <div className="wallet-address" onClick={() => setShowModal(!showModal)}>
+          <span>{userFriendlyAddress}</span>
+        </div>
+      )}
+
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button onClick={handleCopyAddress}>Copy address</button>
+            <button onClick={handleDisconnect}>Disconnect</button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
