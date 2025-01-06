@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { JettonBalance } from "@ton-api/client";
 import './ButtonRow.css';
-import Modal from '../pages/TaskPage'; // Импортируем компонент модального окна
+import Modal from './Modal'; // Импортируем компонент модального окна
 
 interface ButtonRowProps {
   jettons: JettonBalance[] | null;
