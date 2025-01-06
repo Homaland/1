@@ -1,21 +1,30 @@
-
-/* Анимация для модального окна */
-@keyframes slideIn {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+/* Стиль для заголовка модального окна */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 20px; /* Отступ снизу, чтобы не прижимать содержимое */
 }
 
-@keyframes slideOut {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(100%);
-  }
+.modal-header .close-btn {
+  background: transparent;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-header .close-btn:hover {
+  color: #f44336; /* Цвет при наведении */
+}
+
+.modal-header .react-icon {
+  color: #61DAFB; /* Цвет иконки React */
 }
 
 /* Выезжающее окно */
@@ -40,21 +49,19 @@
   animation: slideIn 0.4s forwards; /* Анимация появления */
 }
 
-
-
-/* Контент внутри модального окна */
+/* Общие стили для кнопок и содержимого */
 .swap-content {
   background: #fff;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
-  justify-content: center; /* Центрирование по вертикали */
-  align-items: center; /* Центрирование по горизонтали */
-  text-align: center; /* Текст внутри будет центрирован */
-  width: 90%; /* Адаптивная ширина */
-  max-width: 100%; /* Ограничение максимальной ширины */
-  margin: auto; /* Для центрирования относительно родителя */
+  overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  max-width: 100%;
+  margin: auto;
   color: #000;
 }
 
@@ -65,10 +72,10 @@
 .swap-content input,
 .swap-content select,
 .swap-content button {
-  width: 100%; /* Единая ширина для кнопок и полей ввода */
+  width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ссс;
+  border: 1px solid #ccc;
   border-radius: 8px;
   box-sizing: border-box;
 }
@@ -87,6 +94,26 @@
   background: #f44336;
   color: white;
 }
+
+/* Анимации для модального окна */
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
 
 
 @keyframes skeleton-loading {
