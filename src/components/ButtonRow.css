@@ -1,3 +1,110 @@
+/* Затемнение фона */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный */
+  display: none;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.overlay.visible {
+  display: block;
+  opacity: 1;
+}
+
+/* Анимация для модального окна */
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+/* Выезжающее окно */
+.slide-swap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-height: 80%;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  transform: translateY(100%); /* По умолчанию скрыто за пределами экрана */
+  animation: slideOut 0.4s forwards; /* По умолчанию скрывается */
+}
+
+.slide-swap.visible {
+  animation: slideIn 0.4s forwards; /* Анимация появления */
+}
+
+
+
+/* Контент внутри модального окна */
+.swap-content {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+  justify-content: center; /* Центрирование по вертикали */
+  align-items: center; /* Центрирование по горизонтали */
+  text-align: center; /* Текст внутри будет центрирован */
+  width: 90%; /* Адаптивная ширина */
+  max-width: 100%; /* Ограничение максимальной ширины */
+  margin: auto; /* Для центрирования относительно родителя */
+  color: #000;
+}
+
+.swap-content label {
+  font-weight: bold;
+}
+
+.swap-content input,
+.swap-content select,
+.swap-content button {
+  width: 100%; /* Единая ширина для кнопок и полей ввода */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ссс;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.swap-content button {
+  border: none;
+  cursor: pointer;
+}
+
+.swap-content button:first-child {
+  background: #4caf50;
+  color: white;
+}
+
+.swap-content button:last-child {
+  background: #f44336;
+  color: white;
+}
 
 
 @keyframes skeleton-loading {
