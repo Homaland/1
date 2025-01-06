@@ -1,13 +1,13 @@
-import { useTonConnectModal } from '@tonconnect/ui-react';
+import { useTonConnectUI } from '@tonconnect/ui-react';
 import './CustomConnectButton.css'; // Вынесите стили в отдельный файл
 
 const CustomConnectButton = () => {
-  const { open } = useTonConnectModal();
+  const [tonConnectUI, setOptions] = useTonConnectUI();
 
   return (
-    <button onClick={open} className="custom-connect-button">
-      Подключить кошелек
-    </button>
+        <button onClick={() => tonConnectUI.openModal()}>
+     Connect Wallet
+   </button>
   );
 };
 
