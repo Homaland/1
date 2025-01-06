@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { JettonBalance } from "@ton-api/client";
 import { createSwapWidget } from "@swap-coffee/ui-sdk";
 import { useTonConnectUI } from "@tonconnect/ui-react"; // Импортируем хук
+import './ButtonRow.css';
 
 interface ButtonRowProps {
   jettons: JettonBalance[] | null;
@@ -13,6 +14,13 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
   const [isSwapModalVisible, setIsSwapModalVisible] = useState(false); // Состояние видимости модального окна
   const [tonConnectUi] = useTonConnectUI(); // Получаем экземпляр TonConnectUI
   const widgetInitialized = useRef(false);
+  const manifestUrl = "https://swap.coffee/tonconnect-manifest.json"; // URL манифеста для TonConnect
+
+  // Эмулируем задержку загрузки
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
+    return () => clearTimeout(timer);
+  }, []);
 
   // Инициализация виджета только один раз
   useEffect(() => {
@@ -21,21 +29,14 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
         theme: 'light',
         locale: 'ru',
         tonConnectManifest: {
-          url: "https://swap.coffee/tonconnect-manifest.json",
+          url: manifestUrl,
         },
         injectionMode: 'tonConnect',
         tonConnectUi: tonConnectUi, // Передаем существующий экземпляр
       });
-
       widgetInitialized.current = true;
     }
   }, [tonConnectUi]);
-
-  // Эмулируем задержку загрузки
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
-    return () => clearTimeout(timer);
-  }, []);
 
   const toggleSwapModal = () => {
     setIsSwapModalVisible((prev) => !prev); // Переключаем видимость модального окна
@@ -50,37 +51,6 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
             <div className="skeleton-button" />
           </div>
         ))}
-        <style>
-          {`
-            @keyframes skeleton-loading {
-              0% {
-                background-color: #e0e0e0;
-              }
-              50% {
-                background-color: #f7f7f7;
-              }
-              100% {
-                background-color: #e0e0e0;
-              }
-            }
-
-            .skeleton-button-row {
-              display: flex;
-              gap: 10px;
-            }
-            .skeleton-button-container {
-              width: 70px;
-              height: 80px;
-            }
-            .skeleton-button {
-              width: 100%;
-              height: 100%;
-              background-color: #e0e0e0;
-              border-radius: 10px;
-              animation: skeleton-loading 1.5s infinite ease-in-out;
-            }
-          `}
-        </style>
       </div>
     );
   }
@@ -90,10 +60,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
       <div className="button-row">
         {/* Кнопка "Receive" */}
         <div className="button-container">
-          <div
-            className="action-button"
-            onClick={() => alert("Soon")}
-          >
+          <div className="action-button" onClick={() => alert("Soon")}>
             <img
               src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_downward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
               alt="Receive"
@@ -120,10 +87,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
 
         {/* Кнопка "Swap" */}
         <div className="button-container">
-          <div
-            className="action-button"
-            onClick={toggleSwapModal} // Включаем модальное окно
-          >
+          <div className="action-button" onClick={toggleSwapModal}>
             <img
               src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/swap_vert_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
               alt="Swap"
@@ -140,7 +104,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
           <div className="slide-modal">
             <div className="modal-content">
               <div id="swap-widget-component"></div>
-              <button onClick={toggleSwapModal}>Close</button>
+              <button className="close-modal-btn" onClick={toggleSwapModal}>Close</button>
             </div>
           </div>
         </div>
@@ -218,6 +182,21 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
             justify-content: center;
             align-items: center;
             text-align: center;
+          }
+
+          /* Кнопка закрытия */
+          .close-modal-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+          }
+
+          .close-modal-btn:hover {
+            background-color: #0056b3;
           }
         `}
       </style>
