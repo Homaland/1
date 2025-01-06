@@ -87,7 +87,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
       </div>
 
       {/* Модальное окно с виджетом */}
-      {showModal && <Modal onClose={handleCloseModal} />}
+      {showModal && <Modal onClose={handleCloseModal} isVisible={showModal} />}
     </div>
   );
 };
