@@ -1,40 +1,3 @@
-import { useEffect, useState } from "react";
-import { JettonBalance } from "@ton-api/client";
-import { JettonItem } from "./JettonItem";
-
-interface JettonListProps {
-  jettons: JettonBalance[] | null;
-  connectedAddressString: string | null;
-  onSendClick: (jetton: JettonBalance) => void;
-  className?: string;
-}
-
-const getTonPriceInUSD = async () => {
-  try {
-    const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd");
-    const data = await response.json();
-    return data["the-open-network"]?.usd || 0;
-  } catch (error) {
-    console.error("Ошибка при получении курса TON:", error);
-    return 0;
-  }
-};
-
-const getTonBalance = async (address: string) => {
-  try {
-    const response = await fetch(`https://toncenter.com/api/v2/getAddressBalance?address=${address}`);
-    const data = await response.json();
-    if (data.ok) {
-      return data.result / 1e9;
-    } else {
-      throw new Error("Ошибка при получении баланса");
-    }
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
-
 export const JettonList = ({ jettons, connectedAddressString, onSendClick, className }: JettonListProps) => {
   const [tonBalance, setTonBalance] = useState<number | null>(null);
   const [tonPriceInUSD, setTonPriceInUSD] = useState<number>(0);
@@ -85,8 +48,10 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
               <div className="jetton-details">
                 <p>TON: </p>
               </div>
-              <p>{tonBalance}</p>
-              <p>({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
+              <div className="balance-info">
+                <p>{tonBalance}</p> {/* Показ баланса */}
+                <p>({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p> {/* Показ эквивалента в USD */}
+              </div>
             </div>
           ) : (
             <p>No jettons found</p>
@@ -174,6 +139,11 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             border-radius: 4px;
             margin: 0 auto;
             animation: skeleton-loading 1.5s infinite ease-in-out;
+          }
+
+          /* Стили для нового блока с балансом */
+          .balance-info p {
+            margin: 5px 0; /* Добавляем отступы, чтобы каждый баланс был на новой строке */
           }
         `}
       </style>
