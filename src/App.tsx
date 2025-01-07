@@ -177,7 +177,6 @@ function App() {
               <Tokeninfo />
             </div>
              <div className="cards-container">
-           <div className="earncards"> <Earncard /></div>
            <div
   className="jetton-list-link"
   onClick={() => window.location.href = '/jettons'}
@@ -189,6 +188,7 @@ function App() {
     onSendClick={setSelectedJetton}
   />
 </div>
+               <div className="earncards"> <Earncard /></div>
                </div>
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
