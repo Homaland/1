@@ -181,7 +181,9 @@ margin: 5%;
   align-items: center;
   margin-bottom: 10px;
 }
-
+.jettons-symbol {
+  font-weight: bold; 
+}
 .jettons-image {
   width: 30px;
   height: 30px;
