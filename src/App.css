@@ -361,12 +361,6 @@ background-color:rgba(255, 255, 255, 0.87);
   margin-top: 3vh;
 }
 
-.wallet-connection {
-  display: flex;
-  justify-content: center;
-  width: 100%; 
-  margin-top: 7vh; 
-}
 
 select {
   margin-top: 10px;
@@ -550,7 +544,8 @@ select {
   display: flex;
   justify-content: center; /* Центрируем кнопки по горизонтали */
   align-items: flex-start; /* Выравниваем кнопки по верхнему краю */
-  gap: 5%; /* Пространство между кнопками */
+  gap: 10%; /* Пространство между кнопками */
+    margin: 0 5%; 
 }
 
 .button-container {
