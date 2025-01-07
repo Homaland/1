@@ -61,14 +61,7 @@
   background-color: #ccc;
 }
 
-.user-name {
-  flex-grow: 1;
-  margin-left: 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-   font-size: 18px;
-}
+
 
 .arrow-icon {
   margin-left: 5px;
