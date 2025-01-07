@@ -185,36 +185,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             animation: skeleton-loading 1.5s infinite ease-in-out;
           }
 
-          .jetton-info {
-            display: flex;
-            align-items: center; /* Располагаем картинку и символ на одной строке */
-            gap: 10px; /* Промежуток между изображением и символом */
-          }
-
-          .jetton-image {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-          }
-
-          .jetton-symbol-balance-price {
-            display: flex;
-            align-items: center; /* Все элементы на одной строке */
-            gap: 10px; /* Отступы между символом, балансом и ценой */
-          }
-
-          .jetton-price {
-            font-size: 14px;
-            color: #888;
-          }
-
-          .jetton-symbol {
-            font-weight: bold;
-          }
-
-          .jetton-balance {
-            font-weight: normal;
-          }
+        
         `}
       </style>
     </div>
