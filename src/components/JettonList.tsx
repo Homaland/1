@@ -83,10 +83,10 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
                 style={{ width: "40px", height: "40px", borderRadius: "50%" }}
               />
               <div className="jetton-details">
-                <p>TON: </p>
+                <p>TON:</p>
+                <p className="jetton-balance">{tonBalance}</p> {/* Баланс на новой строке */}
+                <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p> {/* Цена на новой строке */}
               </div>
-              <p>{tonBalance}</p>
-              <p>({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
             </div>
           ) : (
             <p>No jettons found</p>
@@ -174,6 +174,33 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             border-radius: 4px;
             margin: 0 auto;
             animation: skeleton-loading 1.5s infinite ease-in-out;
+          }
+
+          .jetton-item {
+            display: flex;
+            flex-direction: column; /* Вертикальное расположение элементов */
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+
+          .jetton-details {
+            display: flex;
+            flex-direction: column; /* Элементы внутри jetton-details теперь располагаются по вертикали */
+            gap: 5px;
+          }
+
+          .jetton-balance {
+            margin-top: 5px; /* Отступ для баланса */
+            font-weight: bold; /* Подчеркивание важности баланса */
+          }
+
+          .jetton-price {
+            margin-top: 5px; /* Отступ для цены */
+            color: #888; /* Более светлый цвет для цены */
           }
         `}
       </style>
