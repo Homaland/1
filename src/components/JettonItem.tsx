@@ -48,8 +48,24 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
               background-color: #e0e0e0;
               border-radius: 4px;
             }
-          `}
-        </style>
+          .jetton-info {
+            display: flex;
+            align-items: center; /* Располагаем картинку и символ на одной строке */
+            gap: 10px; /* Промежуток между изображением и символом */
+          }
+          .jetton-image {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+          }
+          .jetton-symbol {
+            font-weight: bold;
+          }
+
+          .jetton-balance {
+            font-weight: normal;
+          }
+       `}  </style>
       </div>
     );
   }
