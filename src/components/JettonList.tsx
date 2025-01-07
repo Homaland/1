@@ -185,31 +185,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             animation: skeleton-loading 1.5s infinite ease-in-out;
           }
 
-          .jetton-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          }
-
-          .jetton-details {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-          }
-
-          .jetton-balance {
-            margin-top: 5px;
-            font-weight: bold;
-          }
-
-          .jetton-price {
-            margin-top: 5px;
-            color: #888;
-          }
+         
         `}
       </style>
     </div>
