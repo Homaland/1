@@ -1,3 +1,4 @@
+import React from "react";
 
 const data = [
   { name: "USUAL / USDT", status: "Sideways", percentage: "27.3%", trend: "positive" },
@@ -7,81 +8,75 @@ const data = [
   { name: "ENA / USDT", status: "Sideways", percentage: "14.6%", trend: "positive" },
 ];
 
+const containerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "10px",
+  padding: "20px"
+};
+
+const itemStyle = {
+  display: "flex",
+  alignItems: "center",
+  backgroundColor: "#2A2A2A",
+  borderRadius: "10px",
+  padding: "10px 15px",
+  gap: "15px"
+};
+
+const iconStyle = {
+  width: "40px",
+  height: "40px"
+};
+
+const detailsStyle = {
+  flex: 1
+};
+
+const nameStyle = {
+  fontSize: "16px",
+  fontWeight: "bold",
+  color: "#FFF"
+};
+
+const statusStyle = {
+  fontSize: "14px",
+  color: "#A3A3A3"
+};
+
+const percentageStyle = {
+  fontSize: "16px",
+  fontWeight: "bold",
+  color: "#FFF"
+};
+
+const positiveStyle = {
+  color: "#4CAF50"
+};
+
+const negativeStyle = {
+  color: "#F44336"
+};
+
 export const BotList: React.FC = () => {
-    <style>
-    {`
-      .container {
-display: flex;
-flex-direction: column;
-gap: 10px;
-padding: 20px;
-}
-
-.item {
-display: flex;
-align-items: center;
-background-color: #2A2A2A;
-border-radius: 10px;
-padding: 10px 15px;
-gap: 15px;
-}
-
-.icon {
-width: 40px;
-height: 40px;
-}
-
-.details {
-flex: 1;
-}
-
-.name {
-font-size: 16px;
-font-weight: bold;
-color: #FFF;
-}
-
-.status {
-font-size: 14px;
-color: #A3A3A3;
-}
-
-.percentage {
-font-size: 16px;
-font-weight: bold;
-color: #FFF;
-}
-
-.percentage.positive {
-color: #4CAF50;
-}
-
-.percentage.negative {
-color: #F44336;
-}
-
-    `}
-  </style>
   return (
-    
-    <div className="container">
+    <div style={containerStyle}>
       {data.map((item, index) => (
-        <div className="item" key={index}>
+        <div style={itemStyle} key={index}>
           <img 
             src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" 
             alt="Binance Icon" 
-            className="icon" 
+            style={iconStyle} 
           />
-          <div className="details">
-            <div className="name">{item.name}</div>
-            <div className="status">{item.status}</div>
+          <div style={detailsStyle}>
+            <div style={nameStyle}>{item.name}</div>
+            <div style={statusStyle}>{item.status}</div>
           </div>
-          <div className={`percentage ${item.trend}`}>{item.percentage}</div>
+          <div style={{...percentageStyle, ...(item.trend === "positive" ? positiveStyle : negativeStyle)}}>
+            {item.percentage}
+          </div>
         </div>
       ))}
     </div>
-     
   );
 };
-
-
