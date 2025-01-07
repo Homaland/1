@@ -25,7 +25,7 @@ const getTonBalance = async (address: string) => {
     const response = await fetch(`https://toncenter.com/api/v2/getAddressBalance?address=${address}`);
     const data = await response.json();
     if (data.ok) {
-      return data.result / 1e9;
+      return data.result / 1e9; // Преобразуем в TON
     } else {
       throw new Error("Ошибка при получении баланса");
     }
@@ -60,6 +60,15 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
     fetchData();
   }, [connectedAddressString]);
 
+  // Функция для форматирования баланса в зависимости от символа
+  const formatBalance = (balance: number, symbol: string) => {
+    if (symbol === "HODR") {
+      // Округляем баланс для HODR до целого числа
+      return balance.toFixed(0);
+    }
+    return balance.toFixed(2); // Для других токенов показываем 2 знака после запятой
+  };
+
   return (
     <div className={className}>
       {connectedAddressString ? (
@@ -84,9 +93,9 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
               />
               <div className="jetton-details">
                 <p>TON:</p>
-                {/* Форматирование баланса для TON */}
-                <p className="jetton-balance">{tonBalance.toFixed(2)}</p> {/* 2 знака после запятой */}
-                <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p> {/* Цена на новой строке */}
+                {/* Используем formatBalance для форматирования баланса */}
+                <p className="jetton-balance">{formatBalance(tonBalance, "TON")}</p> {/* Форматирование для TON */}
+                <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p> {/* Цена */}
               </div>
             </div>
           ) : (
@@ -179,8 +188,8 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
 
           .jetton-item {
             display: flex;
-            align-items: center; /* Горизонтальное расположение элементов */
-            gap: 10px; /* Промежуток между изображением и символом */
+            align-items: center;
+            gap: 10px;
             padding: 10px;
             background-color: #fff;
             border-radius: 10px;
@@ -194,13 +203,13 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
           }
 
           .jetton-balance {
-            margin-top: 5px; /* Отступ для баланса */
-            font-weight: bold; /* Подчеркивание важности баланса */
+            margin-top: 5px;
+            font-weight: bold;
           }
 
           .jetton-price {
-            margin-top: 5px; /* Отступ для цены */
-            color: #888; /* Более светлый цвет для цены */
+            margin-top: 5px;
+            color: #888;
           }
         `}
       </style>
