@@ -11,7 +11,7 @@ const initialData = [
 // Функция для генерации случайных процентов в диапазоне от 2 до 40
 const getRandomPercentage = (): string => {
   const min = 2;
-  const max = 40;
+  const max = 15;
   const randomPercentage = (Math.random() * (max - min) + min).toFixed(2); // Генерируем случайное значение от 2 до 40
   return randomPercentage;
 };
