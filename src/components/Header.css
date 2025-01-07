@@ -1,7 +1,7 @@
 .profile-header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Элементы распределяются по краям */
+  justify-content: space-between; /* Выравнивает элементы по краям */
   width: 90%;
   padding: 10px;
   box-sizing: border-box;
@@ -19,9 +19,9 @@
 .user-name {
   font-size: 18px;
   font-weight: bold;
-  margin-right: 5px;
   display: flex;
   align-items: center;
+  margin-right: auto; /* Выравнивание по левому краю */
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -44,7 +44,7 @@
   object-fit: contain;
 }
 
-.skeleton-photo, .skeleton-name {
+.skeleton-photo, .skeleton-name, .skeleton-button {
   animation: skeleton-loading 1.5s infinite ease-in-out;
   background-color: #e0e0e0;
 }
@@ -65,6 +65,12 @@
   width: 120px;
   height: 36px;
   border-radius: 4px;
+}
+
+.skeleton-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 18px;
 }
 
 .placeholder-photo {
