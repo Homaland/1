@@ -177,7 +177,10 @@ function App() {
                <div className="earncards"> <Earncard /></div>
                </div>
               <ButtonRow jettons={jettons} setSelectedJetton={setSelectedJetton} />
-    <BotList />
+     <div className="botcards"> <BotList /></div>
+                          <div className="tokenhodr">
+   <Tokeninfo />
+            </div>
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
                   senderAddress={connectedAddress}
@@ -198,9 +201,7 @@ function App() {
                     texts={texts}
                   />
                        </div>
-                       <div className="tokenhodr">
-   <Tokeninfo />
-            </div>
+         
             <BottomMenu />
           </div>
         )
