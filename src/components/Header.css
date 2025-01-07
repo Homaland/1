@@ -10,11 +10,7 @@
   border-radius: 50%;
 }
 
-.skeleton-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+
 
 .skeleton-photo, .skeleton-name, .skeleton-button {
   animation: skeleton-loading 1.5s infinite ease-in-out;
@@ -40,8 +36,8 @@
 }
 
 .skeleton-button {
-  width: 100px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 18px;
 }
 .profile-header {
@@ -84,14 +80,8 @@
 }
 
 
-.skeleton-header, .skeleton-photo, .skeleton-name, .skeleton-button {
+.skeleton-photo, .skeleton-name, .skeleton-button {
   background-color: #ccc;
-}
-
-.skeleton-header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
 }
 
 .skeleton-photo {
@@ -107,8 +97,8 @@
 }
 
 .skeleton-button {
-  width: 50px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   margin-left: auto;
 }
 
