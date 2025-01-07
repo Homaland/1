@@ -56,10 +56,10 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
 
   const { jetton, balance } = jettonBalance;
 
-  // Для HODR, мы округляем до целого числа, а для других токенов показываем с десятичными знаками
+  // Если символ HODR, выводим только целую часть баланса
   const formattedBalance = jetton.symbol === "HODR"
-    ? Math.floor(Number(balance.toString())) // Округляем до целого числа для HODR
-    : toDecimals(Number(balance.toString()), jetton.decimals); // Для других токенов — обычное форматирование
+    ? Math.floor(Number(balance.toString())) // Используем Math.floor для округления
+    : toDecimals(Number(balance.toString()), jetton.decimals); // Для других токенов отображаем с точностью
 
   return (
     <div className="jetton-item">
