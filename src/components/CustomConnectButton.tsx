@@ -8,7 +8,6 @@ const CustomConnectButton = () => {
   const [tonConnectUI] = useTonConnectUI();
   const [isConnected, setIsConnected] = useState(tonConnectUI.connected);
   const userFriendlyAddress = useTonAddress(); // Получаем пользовательский адрес
-  const rawAddress = useTonAddress(false); // Сырый адрес кошелька
   const [showModal, setShowModal] = useState(false); // Состояние для отображения модального окна
 
   useEffect(() => {
