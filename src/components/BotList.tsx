@@ -78,7 +78,7 @@ const itemStyle: React.CSSProperties = {
   display: "flex",
   alignItems: "center",
   backgroundColor: "#2A2A2A",
-  borderRadius: "10px",
+  borderRadius: "25px",
   padding: "10px 15px",
   gap: "15px",
 };
