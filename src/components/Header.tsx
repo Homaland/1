@@ -70,6 +70,7 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
           <div className="slide-modal visible">
             <div className="modal-content">
               <h2>Fren</h2>
+              <p>Soon</p>
               <button onClick={handleCloseModal}>Cancel</button>
             </div>
           </div>
