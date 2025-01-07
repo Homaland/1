@@ -193,7 +193,24 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             align-items: center; /* Располагаем картинку и символ на одной строке */
           }
 
-         
+         .jetton-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px; /* Отступ справа от изображения */
+  border-radius: 50%;
+}
+.jetton-item {
+  display: flex;
+  align-items: center; /* Выравнивание по центру по вертикали */
+  gap: 10px; /* Промежуток между изображением и текстом */
+  padding: 10px;
+}
+
+.jetton-details {
+  display: flex;
+  flex-direction: column; /* Содержимое внутри будет располагаться по вертикали */
+  gap: 5px;
+}
 
           .jetton-price {
             font-size: 14px;
