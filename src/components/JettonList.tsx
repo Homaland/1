@@ -22,7 +22,7 @@ const getTonPriceInUSD = async () => {
 
 const getTonBalance = async (address: string) => {
   try {
-    const response = await fetch(https://toncenter.com/api/v2/getAddressBalance?address=${address});
+    const response = await fetch(`https://toncenter.com/api/v2/getAddressBalance?address=${address}`);
     const data = await response.json();
     if (data.ok) {
       return data.result / 1e9;
@@ -80,7 +80,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
                 src="https://ton.org/download/ton_symbol.svg"
                 alt="TON"
                 className="jetton-image"
-                style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
               />
               <div className="jetton-details">
                 <p>TON: </p>
@@ -118,7 +118,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
       )}
 
       <style>
-        {
+        {`
           @keyframes skeleton-loading {
             0% {
               background-color: #e0e0e0;
@@ -142,8 +142,8 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             gap: 10px;
           }
           .skeleton-image {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             background-color: #e0e0e0;
             border-radius: 50%;
             animation: skeleton-loading 1.5s infinite ease-in-out;
@@ -175,7 +175,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             margin: 0 auto;
             animation: skeleton-loading 1.5s infinite ease-in-out;
           }
-        }
+        `}
       </style>
     </div>
   );
