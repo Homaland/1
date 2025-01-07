@@ -60,8 +60,8 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
     <div className="jetton-item">
       <img src={jetton.image} alt={jetton.symbol} className="jetton-image" />
       <div className="jetton-details">
-        {/* Отображаем только символ токена */}
-        <p>{jetton.symbol}:</p>
+        {/* Символ токена рядом с изображением */}
+        <p className="jetton-symbol">{jetton.symbol}</p>
         {/* Баланс на новой строке */}
         <p className="jetton-balance">{toDecimals(balance, jetton.decimals)}</p>
       </div>
