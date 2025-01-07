@@ -56,15 +56,13 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
   const { jetton, balance } = jettonBalance;
 
   // Функция для форматирования баланса
-  const formatBalance = (balance: bigint, symbol: string) => {
-    // Преобразуем balance в number
-    const balanceNumber = Number(balance); // Преобразование bigint в number
+  const formatBalance = (balance: bigint | number, symbol: string) => {
     if (symbol === "HODR") {
       // Для HODR убираем дробную часть (округление вниз)
-      return Math.floor(balanceNumber).toString(); 
+      return Math.floor(Number(balance)).toString(); 
     }
     // Для других токенов (например, TON) два знака после запятой
-    return balanceNumber.toFixed(2); 
+    return Number(balance).toFixed(2); 
   };
 
   return (
