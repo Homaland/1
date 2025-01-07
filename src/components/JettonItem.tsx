@@ -56,6 +56,14 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
 
   const { jetton, balance } = jettonBalance;
 
+  // Функция для форматирования баланса
+  const formatBalance = (balance: number, symbol: string) => {
+    if (symbol === "HODR") {
+      return Math.floor(balance).toString(); // Для HODR убираем дробную часть
+    }
+    return balance.toFixed(2); // Для других токенов (например, TON) два знака после запятой
+  };
+
   return (
     <div className="jetton-item">
       <img src={jetton.image} alt={jetton.symbol} className="jetton-image" />
@@ -63,7 +71,8 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
         {/* Отображаем только символ токена */}
         <p>{jetton.symbol}: </p>
       </div>
-      <p>{toDecimals(balance, jetton.decimals)}</p>
+      {/* Форматируем баланс с помощью formatBalance */}
+      <p>{formatBalance(balance, jetton.symbol)}</p>
     </div>
   );
 };
