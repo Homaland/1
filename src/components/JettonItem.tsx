@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 import { JettonBalance } from "@ton-api/client";
 import { toDecimals } from "../utils/decimals";
 
@@ -61,9 +61,10 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
       <img src={jetton.image} alt={jetton.symbol} className="jetton-image" />
       <div className="jetton-details">
         {/* Отображаем только символ токена */}
-        <p>{jetton.symbol}: </p>
+        <p>{jetton.symbol}:</p>
+        {/* Баланс на новой строке */}
+        <p className="jetton-balance">{toDecimals(balance, jetton.decimals)}</p>
       </div>
-      <p>{toDecimals(balance, jetton.decimals)}</p>
     </div>
   );
 };
