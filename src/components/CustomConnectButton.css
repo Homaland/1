@@ -66,10 +66,10 @@
   border: none;
   color: #000;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 18px; /* Размер шрифта для текста */
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 8px; /* Расстояние между иконкой и текстом */
 }
 
 /* Контент внутри модального окна */
