@@ -97,7 +97,8 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             jettons
               .filter((jettonBalance) => {
                 const symbol = jettonBalance.jetton.symbol;
-                return symbol === "TON" || symbol === "HODR"; // Фильтруем только по символу TON или HODR
+                // Показываем TON всегда и HODR только если баланс больше 0
+                return symbol === "TON" || (symbol === "HODR" && jettonBalance.balance > 0);
               })
               .map((jettonBalance) => (
                 <JettonItem key={jettonBalance.jetton.address.toString()} jettonBalance={jettonBalance} onSendClick={onSendClick} />
