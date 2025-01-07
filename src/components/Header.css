@@ -43,42 +43,48 @@
   object-fit: contain;
 }
 
- .skeleton-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  @keyframes skeleton-loading {
+              0% {
+                background-color: #e0e0e0;
+              }
+              50% {
+                background-color: #f7f7f7;
+              }
+              100% {
+                background-color: #e0e0e0;
+              }
+            }
 
-.skeleton-photo, .skeleton-name {
-  animation: skeleton-loading 1.5s infinite ease-in-out;
-  background-color: #e0e0e0;
-}
+            .skeleton-header {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            }
 
-@keyframes skeleton-loading {
-  0% { background-color: #e0e0e0; }
-  50% { background-color: #f7f7f7; }
-  100% { background-color: #e0e0e0; }
-}
+            .skeleton-photo,
+            .skeleton-name,
+            .skeleton-button {
+              animation: skeleton-loading 1.5s infinite ease-in-out;
+            }
 
-.skeleton-photo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.skeleton-name {
-  width: 120px;
-  height: 36px;
-  border-radius: 4px;
-}
-
-
-.placeholder-photo {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #ccc;
-}
+            .skeleton-photo {
+              width: 40px;
+              height: 40px;
+              background-color: #e0e0e0;
+              border-radius: 50%;
+            }
+            .skeleton-name {
+              width: 120px;
+              height: 36px;
+              background-color: #e0e0e0;
+              border-radius: 4px;
+            }
+            .skeleton-button {
+              width: 100px;
+              height: 36px;
+              background-color: #e0e0e0;
+              border-radius: 18px;
+            }
 
 .overlay {
   position: fixed;
