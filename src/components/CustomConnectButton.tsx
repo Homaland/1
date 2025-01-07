@@ -44,11 +44,19 @@ const CustomConnectButton = () => {
     setShowModal(false); // Закрыть модальное окно при отключении
   };
 
+  // Функция для обрезки адреса, чтобы показывать только первые и последние 4 символа
+  const getShortenedAddress = (address: string) => {
+    if (!address) return '';
+    const firstPart = address.slice(0, 4);
+    const lastPart = address.slice(-4);
+    return `${firstPart}...${lastPart}`;
+  };
+
   return (
     <div>
       {/* Одна кнопка для подключения/отключения и отображения адреса */}
       <button className="wallet-address" onClick={handleConnectDisconnect}>
-        {isConnected ? userFriendlyAddress : 'Connect Wallet'}
+        {isConnected ? getShortenedAddress(userFriendlyAddress) : 'Connect Wallet'}
       </button>
 
       {/* Модальное окно для копирования адреса и отключения */}
