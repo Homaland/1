@@ -177,7 +177,22 @@ background-color:rgba(255, 255, 255, 0.87);
   transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
 }
 
+ .jetton-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
+.jetton-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.jetton-details {
+  flex-grow: 1;
+}
 .earncards {
  
   width: 100%;
