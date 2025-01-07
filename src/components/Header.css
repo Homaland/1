@@ -44,47 +44,49 @@
 }
 
   @keyframes skeleton-loading {
-              0% {
-                background-color: #e0e0e0;
-              }
-              50% {
-                background-color: #f7f7f7;
-              }
-              100% {
-                background-color: #e0e0e0;
-              }
-            }
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f7f7f7;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
 
-            .skeleton-header {
-              display: flex;
-              align-items: center;
-              gap: 10px;
-            }
+.skeleton-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-            .skeleton-photo,
-            .skeleton-name,
-            .skeleton-button {
-              animation: skeleton-loading 1.5s infinite ease-in-out;
-            }
+.skeleton-photo,
+.skeleton-name,
+.skeleton-button {
+  animation: skeleton-loading 1.5s infinite ease-in-out;
+}
 
-            .skeleton-photo {
-              width: 40px;
-              height: 40px;
-              background-color: #e0e0e0;
-              border-radius: 50%;
-            }
-            .skeleton-name {
-              width: 120px;
-              height: 36px;
-              background-color: #e0e0e0;
-              border-radius: 4px;
-            }
-            .skeleton-button {
-              width: 100px;
-              height: 36px;
-              background-color: #e0e0e0;
-              border-radius: 18px;
-            }
+.skeleton-photo {
+  width: 40px;
+  height: 40px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+}
+
+.skeleton-name {
+  width: 120px;
+  height: 36px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+.skeleton-button {
+  width: 36px;
+  height: 36px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+}
 
 .overlay {
   position: fixed;
