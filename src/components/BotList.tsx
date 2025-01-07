@@ -8,14 +8,15 @@ const data = [
   { name: "ENA / USDT", status: "Sideways", percentage: "14.6%", trend: "positive" },
 ];
 
-const containerStyle = {
+// Убедитесь, что типы стилей соответствуют типам React.CSSProperties
+const containerStyle: React.CSSProperties = {
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "column",  // Теперь используем правильное значение для flexDirection
   gap: "10px",
   padding: "20px"
 };
 
-const itemStyle = {
+const itemStyle: React.CSSProperties = {
   display: "flex",
   alignItems: "center",
   backgroundColor: "#2A2A2A",
@@ -24,37 +25,37 @@ const itemStyle = {
   gap: "15px"
 };
 
-const iconStyle = {
+const iconStyle: React.CSSProperties = {
   width: "40px",
   height: "40px"
 };
 
-const detailsStyle = {
+const detailsStyle: React.CSSProperties = {
   flex: 1
 };
 
-const nameStyle = {
+const nameStyle: React.CSSProperties = {
   fontSize: "16px",
   fontWeight: "bold",
   color: "#FFF"
 };
 
-const statusStyle = {
+const statusStyle: React.CSSProperties = {
   fontSize: "14px",
   color: "#A3A3A3"
 };
 
-const percentageStyle = {
+const percentageStyle: React.CSSProperties = {
   fontSize: "16px",
   fontWeight: "bold",
   color: "#FFF"
 };
 
-const positiveStyle = {
+const positiveStyle: React.CSSProperties = {
   color: "#4CAF50"
 };
 
-const negativeStyle = {
+const negativeStyle: React.CSSProperties = {
   color: "#F44336"
 };
 
@@ -72,7 +73,7 @@ export const BotList: React.FC = () => {
             <div style={nameStyle}>{item.name}</div>
             <div style={statusStyle}>{item.status}</div>
           </div>
-          <div style={{...percentageStyle, ...(item.trend === "positive" ? positiveStyle : negativeStyle)}}>
+          <div style={{ ...percentageStyle, ...(item.trend === "positive" ? positiveStyle : negativeStyle) }}>
             {item.percentage}
           </div>
         </div>
