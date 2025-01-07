@@ -56,14 +56,24 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
 
   const { jetton, balance } = jettonBalance;
 
+  // Функция для отображения баланса без знаков после запятой
+  const formatBalanceWithoutDecimals = (balance: bigint, decimals: number) => {
+    // Используем toDecimals, чтобы преобразовать баланс в строку
+    let formattedBalance = toDecimals(balance, decimals);
+    
+    // Преобразуем строку в число и убираем дробную часть
+    const balanceNumber = Number(formattedBalance);
+    return Math.floor(balanceNumber).toString(); // Округляем до целого
+  };
+
   return (
     <div className="jetton-item">
       <img src={jetton.image} alt={jetton.symbol} className="jetton-image" />
       <div className="jetton-details">
-        {/* Отображаем только символ токена */}
         <p>{jetton.symbol}: </p>
       </div>
-      <p>{toDecimals(balance, jetton.decimals)}</p>
+      {/* Форматируем баланс, убирая дробную часть */}
+      <p>{formatBalanceWithoutDecimals(balance, jetton.decimals)}</p>
     </div>
   );
 };
