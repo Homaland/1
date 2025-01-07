@@ -54,9 +54,14 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
           <i className="material-icons">arrow_forward_ios</i>
         </span>
       </div>
-      {/* Иконка подарка */}
+      
+      {/* Иконка подарка в виде SVG */}
       <div onClick={handleGiftClick} className="gift-icon">
-        <i className="material-icons">card_giftcard</i>
+        <img 
+          src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/IslomjonAnimeEmoji_AgADajcAAlqLEUg.svg" 
+          alt="Gift Icon"
+          className="gift-icon-img"
+        />
       </div>
 
       {/* Модальное окно */}
@@ -64,16 +69,8 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
         <div className="overlay visible">
           <div className="slide-modal visible">
             <div className="modal-content">
-              <h2>Send Gift</h2>
-              <label>
-                Recipient Address:
-                <input type="text" placeholder="Enter recipient address" />
-              </label>
-              <label>
-                Amount:
-                <input type="number" placeholder="Enter amount" />
-              </label>
-              <button onClick={handleCloseModal}>Send</button>
+              <h2>Fren</h2>
+      
               <button onClick={handleCloseModal}>Cancel</button>
             </div>
           </div>
