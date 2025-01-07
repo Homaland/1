@@ -31,7 +31,7 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
 
   if (loading) {
     return (
-      <header className="skeleton-header">
+      <header>
         <div className="skeleton-photo" />
         <div className="skeleton-name" />
         <div className="skeleton-button" />
