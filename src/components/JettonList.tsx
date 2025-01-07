@@ -91,7 +91,15 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
                 style={{ width: "30px", height: "30px", borderRadius: "50%" }}
               />
               <div className="jetton-details">
-                <p>TON:</p>
+                <div className="jetton-header">
+                  <p className="jetton-symbol">TON:</p>
+                  <img
+                    src="https://ton.org/download/ton_symbol.svg"
+                    alt="TON"
+                    className="jetton-image"
+                    style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                  />
+                </div>
                 <br />
                 <p className="jetton-balance">{formatBalance(tonBalance, "TON")}</p>
                 <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
@@ -187,17 +195,33 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
 
           .jetton-item {
             display: flex;
-            flex-direction: column; /* Обеспечиваем, чтобы элементы шли по вертикали */
-            text-align: left; /* Выравниваем текст слева */
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
           }
-          .jetton-details p {
-            margin: 5px 0; /* Добавляем отступы для каждого элемента */
+
+          .jetton-details {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
           }
+
+          .jetton-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+
+          .jetton-symbol {
+            font-weight: bold;
+            font-size: 16px;
+          }
+
           .jetton-balance {
             font-weight: bold;
             font-size: 16px;
-            line-height: 1.5;
           }
+
           .jetton-price {
             font-size: 14px;
             color: #888;
