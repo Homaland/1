@@ -176,8 +176,20 @@ function App() {
 
               <Tokeninfo />
             </div>
+             <div className="cards-container">
            <div className="earncards"> <Earncard /></div>
-           
+           <div
+  className="jetton-list-link"
+  onClick={() => window.location.href = '/jettons'}
+>
+  <JettonList
+   className="card"
+    jettons={jettons}
+    connectedAddressString={connectedAddressString}
+    onSendClick={setSelectedJetton}
+  />
+</div>
+               </div>
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
                   senderAddress={connectedAddress}
@@ -189,17 +201,7 @@ function App() {
               )}
  
             
-<div
-  className="jetton-list-link"
-  onClick={() => window.location.href = '/jettons'}
->
-  <JettonList
-   className="card"
-    jettons={jettons}
-    connectedAddressString={connectedAddressString}
-    onSendClick={setSelectedJetton}
-  />
-</div>
+
               {error && <p className="error">{error}</p>}
               <CollectionStatus hasHODRCollection={hasHODRCollection} texts={texts} />
  <NftList
