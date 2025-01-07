@@ -216,8 +216,9 @@ text-align: center;
 
 .jetton-item {
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  align-items: flex-start; /* Выравнивание по верхнему краю для картинок и текста */
+  gap: 10px; /* Промежуток между изображением и текстом */
+  padding: 10px;
 }
 
 .jetton-image {
