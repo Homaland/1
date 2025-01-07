@@ -176,37 +176,23 @@ background-color:rgba(255, 255, 255, 0.87);
               0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для создания объема */
   transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
 }
+.jettons-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-  .jetton-info {
-            display: flex;
-            align-items: center; /* Располагаем картинку и символ на одной строке */
-            gap: 10px; /* Промежуток между изображением и символом */
-          }
+.jettons-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
 
-          .jetton-image {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-          }
-
-          .jetton-symbol-balance-price {
-            display: flex;
-            align-items: center; /* Все элементы на одной строке */
-            gap: 10px; /* Отступы между символом, балансом и ценой */
-          }
-
-          .jetton-price {
-            font-size: 14px;
-            color: #888;
-          }
-
-          .jetton-symbol {
-            font-weight: bold;
-          }
-
-          .jetton-balance {
-            font-weight: normal;
-          }
+.jettons-details {
+  flex-grow: 1;
+}
+  
 .earncards {
  
   width: 100%;
