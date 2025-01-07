@@ -197,21 +197,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             align-items: center; /* Располагаем картинку и символ на одной строке */
           }
 
-          .jetton-symbol {
-            margin-left: 10px;
-            font-size: 16px;
-            font-weight: bold;
-          }
-
-          .jetton-details {
-            margin-top: 5px;
-          }
-
-          .jetton-balance {
-            font-weight: bold;
-            font-size: 16px;
-            line-height: 1.5;
-          }
+         
 
           .jetton-price {
             font-size: 14px;
