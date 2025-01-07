@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import BottomMenu from "./components/BottomMenu";
 import Header from "./components/Header";
 import { SticList } from "./components/SticList";
+import { BotList } from "./components/BotList";
 import CollectionStatus from "./components/CollectionStatus";
 import ButtonRow from "./components/ButtonRow";
 import CustomConnectButton from './components/CustomConnectButton';
@@ -176,9 +177,7 @@ function App() {
                <div className="earncards"> <Earncard /></div>
                </div>
               <ButtonRow jettons={jettons} setSelectedJetton={setSelectedJetton} />
-<div className="tokenhodr">
-   <Tokeninfo />
-            </div>
+    <BotList />
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
                   senderAddress={connectedAddress}
@@ -199,6 +198,9 @@ function App() {
                     texts={texts}
                   />
                        </div>
+                       <div className="tokenhodr">
+   <Tokeninfo />
+            </div>
             <BottomMenu />
           </div>
         )
