@@ -1,77 +1,95 @@
-import { useTonConnectUI } from '@tonconnect/ui-react'; 
-import { useState, useEffect } from 'react';
-import { useTonAddress } from '@tonconnect/ui-react'; // Хук для получения адреса
-import './CustomConnectButton.css'; // Вынесите стили в отдельный файл
+import React, { useState, useEffect } from "react";
+import { JettonBalance } from "@ton-api/client";
+import './ButtonRow.css';
+import Modal from './Modal'; // Импортируем компонент модального окна
 
-const CustomConnectButton = () => {
-  const [tonConnectUI] = useTonConnectUI();
-  const [isConnected, setIsConnected] = useState(tonConnectUI.connected);
-  const userFriendlyAddress = useTonAddress(); // Получаем пользовательский адрес
-  const rawAddress = useTonAddress(false); // Сырый адрес кошелька
+interface ButtonRowProps {
+  jettons: JettonBalance[] | null;
+  setSelectedJetton: (jetton: JettonBalance | null) => void;
+}
+
+const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => {
+  const [loading, setLoading] = useState(true); // Состояние загрузки
   const [showModal, setShowModal] = useState(false); // Состояние для отображения модального окна
 
   useEffect(() => {
-    const checkConnectionStatus = () => {
-      setIsConnected(tonConnectUI.connected); // Обновляем состояние подключения
-    };
+    // Эмулируем задержку загрузки
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушки через 2 секунды
+    return () => clearTimeout(timer);
+  }, []);
 
-    checkConnectionStatus();
-
-    const intervalId = setInterval(() => {
-      checkConnectionStatus();
-    }, 500);
-
-    return () => clearInterval(intervalId);
-  }, [tonConnectUI]);
-
-  const handleConnectDisconnect = () => {
-    if (isConnected) {
-      setShowModal(true); // Открываем модалку при подключенном состоянии
-    } else {
-      tonConnectUI.openModal(); // Открываем модалку для подключения
-    }
+  const handleSwapClick = () => {
+    setShowModal(true); // Открываем модальное окно при нажатии на кнопку "Swap"
   };
 
-  const handleCopyAddress = () => {
-    if (rawAddress) {
-      navigator.clipboard.writeText(rawAddress);
-      alert('Address copied to clipboard');
-    }
+  const handleCloseModal = () => {
+    setShowModal(false); // Закрываем модальное окно
   };
 
-  const handleDisconnect = () => {
-    tonConnectUI.disconnect();
-    setShowModal(false); // Закрыть модальное окно при отключении
-  };
-
-  // Функция для обрезки адреса, чтобы показывать только первые и последние 4 символа
-  const getShortenedAddress = (address: string) => {
-    if (!address) return '';
-    const firstPart = address.slice(0, 4);
-    const lastPart = address.slice(-4);
-    return `${firstPart}...${lastPart}`;
-  };
+  if (loading) {
+    // Заглушки
+    return (
+      <div className="button-row skeleton-button-row">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div key={index} className="skeleton-button-container">
+            <div className="skeleton-button" />
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
-    <div>
-      {/* Одна кнопка для подключения/отключения и отображения адреса */}
-      <button className="wallet-address" onClick={handleConnectDisconnect}>
-        {isConnected ? getShortenedAddress(userFriendlyAddress) : 'Connect Wallet'}
-      </button>
-
-      {/* Модальное окно для копирования адреса и отключения */}
-      {showModal && (
-        <div className="modal-overlay">
-          <div className={`slide-modal ${showModal ? 'visible' : ''}`}>
-            <div className="modal-content">
-              <button onClick={handleCopyAddress}>Copy address</button>
-              <button onClick={handleDisconnect}>Disconnect</button>
-            </div>
-          </div>
+    <div className="button-row">
+      {/* Кнопка "Receive" */}
+      <div className="button-container">
+        <div
+          className="action-button"
+          onClick={() => alert("Soon")}
+        >
+          <img
+            src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_downward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+            alt="Receive"
+            className="icon"
+          />
+          <p className="button-text">Receive</p>
         </div>
-      )}
+      </div>
+
+      {/* Кнопка "Send" */}
+      <div className="button-container">
+        <div
+          className="action-button"
+          onClick={() => setSelectedJetton(jettons ? jettons[0] : null)}
+        >
+          <img
+            src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/arrow_upward_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+            alt="Send"
+            className="icon"
+          />
+          <p className="button-text">Send</p>
+        </div>
+      </div>
+
+      {/* Кнопка "Swap" */}
+      <div className="button-container">
+        <div
+          className="action-button"
+          onClick={handleSwapClick} // Открыть модальное окно
+        >
+          <img
+            src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/swap_vert_36dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+            alt="Swap"
+            className="icon"
+          />
+          <p className="button-text">Swap</p>
+        </div>
+      </div>
+
+      {/* Модальное окно с виджетом */}
+      {showModal && <Modal onClose={handleCloseModal} isVisible={showModal} />}
     </div>
   );
 };
 
-export default CustomConnectButton;
+export default ButtonRow;
