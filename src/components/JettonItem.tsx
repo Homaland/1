@@ -56,15 +56,15 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
 
   const { jetton, balance } = jettonBalance;
 
-  // Обрезаем символ HODR, чтобы после запятой ничего не отображалось
-  const formattedSymbol = jetton.symbol === "HODR" ? jetton.symbol.split(".")[0] : jetton.symbol;
+  // Обрабатываем символ HODR для отображения без части после запятой
+  const symbol = jetton.symbol === "HODR" ? "HODR" : jetton.symbol;
 
   return (
     <div className="jetton-item">
       <img src={jetton.image} alt={jetton.symbol} className="jetton-image" />
       <div className="jetton-details">
         {/* Символ токена рядом с изображением */}
-        <p className="jetton-symbol">{formattedSymbol}</p>
+        <p className="jetton-symbol">{symbol}</p>
         {/* Баланс на новой строке */}
         <p className="jetton-balance">{toDecimals(balance, jetton.decimals)}</p>
       </div>
