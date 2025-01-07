@@ -194,7 +194,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            gap: 5px;
+           margin-right: 5px;
           }
 
           .jetton-symbol-balance-price {
@@ -209,6 +209,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
 
           .jetton-symbol {
             font-weight: normal;
+            margin-right: 5px;
           }
 
           .jetton-balance {
