@@ -165,7 +165,7 @@ background-color:rgba(255, 255, 255, 0.87);
  gap: 20px;
 } 
 .card { 
-  
+  flex-wrap: wrap; 
   background-color: #fff; /* Полупрозрачный желтый фон */
   height: auto; /* Высота элемента автоматически подстраивается под содержимое */
   border: 1px solid #fff; /* Полупрозрачная желтая рамка вокруг элемента */
