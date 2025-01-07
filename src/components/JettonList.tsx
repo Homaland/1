@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 import { JettonBalance } from "@ton-api/client";
 import { JettonItem } from "./JettonItem";
 
@@ -73,13 +73,6 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
                   <div className="skeleton-line" style={{ width: "50px", height: "14px" }} />
                 </div>
               </div>
-              <div className="skeleton-item">
-                <div className="skeleton-image" />
-                <div className="skeleton-details">
-                  <div className="skeleton-line" style={{ width: "100px", height: "16px" }} />
-                  <div className="skeleton-line" style={{ width: "50px", height: "14px" }} />
-                </div>
-              </div>
             </div>
           ) : tonBalance !== null && tonPriceInUSD > 0 ? (
             <div className="jetton-item">
@@ -87,7 +80,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
                 src="https://ton.org/download/ton_symbol.svg"
                 alt="TON"
                 className="jetton-image"
-                style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
               />
               <div className="jetton-details">
                 <p>TON: </p>
@@ -98,9 +91,14 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
           ) : (
             <p>No jettons found</p>
           )}
+
+          {/* Фильтруем и показываем только TON или HODR */}
           {jettons && jettons.length ? (
             jettons
-              .filter((jettonBalance) => jettonBalance.balance > 0)
+              .filter((jettonBalance) => {
+                const symbol = jettonBalance.jetton.symbol;
+                return symbol === "TON" || symbol === "HODR"; // Фильтруем только по символу TON или HODR
+              })
               .map((jettonBalance) => (
                 <JettonItem key={jettonBalance.jetton.address.toString()} jettonBalance={jettonBalance} onSendClick={onSendClick} />
               ))
@@ -117,6 +115,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
           )}
         </div>
       )}
+
       <style>
         {`
           @keyframes skeleton-loading {
