@@ -49,22 +49,7 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
               border-radius: 4px;
             }
        
-        .jetton-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.jetton-image {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-  border-radius: 50%;
-}
-
-.jetton-details {
-  flex-grow: 1;
-}
+       
        `}  </style>
       </div>
     );
