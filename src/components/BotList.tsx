@@ -72,7 +72,6 @@ const containerStyle: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   gap: "10px",
-  padding: "20px",
 };
 
 const itemStyle: React.CSSProperties = {
