@@ -199,7 +199,6 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
           .jetton-symbol-balance-price {
             display: flex;
             align-items: center; /* Все элементы на одной строке */
-            gap: 10px; /* Отступы между символом, балансом и ценой */
           }
 
           .jetton-price {
