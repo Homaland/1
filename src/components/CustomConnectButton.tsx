@@ -35,7 +35,7 @@ const CustomConnectButton = () => {
 
   const handleCopyAddress = () => {
     if (rawAddress) {
-      navigator.clipboard.writeText(rawAddress);
+      navigator.clipboard.writeText(rawAddress); // Копируем полный адрес
       alert('Address copied to clipboard');
     }
   };
@@ -71,7 +71,7 @@ const CustomConnectButton = () => {
           <div className={`slide-modal ${showModal ? 'visible' : ''}`}>
             <div className="modal-header">
               <button className="close-btn" onClick={handleCloseModal}>
-                <IoMdClose size={24} />
+                <IoMdClose size={24} /> Close
               </button>
             </div>
             <div className="modal-content">
