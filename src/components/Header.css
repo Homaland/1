@@ -76,10 +76,13 @@
   margin-left: 5px;
 }
 
+/* Стили для иконки подарка */
 .gift-icon-img {
-  font-size: 36px;
-  cursor: pointer;
+  width: 36px; /* Устанавливаем ширину иконки 36px */
+  height: 36px; /* Устанавливаем высоту иконки 36px */
+  object-fit: contain; /* Сохраняет пропорции и не искажает изображение */
 }
+
 
 .skeleton-header, .skeleton-photo, .skeleton-name, .skeleton-button {
   background-color: #ccc;
