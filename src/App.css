@@ -214,7 +214,7 @@ text-align: center;
 
 .jetton-item {
   display: flex;
-  align-items: flex-start; /* Выравнивание по верхнему краю для картинок и текста */
+  align-items: center; /* Выравнивание по центру по вертикали */
   gap: 10px; /* Промежуток между изображением и текстом */
   padding: 10px;
 }
@@ -222,18 +222,25 @@ text-align: center;
 .jetton-image {
   width: 30px;
   height: 30px;
-  margin-right: 10px;
+  margin-right: 10px; /* Отступ справа от изображения */
   border-radius: 50%;
 }
 
 .jetton-details {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column; /* Содержимое внутри будет располагаться по вертикали */
+  gap: 5px;
+}
+
+.jetton-symbol {
+  font-weight: bold; /* Символ токена жирным шрифтом */
 }
 
 .jetton-balance {
-  margin-top: 5px; /* Отступ сверху для баланса, чтобы он был на новой строке */
-  font-weight: bold; /* Чтобы баланс был более заметным */
+  font-weight: normal; /* Баланс без жирного шрифта */
+  margin-top: 5px; /* Отступ сверху */
 }
+
 .modal {
   position: fixed;
   top: 0;
