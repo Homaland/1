@@ -48,23 +48,23 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
               background-color: #e0e0e0;
               border-radius: 4px;
             }
-          .jetton-info {
-            display: flex;
-            align-items: center; /* Располагаем картинку и символ на одной строке */
-            gap: 10px; /* Промежуток между изображением и символом */
-          }
-          .jetton-image {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-          }
-          .jetton-symbol {
-            font-weight: bold;
-          }
+       
+        .jetton-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-          .jetton-balance {
-            font-weight: normal;
-          }
+.jetton-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.jetton-details {
+  flex-grow: 1;
+}
        `}  </style>
       </div>
     );
