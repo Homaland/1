@@ -186,11 +186,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             animation: skeleton-loading 1.5s infinite ease-in-out;
           }
 
-          .jetton-item {
-            display: flex;
-            flex-direction: column; /* Обеспечиваем, чтобы баланс и цена шли по вертикали */
-            text-align: left; /* Выравниваем все элементы по левому краю */
-          }
+         
 
           .jetton-info {
             display: flex;
