@@ -211,14 +211,6 @@ text-align: center;
 }
 
 
-.jetton-symbol {
-  font-weight: bold; /* Символ токена жирным шрифтом */
-}
-
-.jetton-balance {
-  font-weight: normal; /* Баланс без жирного шрифта */
-  margin-top: 5px; /* Отступ сверху */
-}
 
 .modal {
   position: fixed;
