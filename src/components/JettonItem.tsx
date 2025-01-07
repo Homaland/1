@@ -56,17 +56,19 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
 
   const { jetton, balance } = jettonBalance;
 
-  // Обрабатываем символ HODR для отображения без части после запятой
-  const symbol = jetton.symbol === "HODR" ? "HODR" : jetton.symbol;
+  // Для HODR округляем до целого числа, для других токенов используем функцию toDecimals
+  const formattedBalance = jetton.symbol === "HODR"
+    ? Number(balance.toString()) // Преобразуем bigint в число для HODR
+    : toDecimals(Number(balance.toString()), jetton.decimals); // Преобразуем bigint в число и передаем в toDecimals для других токенов
 
   return (
     <div className="jetton-item">
       <img src={jetton.image} alt={jetton.symbol} className="jetton-image" />
       <div className="jetton-details">
         {/* Символ токена рядом с изображением */}
-        <p className="jetton-symbol">{symbol}</p>
+        <p className="jetton-symbol">{jetton.symbol}</p>
         {/* Баланс на новой строке */}
-        <p className="jetton-balance">{toDecimals(balance, jetton.decimals)}</p>
+        <p className="jetton-balance">{formattedBalance}</p>
       </div>
     </div>
   );
