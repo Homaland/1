@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";  
 import { JettonBalance } from "@ton-api/client";
 
 interface JettonItemProps {
@@ -60,9 +60,11 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
     // Преобразуем balance в number
     const balanceNumber = Number(balance); // Преобразование bigint в number
     if (symbol === "HODR") {
-      return Math.floor(balanceNumber).toString(); // Для HODR убираем дробную часть
+      // Для HODR убираем дробную часть (округление вниз)
+      return Math.floor(balanceNumber).toString(); 
     }
-    return balanceNumber.toFixed(2); // Для других токенов (например, TON) два знака после запятой
+    // Для других токенов (например, TON) два знака после запятой
+    return balanceNumber.toFixed(2); 
   };
 
   return (
