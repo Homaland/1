@@ -91,9 +91,9 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
                   className="jetton-image"
                 />
                 <div className="jetton-symbol-balance-price">
-                  <p className="jetton-symbol">TON:</p>
+                  <p className="jetton-symbol"> TON: </p>
                   <p className="jetton-balance">{formatBalance(tonBalance, "TON")}</p>
-                  <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
+                  <p className="jetton-price"> ({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
                 </div>
               </div>
             </div>
