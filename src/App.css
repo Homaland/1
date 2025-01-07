@@ -190,8 +190,12 @@ background-color:rgba(255, 255, 255, 0.87);
               0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для создания объема */
   transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
 }
-
-
+.jetton-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px; /* Отступ справа от изображения */
+  border-radius: 50%;
+}
 
 .cstatus {
   padding-top: 2vh; /* Отступ сверху в 2% от высоты экрана */
