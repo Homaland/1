@@ -90,13 +90,11 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
                   alt="TON"
                   className="jetton-image"
                 />
-                <div className="jetton-symbol-and-balance">
+                <div className="jetton-symbol-balance-price">
                   <p className="jetton-symbol">TON:</p>
                   <p className="jetton-balance">{formatBalance(tonBalance, "TON")}</p>
+                  <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
                 </div>
-              </div>
-              <div className="jetton-price">
-                <p>({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
               </div>
             </div>
           ) : (
@@ -199,16 +197,15 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             border-radius: 50%;
           }
 
-          .jetton-symbol-and-balance {
+          .jetton-symbol-balance-price {
             display: flex;
-            align-items: center; /* Размещаем символ и баланс на одной строке */
-            gap: 5px; /* Отступ между символом и балансом */
+            align-items: center; /* Все элементы на одной строке */
+            gap: 10px; /* Отступы между символом, балансом и ценой */
           }
 
           .jetton-price {
             font-size: 14px;
             color: #888;
-            margin-top: 5px;
           }
 
           .jetton-symbol {
