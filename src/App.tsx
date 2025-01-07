@@ -161,11 +161,7 @@ function App() {
                          <CustomConnectButton />
           <div className="content">
                         <SticList />
-                        <ButtonRow jettons={jettons} setSelectedJetton={setSelectedJetton} />
-<div className="tokenhodr">
-   <Tokeninfo />
-            </div>
-             <div className="cards-container">
+                 <div className="cards-container">
            <div
   className="jetton-list-link"
   onClick={() => window.location.href = '/jettons'}
@@ -179,6 +175,10 @@ function App() {
 </div>
                <div className="earncards"> <Earncard /></div>
                </div>
+              <ButtonRow jettons={jettons} setSelectedJetton={setSelectedJetton} />
+<div className="tokenhodr">
+   <Tokeninfo />
+            </div>
               {selectedJetton && connectedAddress && (
                 <SendJettonModal
                   senderAddress={connectedAddress}
