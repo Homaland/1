@@ -208,7 +208,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
           }
 
           .jetton-symbol {
-            font-weight: bold;
+            font-weight: normal;
           }
 
           .jetton-balance {
