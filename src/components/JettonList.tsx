@@ -186,40 +186,32 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             margin: 0 auto;
             animation: skeleton-loading 1.5s infinite ease-in-out;
           }
-
           .jetton-info {
             display: flex;
             align-items: center; /* Располагаем картинку и символ на одной строке */
             gap: 10px; /* Промежуток между изображением и символом */
           }
-
           .jetton-image {
             width: 30px;
             height: 30px;
             border-radius: 50%;
           }
-
           .jetton-symbol-and-balance {
             display: flex;
             align-items: center; /* Размещаем символ и баланс на одной строке */
             gap: 5px; /* Отступ между символом и балансом */
           }
-
-          .jetton-symbol {
-            font-size: 16px;
-            font-weight: bold;
-          }
-
-          .jetton-balance {
-            font-size: 16px;
-            font-weight: bold;
-          }
-
           .jetton-price {
             font-size: 14px;
             color: #888;
             margin-top: 5px;
           }
+.jetton-symbol {
+  font-weight: bold; 
+}
+.jetton-balance {
+  font-weight: normal; 
+}
         `}
       </style>
     </div>
