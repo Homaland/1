@@ -160,20 +160,23 @@ background-color:rgba(255, 255, 255, 0.87);
   box-shadow: none; /* Убирает эффект теней */
 }
 
-.card {
-  width: 45%;
+.card { 
+  width: 45%; /* Убедитесь, что ширина контейнера достаточно для вашего контента */
   text-align: start;
   background-color: #fff;
   height: auto;
   border: 1px solid #fff;
   border-radius: 25px;
-  padding: 5px;
+  padding: 15px; /* Немного увеличен padding для лучшего отображения */
   margin: 5%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
               0 4px 6px rgba(0, 0, 0, 0.1);
   user-select: none; /* Запрещает выделение текста */
   -webkit-tap-highlight-color: transparent; /* Убирает эффект выделения на мобильных устройствах */
+  box-sizing: border-box; /* Включает padding и border в расчет ширины и высоты */
+  overflow: hidden; /* Чтобы содержимое не вылезало за пределы */
 }
+
 
 .earncards {
   width: 45%;
