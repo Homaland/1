@@ -125,10 +125,8 @@ function App() {
     );
     setHasHODRCollection(collectionExists);
   };
-
   const filteredNfts = nfts?.filter((nft) => nft.collection);
   const texts = getText(language);
-
   useEffect(() => {
     if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
       const { id, first_name, username } = WebApp.initDataUnsafe.user;
@@ -154,27 +152,18 @@ function App() {
         });
     }
   }, []);
-
-  
   return (
     <Router>
       <Routes>
         <Route path="/" element={
-       (          
-        
-              <div className="main-content">
-
-                
+       ( <div className="main-content">
                          <Header profilePhotoUrl={profilePhotoUrl} firstName={firstName} /> {/* Use Header component */}
                          <CustomConnectButton />
           <div className="content">
                         <SticList />
                         <ButtonRow jettons={jettons} setSelectedJetton={setSelectedJetton} />
-<div className="how-it-works">  <p>Hold On for Dear Reward</p> </div>
 <div className="tokenhodr">
-
-
-              <Tokeninfo />
+   <Tokeninfo />
             </div>
              <div className="cards-container">
            <div
@@ -214,12 +203,10 @@ function App() {
           </div>
         )
       } />
-
       <Route path="/task" element={<TaskPage />} />
       <Route path="/play" element={<PlayPage />} />
       <Route path="/shop" element={<ShopPage />} />
-      <Route path="/trade" element={<TradePage />} />
-      
+      <Route path="/trade" element={<TradePage />} /> 
       <Route
   path="/jettons"
   element={
@@ -230,11 +217,9 @@ function App() {
     />
   }
 />
-
       <Route path="/settings" element={<SettingsPage language={language} setLanguage={setLanguage} />} />
     </Routes>
   </Router>
   );
 }
-
 export default App;
