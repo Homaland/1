@@ -7,14 +7,7 @@ body, html {
    
 }
  
-.cards-container {
-  display: flex; /* Flexbox для выравнивания элементов по горизонтали */
-  justify-content: space-between; /* Распределяем элементы на всю ширину контейнера */
-  gap: 20px; /* Добавляем промежуток между элементами */
-  width: 100%; /* Занимаем всю доступную ширину */
-  font-size: 12px;
-  word-wrap: break-word;
-}
+
 
 
 #root {
@@ -161,32 +154,28 @@ background-color:rgba(255, 255, 255, 0.87);
   box-shadow: none; /* Убирает эффект теней */
 }
 
-.card { 
-  width: 45%;
-  
-  background-color: #fff; /* Полупрозрачный желтый фон */
-  height: auto; /* Высота элемента автоматически подстраивается под содержимое */
-  border: 1px solid #fff; /* Полупрозрачная желтая рамка вокруг элемента */
-  border-radius: 25px; /* Скругленные углы для элемента */
-  padding: 5px; /* Внутренние отступы внутри элемента */
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
-              0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для создания объема */
-  transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap; /* Разрешаем обтекание элементов, если места не хватает */
 }
 
-
-.earncards {
-  width: 45%;
-  
-  background-color: #fff; /* Полупрозрачный желтый фон */
-  height: auto; /* Высота элемента автоматически подстраивается под содержимое */
-  border: 1px solid #fff; /* Полупрозрачная желтая рамка вокруг элемента */
-  border-radius: 25px; /* Скругленные углы для элемента */
-  padding: 5px; /* Внутренние отступы внутри элемента */
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
-              0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для создания объема */
-  transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
+.card, .earncards {
+  flex-basis: 45%; /* Задаем базовую ширину 45% для каждого элемента */
+  box-sizing: border-box; /* Учитываем padding и border в расчет ширины */
 }
+
+.card img {
+  max-width: 100%;
+  height: auto; /* Чтобы изображения не выходили за пределы контейнера */
+}
+
+.card p {
+  word-wrap: break-word; /* Переносим текст, если он не помещается */
+}
+
 
 .cstatus {
   padding-top: 2vh; /* Отступ сверху в 2% от высоты экрана */
