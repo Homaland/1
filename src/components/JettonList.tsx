@@ -188,7 +188,6 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
           .jetton-info {
             display: flex;
             align-items: center; /* Располагаем картинку и символ на одной строке */
-            gap: 10px; /* Промежуток между изображением и символом */
           }
 
           .jetton-image {
