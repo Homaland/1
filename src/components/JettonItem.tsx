@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"; 
 import { JettonBalance } from "@ton-api/client";
-import { toDecimals } from "../utils/decimals";
 
 interface JettonItemProps {
   jettonBalance: JettonBalance | null; // Учитываем возможность, что данные ещё не загружены
@@ -57,11 +56,13 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
   const { jetton, balance } = jettonBalance;
 
   // Функция для форматирования баланса
-  const formatBalance = (balance: number, symbol: string) => {
+  const formatBalance = (balance: bigint, symbol: string) => {
+    // Преобразуем balance в number
+    const balanceNumber = Number(balance); // Преобразование bigint в number
     if (symbol === "HODR") {
-      return Math.floor(balance).toString(); // Для HODR убираем дробную часть
+      return Math.floor(balanceNumber).toString(); // Для HODR убираем дробную часть
     }
-    return balance.toFixed(2); // Для других токенов (например, TON) два знака после запятой
+    return balanceNumber.toFixed(2); // Для других токенов (например, TON) два знака после запятой
   };
 
   return (
