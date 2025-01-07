@@ -85,7 +85,19 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ jettons, setSelectedJetton }) => 
           <p className="button-text">Swap</p>
         </div>
       </div>
-
+   <div className="button-container">
+        <div
+          className="action-button"
+          onClick={() => alert("Soon")}
+        >
+          <img
+            src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/casino_40dp_000000_FILL0_wght400_GRAD0_opsz40.svg"
+            alt="Swap"
+            className="icon"
+          />
+          <p className="button-text">Play</p>
+        </div>
+      </div>
       {/* Модальное окно с виджетом */}
       {showModal && <Modal onClose={handleCloseModal} isVisible={showModal} />}
     </div>
