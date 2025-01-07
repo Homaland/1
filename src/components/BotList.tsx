@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 const initialData = [
-  { name: "USUAL / USDT", status: "Sideways", percentage: "27.3%", trend: "positive" },
-  { name: "MOVE / USDT", status: "Sideways", percentage: "21.24%", trend: "positive" },
-  { name: "PENGU / USDT", status: "Sideways", percentage: "15.38%", trend: "positive" },
-  { name: "OM / USDT", status: "Sideways", percentage: "14.64%", trend: "positive" },
-  { name: "ENA / USDT", status: "Sideways", percentage: "14.6%", trend: "positive" },
+  { name: "USUAL / USDT", status: "Grid", percentage: "27.3%", trend: "positive" },
+  { name: "MOVE / USDT", status: "Grid", percentage: "21.24%", trend: "positive" },
+  { name: "PENGU / USDT", status: "Grid", percentage: "15.38%", trend: "positive" },
+  { name: "OM / USDT", status: "Grid", percentage: "14.64%", trend: "positive" },
+  { name: "ENA / USDT", status: "Grid", percentage: "14.6%", trend: "positive" },
 ];
 
 // Функция для генерации случайных процентов в диапазоне от 2 до 40
@@ -17,7 +17,7 @@ const getRandomPercentage = (): string => {
 };
 
 const getRandomName = (): string => {
-  const names = ["USUAL / USDT", "MOVE / USDT", "PENGU / USDT", "OM / USDT", "ENA / USDT"];
+  const names = ["USUAL / USDT", "NOT / USDT", "TON / USDT", "PEPE / USDT", "MOVE / USDT", "PIXEL / USDT", "XAI / USDT", "DYDX / USDT", "ETHFI / USDT", "PENGU / USDT", "OM / USDT", "ENA / USDT"];
   const randomIndex = Math.floor(Math.random() * names.length);
   return names[randomIndex];
 };
