@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 import { JettonBalance } from "@ton-api/client";
 import { JettonItem } from "./JettonItem";
 
@@ -60,17 +60,6 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
     fetchData();
   }, [connectedAddressString]);
 
-  // Функция для форматирования баланса в зависимости от символа
-  const formatBalance = (symbol: string, balance: number) => {
-    if (symbol === "HODR") {
-      return Math.floor(balance); // Для HODR отбрасываем дробную часть
-    } else if (symbol === "TON") {
-      return balance.toFixed(2); // Для TON показываем два знака после запятой
-    } else {
-      return balance.toString(); // Для других символов возвращаем без изменений
-    }
-  };
-
   return (
     <div className={className}>
       {connectedAddressString ? (
@@ -95,7 +84,8 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
               />
               <div className="jetton-details">
                 <p>TON:</p>
-                <p className="jetton-balance">{tonBalance}</p> {/* Баланс на новой строке */}
+                {/* Форматирование баланса для TON */}
+                <p className="jetton-balance">{tonBalance.toFixed(2)}</p> {/* 2 знака после запятой */}
                 <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p> {/* Цена на новой строке */}
               </div>
             </div>
