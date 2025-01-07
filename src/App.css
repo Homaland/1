@@ -160,7 +160,7 @@ background-color:rgba(255, 255, 255, 0.87);
   align-items: center;
   justify-content: space-between; /* Выравнивает элементы по краям */
   padding: 10px;
-margin-left: 5%;
+margin: 5%;
      gap: 20px;
 } 
 .card { 
