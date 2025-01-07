@@ -552,7 +552,7 @@ select {
   display: flex;
   justify-content: center; /* Центрируем кнопки по горизонтали */
   align-items: flex-start; /* Выравниваем кнопки по верхнему краю */
-  gap: 40px; /* Пространство между кнопками */
+  gap: 10px; /* Пространство между кнопками */
 }
 
 .button-container {
