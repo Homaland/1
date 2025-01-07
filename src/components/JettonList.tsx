@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 import { JettonBalance } from "@ton-api/client";
 import { JettonItem } from "./JettonItem";
 
