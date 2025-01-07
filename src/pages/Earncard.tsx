@@ -28,11 +28,12 @@ function Earncard() {
     <div className="EarnPage">
       {balance !== null ? (
         <p>Your HODR points: {balance}</p>
+       
       ) : (
         <div className="skeleton-loading">
           <div className="skeleton-text" />
         </div>
-      )}
+      )}<p>Claim (soon)</p>
       <style>
         {`
           @keyframes skeleton-loading {
