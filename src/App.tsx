@@ -177,7 +177,7 @@ function App() {
                <div className="earncards"> <Earncard /></div>
                </div>
               <ButtonRow jettons={jettons} setSelectedJetton={setSelectedJetton} />
-     <div className="botcard"> <BotList /></div>
+     <div className="botcard"><h2>Bot rating</h2> <BotList /></div>
                           <div className="tokenhodr">
    <Tokeninfo />
             </div>
