@@ -29,7 +29,7 @@ const texts: Record<Language, {
 }> = {
   'RU': {
     connectWallet: 'Подключить кошелек',
-    holderStatus: 'Статус держателя',
+    holderStatus: 'Premium Статус',
     hodrCollectionFound: 'Коллекция HODR найдена',
     hodrCollectionNotFound: 'Коллекция HODR не найдена',
     noCollectionFound: 'Коллекция не найдена',
@@ -37,7 +37,7 @@ const texts: Record<Language, {
   },
   'ENG': {
     connectWallet: 'Connect Wallet',
-    holderStatus: 'Holder Status',
+    holderStatus: 'Premium Status',
     hodrCollectionFound: 'HODR Collection Found',
     hodrCollectionNotFound: 'HODR Collection Not Found',
     noCollectionFound: 'No Collection Found',
