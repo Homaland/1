@@ -13,7 +13,7 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 2000); // Симуляция загрузки
     return () => clearTimeout(timer);
   }, []);
 
@@ -31,10 +31,11 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
 
   if (loading) {
     return (
-      <header>
+      <header className="profile-header skeleton-header">
         <div className="skeleton-photo" />
         <div className="skeleton-name" />
-           </header>
+        <div className="skeleton-button" />
+      </header>
     );
   }
 
@@ -54,7 +55,7 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
         </span>
       </div>
       
-      {/* Иконка подарка в виде SVG */}
+      {/* Иконка подарка */}
       <div onClick={handleGiftClick} className="gift-icon">
         <img 
           src="https://raw.githubusercontent.com/HODRLAND/HODR/refs/heads/main/img/IslomjonAnimeEmoji_AgADajcAAlqLEUg.svg" 
@@ -69,7 +70,6 @@ const Header = ({ profilePhotoUrl, firstName }: HeaderProps) => {
           <div className="slide-modal visible">
             <div className="modal-content">
               <h2>Fren</h2>
-      
               <button onClick={handleCloseModal}>Cancel</button>
             </div>
           </div>
