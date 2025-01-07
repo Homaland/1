@@ -22,7 +22,7 @@ const getTonPriceInUSD = async () => {
 
 const getTonBalance = async (address: string) => {
   try {
-    const response = await fetch(`https://toncenter.com/api/v2/getAddressBalance?address=${address}`);
+    const response = await fetch(https://toncenter.com/api/v2/getAddressBalance?address=${address});
     const data = await response.json();
     if (data.ok) {
       return data.result / 1e9;
@@ -85,9 +85,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
               <div className="jetton-details">
                 <p>TON: </p>
               </div>
-              {/* Баланс на новой строке */}
               <p>{tonBalance}</p>
-              {/* Стоимость в долларах на новой строке */}
               <p>({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
             </div>
           ) : (
@@ -120,7 +118,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
       )}
 
       <style>
-        {`
+        {
           @keyframes skeleton-loading {
             0% {
               background-color: #e0e0e0;
@@ -177,7 +175,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             margin: 0 auto;
             animation: skeleton-loading 1.5s infinite ease-in-out;
           }
-        `}
+        }
       </style>
     </div>
   );
