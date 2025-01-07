@@ -1,3 +1,16 @@
+.button-container {
+  text-align: start;
+  background-color: #fff;
+  height: auto;
+  border: 1px solid #fff;
+  border-radius: 25px;
+  padding: 5px;
+  margin: 5%;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
+              0 4px 6px rgba(0, 0, 0, 0.1);
+  user-select: none; /* Запрещает выделение текста */
+  -webkit-tap-highlight-color: transparent; /* Убирает эффект выделения на мобильных устройствах */
+}
 .modal-header { 
   display: flex;
   align-items: center;
