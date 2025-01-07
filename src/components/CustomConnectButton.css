@@ -1,18 +1,16 @@
-
 .wallet-address {
-  padding-top: 10%; /* Отступ сверху в 2% от высоты экрана */
-  background-color: rgba(245, 215, 44, 0.7); /* Полупрозрачный желтый фон */
-  height: auto; /* Высота элемента автоматически подстраивается под содержимое */
-  border: 1px solid rgba(245, 215, 44, 0.7); /* Полупрозрачная желтая рамка вокруг элемента */
-  border-radius: 25px; /* Скругленные углы для элемента */
-  padding: 5px; /* Внутренние отступы внутри элемента */
-  margin: 5%; /* Внешние отступы со всех сторон в 5% от ширины родителя */
+  padding-top: 10%;
+  background-color: rgba(245, 215, 44, 0.7);
+  height: auto;
+  border: 1px solid rgba(245, 215, 44, 0.7);
+  border-radius: 25px;
+  padding: 5px;
+  margin: 5%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
-              0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для создания объема */
-  transition: box-shadow 0.3s ease-in-out; /* Плавное изменение тени при взаимодействии */
-text-align: center;
+              0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  text-align: center;
 }
-
 
 /* Стиль для выезжающего окна */
 .slide-modal {
@@ -28,15 +26,14 @@ text-align: center;
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto;
-  transform: translateY(100%); /* По умолчанию скрыто за пределами экрана */
-  animation: slideOut 0.4s forwards; /* По умолчанию скрывается */
+  transform: translateY(100%);
+  animation: slideOut 0.4s forwards;
 }
 
 .slide-modal.visible {
-  animation: slideIn 0.4s forwards; /* Анимация появления */
+  animation: slideIn 0.4s forwards;
 }
 
-/* Анимация появления модального окна */
 @keyframes slideIn {
   from {
     transform: translateY(100%);
@@ -46,7 +43,6 @@ text-align: center;
   }
 }
 
-/* Анимация скрытия модального окна */
 @keyframes slideOut {
   from {
     transform: translateY(0);
@@ -56,20 +52,40 @@ text-align: center;
   }
 }
 
+/* Заголовок модального окна с кнопкой Close */
+.modal-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* Контент внутри модального окна */
 .modal-content {
   background: #fff;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  justify-content: center; /* Центрирование по вертикали */
-  align-items: center; /* Центрирование по горизонтали */
-  text-align: center; /* Текст внутри будет центрирован */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   color: #000;
 }
 
 .modal-content button {
-  width: 100%; /* Единая ширина для кнопок */
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: none;
