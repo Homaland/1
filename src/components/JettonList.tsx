@@ -92,9 +92,9 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
               />
               <div className="jetton-details">
                 <p>TON:</p>
-                {/* Форматируем баланс с использованием formatBalance */}<br>
-                <p className="jetton-balance">{formatBalance(tonBalance, "TON")}</p> 
-                <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p> 
+                <br />
+                <p className="jetton-balance">{formatBalance(tonBalance, "TON")}</p>
+                <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
               </div>
             </div>
           ) : (
@@ -185,7 +185,23 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             animation: skeleton-loading 1.5s infinite ease-in-out;
           }
 
-         
+          .jetton-item {
+            display: flex;
+            flex-direction: column; /* Обеспечиваем, чтобы элементы шли по вертикали */
+            text-align: left; /* Выравниваем текст слева */
+          }
+          .jetton-details p {
+            margin: 5px 0; /* Добавляем отступы для каждого элемента */
+          }
+          .jetton-balance {
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 1.5;
+          }
+          .jetton-price {
+            font-size: 14px;
+            color: #888;
+          }
         `}
       </style>
     </div>
