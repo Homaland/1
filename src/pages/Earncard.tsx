@@ -9,7 +9,7 @@ function Earncard() {
       const telegramId = WebApp.initDataUnsafe.user.id;
       console.log("Telegram ID:", telegramId);  // Логируем ID пользователя
 
-      fetch(`https://homaland-hodrland-04a0.twc1.net/get_balance/${telegramId}`) // Используем обратные кавычки
+      fetch(`https://fefefefe.fun/get_balance/${telegramId}`) // Используем обратные кавычки
         .then((response) => response.json())
         .then((data) => {
           if (data.status === "success") {
