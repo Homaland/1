@@ -211,11 +211,16 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
   flex-direction: column; /* Содержимое внутри будет располагаться по вертикали */
   gap: 5px;
 }
-
+ .jetton-balance {
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 1.5;
+          }
           .jetton-price {
             font-size: 14px;
             color: #888;
           }
+    
         `}
       </style>
     </div>
