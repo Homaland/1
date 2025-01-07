@@ -1,13 +1,13 @@
 .wallet-address {
-  padding-top: 10%;
-  background-color: rgba(245, 215, 44, 0.7);
+  width: 100%;
+  padding-top: 2%;
+  background-color: #0098EA;
   height: auto;
-  border: 1px solid rgba(245, 215, 44, 0.7);
+  border: 1px solid #0098EA;
   border-radius: 25px;
   padding: 5px;
   margin: 5%;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 
-              0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease-in-out;
   text-align: center;
 }
