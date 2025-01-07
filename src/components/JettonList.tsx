@@ -87,7 +87,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
                 src="https://ton.org/download/ton_symbol.svg"
                 alt="TON"
                 className="jetton-image"
-                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                style={{ width: "30px", height: "30px", borderRadius: "50%" }}
               />
               <div className="jetton-details">
                 <p>TON: </p>
