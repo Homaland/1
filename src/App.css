@@ -361,7 +361,7 @@ background-color:rgba(255, 255, 255, 0.87);
 }
 
 .user-name {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   margin-right: 5px; /* Отступ от имени до иконки */
   display: flex;
