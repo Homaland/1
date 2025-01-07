@@ -43,7 +43,13 @@
   object-fit: contain;
 }
 
-.skeleton-photo, .skeleton-name, .skeleton-button {
+ .skeleton-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+.skeleton-photo, .skeleton-name {
   animation: skeleton-loading 1.5s infinite ease-in-out;
   background-color: #e0e0e0;
 }
@@ -66,11 +72,6 @@
   border-radius: 4px;
 }
 
-.skeleton-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 18px;
-}
 
 .placeholder-photo {
   width: 50px;
