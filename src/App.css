@@ -155,22 +155,15 @@ background-color:rgba(255, 255, 255, 0.87);
 }
 
 
-.card, .earncards {
-  flex-basis: 45%; /* Задаем ширину карточки через flex-basis */
-  box-sizing: border-box; /* Включаем padding и border в расчет ширины */
-}
-
  .cards-container { 
  display: flex;
   align-items: center;
   justify-content: space-between; /* Выравнивает элементы по краям */
   width: 90%;
   padding: 10px;
-  box-sizing: border-box;
   margin-left: 5%;
 } 
 .card { 
-  
   
   background-color: #fff; /* Полупрозрачный желтый фон */
   height: auto; /* Высота элемента автоматически подстраивается под содержимое */
