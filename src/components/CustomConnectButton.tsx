@@ -1,6 +1,7 @@
 import { useTonConnectUI } from '@tonconnect/ui-react'; 
 import { useState, useEffect } from 'react';
 import { useTonAddress } from '@tonconnect/ui-react'; // Хук для получения адреса
+import { IoMdClose } from 'react-icons/io'; // Импортируем иконку для кнопки Close
 import './CustomConnectButton.css'; // Вынесите стили в отдельный файл
 
 const CustomConnectButton = () => {
@@ -52,6 +53,11 @@ const CustomConnectButton = () => {
     return `${firstPart}...${lastPart}`;
   };
 
+  // Функция для закрытия модального окна
+  const handleCloseModal = () => {
+    setShowModal(false); // Закрыть модальное окно
+  };
+
   return (
     <div>
       {/* Одна кнопка для подключения/отключения и отображения адреса */}
@@ -63,6 +69,11 @@ const CustomConnectButton = () => {
       {showModal && (
         <div className="modal-overlay">
           <div className={`slide-modal ${showModal ? 'visible' : ''}`}>
+            <div className="modal-header">
+              <button className="close-btn" onClick={handleCloseModal}>
+                <IoMdClose size={24} />
+              </button>
+            </div>
             <div className="modal-content">
               <button onClick={handleCopyAddress}>Copy address</button>
               <button onClick={handleDisconnect}>Disconnect</button>
