@@ -63,10 +63,9 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
   // Функция для форматирования баланса в зависимости от символа
   const formatBalance = (balance: number, symbol: string) => {
     if (symbol === "HODR") {
-      // Округляем баланс для HODR до целого числа
-      return balance.toFixed(0);
+      return balance.toFixed(0); // Округляем для HODR до целого числа
     }
-    return balance.toFixed(2); // Для других токенов показываем 2 знака после запятой
+    return balance.toFixed(2); // Для остальных токенов, например, TON — 2 знака после запятой
   };
 
   return (
@@ -93,9 +92,9 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
               />
               <div className="jetton-details">
                 <p>TON:</p>
-                {/* Используем formatBalance для форматирования баланса */}
-                <p className="jetton-balance">{formatBalance(tonBalance, "TON")}</p> {/* Форматирование для TON */}
-                <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p> {/* Цена */}
+                {/* Форматируем баланс с использованием formatBalance */}
+                <p className="jetton-balance">{formatBalance(tonBalance, "TON")}</p> 
+                <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p> 
               </div>
             </div>
           ) : (
