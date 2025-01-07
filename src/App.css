@@ -160,6 +160,7 @@ background-color:rgba(255, 255, 255, 0.87);
 }
 
 .card {
+  width: 45%;
   text-align: start;
   background-color: #fff;
   height: auto;
@@ -174,6 +175,7 @@ background-color:rgba(255, 255, 255, 0.87);
 }
 
 .earncards {
+  width: 45%;
   padding-top: 2vh; /* Отступ сверху в 2% от высоты экрана */
   background-color: #fff; /* Полупрозрачный желтый фон */
   height: auto; /* Высота элемента автоматически подстраивается под содержимое */
