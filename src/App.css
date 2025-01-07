@@ -163,7 +163,7 @@ background-color:rgba(255, 255, 255, 0.87);
   width: 45%;
   text-align: start;
   background-color: #fff;
-  height: auto;
+  height: 15%;
   border: 1px solid #fff;
   border-radius: 25px;
   padding: 5px;
@@ -176,9 +176,9 @@ background-color:rgba(255, 255, 255, 0.87);
 
 .earncards {
   width: 45%;
-  padding-top: 2vh; /* Отступ сверху в 2% от высоты экрана */
+  
   background-color: #fff; /* Полупрозрачный желтый фон */
-  height: auto; /* Высота элемента автоматически подстраивается под содержимое */
+  height: 15%; /* Высота элемента автоматически подстраивается под содержимое */
   border: 1px solid #fff; /* Полупрозрачная желтая рамка вокруг элемента */
   border-radius: 25px; /* Скругленные углы для элемента */
   padding: 5px; /* Внутренние отступы внутри элемента */
