@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import { JettonBalance } from "@ton-api/client";
 import { toDecimals } from "../utils/decimals";
 
@@ -12,7 +12,7 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
 
   useEffect(() => {
     // Эмулируем загрузку
-    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушку через 1 секунду
+    const timer = setTimeout(() => setLoading(false), 2000); // Убираем заглушку через 2 секунды
     return () => clearTimeout(timer);
   }, []);
 
@@ -54,15 +54,16 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
     );
   }
 
-  const { jetton, balance, jetton: { decimals } } = jettonBalance;
+  const { jetton, balance } = jettonBalance;
 
   return (
     <div className="jetton-item">
-      <img src={jetton.image} alt={jetton.name} className="jetton-image" />
+      <img src={jetton.image} alt={jetton.symbol} className="jetton-image" />
       <div className="jetton-details">
-        <p>{jetton.name} ({jetton.symbol}): </p>
+        {/* Отображаем только символ токена */}
+        <p>{jetton.symbol}: </p>
       </div>
-      <p>{toDecimals(balance, decimals)}</p>
+      <p>{toDecimals(balance, jetton.decimals)}</p>
     </div>
   );
 };
