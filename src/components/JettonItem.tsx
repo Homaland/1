@@ -68,9 +68,9 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
   };
 
   return (
-    <div className="jetton-item">
-      <img src={jetton.image} alt={jetton.symbol} className="jetton-image" />
-      <div className="jetton-details">
+    <div className="jettons-item">
+      <img src={jetton.image} alt={jetton.symbol} className="jettons-image" />
+      <div className="jettons-details">
         <p>{jetton.symbol}: </p>
       </div>
       {/* Форматируем баланс, убирая дробную часть */}
