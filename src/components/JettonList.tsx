@@ -63,9 +63,9 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
   // Функция для форматирования баланса в зависимости от символа
   const formatBalance = (balance: number, symbol: string) => {
     if (symbol === "HODR") {
-      return Math.floor(balance).toString(); // Для HODR показываем только целую часть
+      return Math.floor(balance).toString(); // Округляем до целого числа для HODR
     }
-    return balance.toFixed(2); // Для других токенов, например, TON — 2 знака после запятой
+    return balance.toFixed(2); // Для других токенов (например, TON) — два знака после запятой
   };
 
   return (
