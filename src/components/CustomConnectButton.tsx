@@ -34,8 +34,8 @@ const CustomConnectButton = () => {
   };
 
   const handleCopyAddress = () => {
-    if (rawAddress) {
-      navigator.clipboard.writeText(rawAddress); // Копируем полный адрес
+    if (userFriendlyAddress) {
+      navigator.clipboard.writeText(userFriendlyAddress); // Копируем полный адрес
       alert('Address copied to clipboard');
     }
   };
