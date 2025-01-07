@@ -90,14 +90,12 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
                   alt="TON"
                   className="jetton-image"
                 />
-                <div className="jetton-symbol-and-balance">
+                <div className="jetton-symbol-balance">
                   <p className="jetton-symbol">TON:</p>
                   <p className="jetton-balance">{formatBalance(tonBalance, "TON")}</p>
                 </div>
               </div>
-              <div className="jetton-price">
-                <p>({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
-              </div>
+              <p className="jetton-price">({(tonBalance * tonPriceInUSD).toFixed(2)} $)</p>
             </div>
           ) : (
             <p>No jettons found</p>
@@ -186,32 +184,47 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
             margin: 0 auto;
             animation: skeleton-loading 1.5s infinite ease-in-out;
           }
+
           .jetton-info {
             display: flex;
             align-items: center; /* Располагаем картинку и символ на одной строке */
-            gap: 10px; /* Промежуток между изображением и символом */
+            gap: 10px;
           }
+
           .jetton-image {
             width: 30px;
             height: 30px;
             border-radius: 50%;
           }
-          .jetton-symbol-and-balance {
+
+          .jetton-symbol-balance {
             display: flex;
-            align-items: center; /* Размещаем символ и баланс на одной строке */
-            gap: 5px; /* Отступ между символом и балансом */
+            align-items: center;
+            gap: 5px;
           }
+
+          .jetton-symbol {
+            font-weight: bold;
+            font-size: 16px;
+          }
+
+          .jetton-balance {
+            font-size: 16px;
+            font-weight: bold;
+          }
+
           .jetton-price {
             font-size: 14px;
             color: #888;
-            margin-top: 5px;
           }
-.jetton-symbol {
-  font-weight: bold; 
-}
-.jetton-balance {
-  font-weight: normal; 
-}
+
+          .jetton-item {
+            display: flex;
+            flex-direction: column; /* Для отображения баланса и цены по вертикали */
+            gap: 5px;
+            padding: 10px;
+            align-items: flex-start;
+          }
         `}
       </style>
     </div>
