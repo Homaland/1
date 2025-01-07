@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import { JettonBalance } from "@ton-api/client";
 import { toDecimals } from "../utils/decimals";
 
@@ -56,20 +56,14 @@ export const JettonItem = ({ jettonBalance }: JettonItemProps) => {
 
   const { jetton, balance } = jettonBalance;
 
-  // Если символ HODR, выводим только целую часть баланса
-  const formattedBalance = jetton.symbol === "HODR"
-    ? Math.floor(Number(balance.toString())) // Используем Math.floor для округления
-    : toDecimals(Number(balance.toString()), jetton.decimals); // Для других токенов отображаем с точностью
-
   return (
     <div className="jetton-item">
       <img src={jetton.image} alt={jetton.symbol} className="jetton-image" />
       <div className="jetton-details">
-        {/* Символ токена рядом с изображением */}
-        <p className="jetton-symbol">{jetton.symbol}</p>
-        {/* Баланс на новой строке */}
-        <p className="jetton-balance">{formattedBalance}</p>
+        {/* Отображаем только символ токена */}
+        <p>{jetton.symbol}: </p>
       </div>
+      <p>{toDecimals(balance, jetton.decimals)}</p>
     </div>
   );
 };
