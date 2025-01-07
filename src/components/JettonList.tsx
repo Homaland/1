@@ -178,9 +178,8 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
 
           .jetton-item {
             display: flex;
-            flex-direction: column; /* Вертикальное расположение элементов */
-            align-items: flex-start;
-            gap: 10px;
+            align-items: center; /* Горизонтальное расположение элементов */
+            gap: 10px; /* Промежуток между изображением и символом */
             padding: 10px;
             background-color: #fff;
             border-radius: 10px;
@@ -189,7 +188,7 @@ export const JettonList = ({ jettons, connectedAddressString, onSendClick, class
 
           .jetton-details {
             display: flex;
-            flex-direction: column; /* Элементы внутри jetton-details теперь располагаются по вертикали */
+            flex-direction: column;
             gap: 5px;
           }
 
